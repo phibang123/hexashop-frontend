@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.3",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -12,17 +13,24 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
+    "history": "4.10.0",
+    "init": "^0.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.2.0",
     "react-redux": "^7.2.0",
-    "react-scripts": "5.0.0",
+    "react-router-dom": "5.3.0",
+    "react-scripts": "5.0.0", 
+    "react-toastify": "^8.2.0",
+    "slick-carousel": "^1.8.1",
+    "tailwindcss-cli": "^0.1.2",
     "typescript": "~4.1.5"
   },
   "scripts": {
+    "eject": "react-scripts eject",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test":  "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,5 +46,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router": "^5.1.18",
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
