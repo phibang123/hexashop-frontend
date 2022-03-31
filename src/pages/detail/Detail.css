@@ -1,0 +1,194 @@
+.border-top {
+  border-top: 3px dotted #eee;
+}
+
+.detail_banner_content {
+  background-image: url('https://templatemo.com/templates/templatemo_571_hexashop/assets/images/products-page-heading.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+.detail_banner_title {
+  position: absolute;
+}
+.detail_banner_title h2 {
+  font-size: 52px;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.detail_banner_title span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-style: italic;
+}
+
+#detail .right-content {
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
+}
+#detail .right-content h4 {
+  font-size: 22px;
+  color: #2a2a2a;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+#detail .right-content span.price {
+  font-size: 18px;
+  color: #a1a1a1;
+  font-weight: 500;
+  display: block;
+  margin-top: 5px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+#detail .right-content ul.stars {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#detail .right-content ul.stars li {
+  display: inline;
+  font-size: 13px;
+}
+#detail .right-content span {
+  font-size: 14px;
+  color: #aaaaaa;
+  font-weight: 500;
+  display: block;
+  margin-top: 25px;
+}
+#detail .right-content .quote i {
+  float: left;
+  font-size: 45px;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+#detail .right-content .quote {
+  margin-top: 25px;
+}
+#detail .right-content p {
+  font-size: 14px;
+  color: #aaaaaa;
+  font-weight: 500;
+  display: block;
+  margin-top: 25px;
+}
+#detail .right-content .quote p {
+  font-style: italic;
+  color: #2a2a2a;
+  font-weight: 500;
+}
+.quantity-content {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+.quantity-content .left-content {
+  float: left;
+  margin-right: 30px;
+}
+.quantity-content .left-content h6 {
+  padding-top: 7px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #aaa;
+  position: relative;
+  z-index: 11;
+}
+#detail .right-content {
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
+  font-size: 16px;
+}
+.quantity-content .right-content {
+  text-align: right;
+}
+.quantity {
+  display: inline-block;
+}
+.quantity.buttons_added {
+  text-align: left;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.quantity.buttons_added .minus,
+.quantity.buttons_added .plus {
+  padding: 7px 10px 8px;
+  height: 39px;
+  background-color: #ffffff;
+  border: 1px solid #efefef;
+  cursor: pointer;
+}
+.quantity.buttons_added .minus {
+  border-right: 0;
+}
+.quantity.buttons_added input {
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+  box-shadow: none;
+}
+.quantity .input-text.qty {
+  width: 35px;
+  height: 39px;
+  padding: 0 5px;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid #efefef;
+}
+.quantity.buttons_added input {
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
+  box-shadow: none;
+}
+.quantity.buttons_added .minus:hover,
+.quantity.buttons_added .plus:hover {
+  background: #eeeeee;
+}
+#detail .right-content h4 {
+  font-size: 22px;
+  color: #2a2a2a;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+.total h4 {
+  float: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #aaa !important;
+}
+.total .main-border-button {
+  text-align: right;
+}
+.main-border-button a {
+  font-size: 13px;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 25px;
+  display: inline-block;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.total .main-border-button a {
+  border-color: #2a2a2a;
+  color: #2a2a2a;
+}
+.total .main-border-button a:hover {
+  color: #fff;
+  background-color: #2a2a2a;
+}
