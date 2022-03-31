@@ -47,10 +47,8 @@ export default function Footer() {
           </div>
           <div className="row-span-2 col-span-full flex justify-center items-center border-t mt-20">
             <div className="my-20 text-center font-thin">
-              <p className="text-2xl mb-3">
-                Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved Design: TemplateMo
-              </p>
-              <p className="text-2xl">Design: TemplateMo</p>
+              <p className="text-2xl mb-3">Web được lấy ý tưởng và thực hiện bởi nhóm BBCC</p>
+              <p className="text-2xl">Nguồn: TemplateMo</p>
             </div>
           </div>
         </div>
