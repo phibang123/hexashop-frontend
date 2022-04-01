@@ -14,6 +14,8 @@ import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
 import Detail from 'pages/detail/Detail';
 import ProductTemplate from 'templates/Products/ProductTemplate';
 import Productlist from 'pages/Products/Productlist';
+import InfomationTemP from 'templates/InfomationTemplate/InfomationTemP';
+import Infouser from 'pages/infouser/Infouser';
 
 export const history = createBrowserHistory();
 
@@ -25,6 +27,7 @@ function App() {
         <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
         <DetailTemplate exact path="/detail" Component={Detail}></DetailTemplate>
         <ProductTemplate exact path="/products" Component={Productlist}></ProductTemplate>
+        <InfomationTemP exact path="/info" Component={Infouser}></InfomationTemP>
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
       </Switch>

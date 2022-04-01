@@ -9,7 +9,7 @@ interface IpropsTemPlate {
   exact: boolean;
 }
 
-export default function DetailTemplate(props: IpropsTemPlate) {
+export default function InfomationTemP(props: IpropsTemPlate) {
   let { Component, ...resRoute } = props;
   return (
     <Route
