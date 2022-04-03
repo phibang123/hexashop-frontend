@@ -38,6 +38,8 @@ export default function SlickCarousel() {
 		autoplaySpeed: 2000,
 		slidesToShow: 3,
 		slidesToScroll: 1,	
+	
+	
 		nextArrow: (
 			<div>
 				<p>asasasasasx</p>
@@ -48,7 +50,7 @@ export default function SlickCarousel() {
 		prevArrow: <SamplePrevArrow />,
 	};
 	return (
-		<div className="border-t-2 border-dashed">
+		<div className="border-t-2 border-dashed w-96">
 			<div className="2xl:max-w-8xl mx-auto mt-40 mb-10 ">
 				<div className="">
 					<h1 className="text-dark-primary font-bold text-6xl leading-relaxed mb-5">
