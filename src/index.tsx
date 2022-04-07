@@ -1,15 +1,25 @@
+import './index.css';
+
+import * as serviceWorker from './serviceWorker';
+
+import App from './App';
+import { ConnectedRouter } from 'connected-react-router';
+import { CssBaseline } from '@mui/material';
+import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Toaster } from 'react-hot-toast';
+import { history } from 'utils/history';
 import { store } from './app/store';
-import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ConnectedRouter history={history}>
+        <CssBaseline />
+        <App />
+      </ConnectedRouter>
+      <Toaster />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

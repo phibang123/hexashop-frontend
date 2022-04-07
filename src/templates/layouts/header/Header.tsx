@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import { Http2ServerRequest } from 'http2';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
+import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
@@ -70,14 +68,14 @@ export default function Header() {
     </Box>
   );
   return (
-    <div className={`${scrollPosition > 200 ? "fixed z-20 bg-white top-0 w-full max-w-full  px-96 mx-9" : "max-w-8xl"} transition-all duration-500  mx-auto flex py-10 justify-between items-center `}>
-      <a href="/">
+    <div className={`${scrollPosition > 200 ? "fixed z-20 bg-white top-0 w-full max-w-full  px-104" : "max-w-8xl"} transition-all  duration-500  mx-auto flex py-10 justify-between items-center `}>
+      <NavLink exact to="/">
         <img src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/logo.png"></img>
-      </a>
+      </NavLink>
       <div className="md:block ">
         <ul className="flex">
           <li className="2xl:text-3xl xl:px-9 md:px-2  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
-            Home
+            <NavLink exact to="/home" > Home</NavLink> 
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Men's
@@ -89,13 +87,13 @@ export default function Header() {
             Kid's
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
-            <a href="/products"> Product</a>
+            <NavLink exact to="/products"> Product</NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
-            <a href="/detail">Detail</a>
+            <NavLink exact to="/about">About</NavLink>
           </li>
           <li className="2xl:text-3xl pl-xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
-            <a href="/login">Login</a>
+            <NavLink exact to="/login">Login</NavLink>
           </li>
           <li className="2xl:text-3xl pl-xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ml-9">
             <div>

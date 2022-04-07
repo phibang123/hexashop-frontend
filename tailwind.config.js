@@ -28,7 +28,10 @@ module.exports = {
       },
       backgroundImage: {
         'about-pattern': "url('https://templatemo.com/templates/templatemo_571_hexashop/assets/images/about-us-page-heading.jpg')",
-      }
+      },
+      padding : {
+        '104': '26rem',
+      },
     },
   },
   plugins: [],

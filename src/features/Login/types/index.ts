@@ -1,14 +1,16 @@
+import { INguoiDung } from './../../../models/user';
 export interface LoginType {
   taiKhoan: string;
   matKhau: string;
 }
+
+interface dataS {
+  token: string;
+  user: INguoiDung;
+}
 export interface LoginRespon {
-  data: {
-    data: {
-      statusCode: Number;
-      message: string;
-      dateTime: string;
-      content: string;
-    };
-  };
+  dateTime: string;
+  message: any;
+  status: number;
+  data: dataS | string;
 }

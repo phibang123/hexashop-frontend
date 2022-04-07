@@ -4,6 +4,7 @@ import { Route, Router, Switch } from 'react-router';
 
 import About from './features/About/About';
 import {Counter} from "./features/Counter/Counter"
+import { CssBaseline } from '@mui/material';
 import Detail from 'features/Detail/Detail';
 import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
 import Home from './features/Home/Home';
@@ -16,16 +17,12 @@ import Productlist from 'features/Products/Productlist';
 import SignUp from 'features/user/SignUp/SignUp';
 import { createBrowserHistory } from 'history';
 
-
-
-
-export const history = createBrowserHistory();
-
 function App() {
   return (
-    <Router history={history}>
+    <>
       <Switch>
         <HomeTemplate exact path="/" Component={Home}></HomeTemplate>
+        <HomeTemplate exact path="/home" Component={Home}></HomeTemplate>
         <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
         <DetailTemplate exact path="/detail" Component={Detail}></DetailTemplate>
         <ProductTemplate exact path="/products" Component={Productlist}></ProductTemplate>
@@ -33,7 +30,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
       </Switch>
-    </Router>
+    </>
   );
 }
 
