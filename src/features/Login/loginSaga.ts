@@ -1,16 +1,15 @@
-import { INguoiDung, INguoiDungLogin } from 'models';
-import { LoginPayload, authActions } from '../Auth/authSlide';
-import { LoginRespon, LoginType } from './types/index';
-import { all, call, fork, put, take, takeLatest } from 'redux-saga/effects';
+import { LoginRespon, LoginType, ProfileRes } from './types/index';
+import { all, call, cancel, delay, fork, put, take, takeLatest } from 'redux-saga/effects';
 import { toastError, toastSuccess } from './../../utils/toast/hotToast';
 
+import { INguoiDungLogin } from './../../models/user';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { authActions } from './loginSlice';
 import axiosClient from 'api/axiosClient';
 import { push } from 'connected-react-router';
 import userApi from 'api/userAPI';
 
-function* handleLogin(payload: LoginPayload) {
-  console.log(456);
+function* handleLogin(payload: LoginType) {
   try {
     const reponese: LoginRespon = yield call(() =>
       userApi.login({
@@ -21,33 +20,53 @@ function* handleLogin(payload: LoginPayload) {
     yield localStorage.setItem('access_token', reponese.data.token);
     yield put(authActions.loginSuccess(reponese.data.user));
     yield put(push('/'));
+    yield window.location.reload();
     toastSuccess(reponese.message);
+    yield cancel();
   } catch (error: any) {
-    console.log(error);
     if (error.response?.data) {
-      yield put(authActions.loginFailed(error.response?.data));
-      return toastError(error.response?.data.message);
+      yield put(authActions.loginFailed());
+      toastError(error.response?.data.message);
+      yield cancel();
     }
-    yield put(authActions.loginFailed('Error connect!'));
-    return toastError('Error connect!');
+    yield put(authActions.loginFailed());
+    toastError('Error connect!');
+    yield cancel();
   }
 }
 
 function* handleLogout() {
-  console.log(123);
   localStorage.removeItem('access_token');
-  yield put(push('/login'));
+  yield window.location.reload();
+}
+
+function* handleProfile() {
+  try {
+    const reponese: ProfileRes = yield call(() => userApi.getProfile());
+    yield put(authActions.returnProfile(reponese.data));
+  } catch (error: any) {
+    if (localStorage.getItem('access_token')) {
+      localStorage.removeItem('access_token');
+      yield put(push('/login'));
+      toastError('Error connect!');
+    }
+  }
 }
 
 function* watchLogin() {
-  const action: PayloadAction<LoginPayload> = yield take(authActions.login.type);
-  yield fork(handleLogin, action.payload);
-  //yield takeLatest(authActions.login.type, handleLogin);
+  while (true) {
+    const action: PayloadAction<LoginType> = yield take(authActions.login.type);
+    yield fork(handleLogin, action.payload);
+  }
+  //yield takeLatest(action, handleLogin);
 }
 function* watchLogout() {
   yield takeLatest(authActions.logout.type, handleLogout);
 }
+function* watchUser() {
+  yield takeLatest(authActions.checkProfile.type, handleProfile);
+}
 
 export function* loginSaga() {
-  yield all([watchLogin(), watchLogout()]);
+  yield all([watchLogin(), watchLogout(), watchUser()]);
 }

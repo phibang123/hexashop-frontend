@@ -14,3 +14,10 @@ export interface LoginRespon {
   status: number;
   data: dataS;
 }
+
+export interface ProfileRes {
+  dateTime: string;
+  message: any;
+  status: number;
+  data: INguoiDung;
+}

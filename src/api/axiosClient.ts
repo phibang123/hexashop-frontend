@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 //https://hexashop-api.herokuapp.com/api
-//http://localhost:3000/api
+//http://localhost:3001/api
 const axiosClient = axios.create({
-  baseURL: 'https://hexashop-api.herokuapp.com/api',
+  baseURL: 'http://localhost:3001/api',
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
+    authorization: 'Bearer ' + localStorage.getItem('access_token'),
   },
 });
 

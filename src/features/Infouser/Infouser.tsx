@@ -1,12 +1,11 @@
 import './Infouser.css';
 
-import { INguoiDung } from 'models';
 import React from 'react';
 import { Redirect } from 'react-router';
 import { useAppSelector } from 'app/hooks';
 
 export default function Infouser() {
-  const userReducer = useAppSelector((state) => state.login.currentUser);
+  const userReducer = useAppSelector((state) => state.auth.currentUser);
   if (!userReducer) {
     return <Redirect to="/login" />;
   }
@@ -20,7 +19,7 @@ export default function Infouser() {
             data-dropdown-toggle="dropdownInformation"
             className="p-10 rounded-full items-center"
             style={{width: "-webkit-fill-available"}}
-            src={`http://${userReducer.avatar?.split(' ').join('%20')}`}
+            src={userReducer.avatar}
           ></img>
         </div>
         <div className="w-3/4">

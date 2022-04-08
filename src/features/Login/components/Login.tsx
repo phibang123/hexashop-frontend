@@ -1,21 +1,16 @@
 import * as React from 'react';
 import * as Yup from 'yup';
 
+import { CircularProgress, CssBaseline, Grid } from '@mui/material';
 import { Form, useFormik, withFormik } from 'formik';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import { CircularProgress } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
@@ -25,8 +20,8 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const dispatch = useAppDispatch();
-  const isLogging = useAppSelector(state => state.login.isLoggedIn)
-  const formik = useFormik({
+  const isLogging = useAppSelector((state) => state.auth.isLoggedIn);
+  const formikLogin = useFormik({
     initialValues: {
       taiKhoan: '',
       matKhau: '',
@@ -70,70 +65,82 @@ export default function SignInSide() {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: "center"
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography  component="h1" variant="h5">
-              Login
-            </Typography>
-            <form className="container" onSubmit={formik.handleSubmit}>
-              <div className="">
-                <div className="mb-20">
-                  <label className="block mb-2 text-4xl  font-medium text-gray-900 dark:text-gray-300">
-                    Account
-                  </label>
-                  <input
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    name="taiKhoan"
-                    className="bg-gray-50 border text-4xl  border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter account"
-                  />
-                  <div className="text-red-900 text-2xl">
-                    {formik.errors.taiKhoan && formik.touched.taiKhoan ? (
-                      <>{formik.errors.taiKhoan}</>
-                    ) : null}
-                  </div>
-                </div>
-                <div className="mb-16">
-                  <label className="block mb-2  text-4xl font-medium text-gray-900 dark:text-gray-300">
-                    Password
-                  </label>
-                  <input
-                    className="bg-gray-50 text-4xl border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    type="password"
-                    placeholder='Enter password'
-                    name="matKhau"
-                  />
-                  <div className="text-red-900 text-2xl">
-                    {formik.errors.matKhau && formik.touched.matKhau ? (
-                      <>{formik.errors.matKhau}</>
-                    ) : null}
-                  </div>
-                </div>
-                <NavLink to="/signup" exact className="text-3xl text-base">You don't have account</NavLink>
-                <div className="d-flex justify-content-between w-50 mt-10">
-                  <button
-                    className="text-white bg-blue-700 hover:bg-blue-800  text-4xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="submit"
-                    disabled={isLogging ? true : false}
-                  >
-                    {isLogging && <CircularProgress size={20} color="secondary"/> } &nbsp; Login
-                  </button>
-                 
+         
 
-                  {/* <button htmlType="submit" size='large' style={{ color: '#ffffff', width: '45%', backgroundColor: 'red', marginTop: '50px' }} onClick={() =>
-                {
-                    history.push('/signup')
-                }} className='mt-5'  type='button'>Sign up</button>
-                </div> */}
-                </div>
+            <div className="flex flex-col mt-20 max-w-5xl p-12 rounded-md  border w-4/5 shadow-lg">
+              <div className="mb-16  text-center">
+                <h1 className="my-6 text-8xl font-bold">Sign in</h1>
+                <p className="text-xl dark:text-coolGray-400">Sign in to access your account</p>
               </div>
-            </form>
+              <form
+                onSubmit={formikLogin.handleSubmit}
+                className="space-y-12 ng-untouched ng-pristine ng-valid"
+              >
+                <div className="space-y-4">
+                  <div>
+                    <label className="block mb-5 text-2xl">Account</label>
+                    <input
+                      onChange={formikLogin.handleChange}
+                      onBlur={formikLogin.handleBlur}
+                      name="taiKhoan"
+                      id="email"
+                      placeholder="leroy@jenkins.com"
+                      className="w-full text-xl px-6 py-5 border rounded-md  "
+                    />
+                    <div className="text-red-900 ml-5">
+                      {formikLogin.errors.taiKhoan && formikLogin.touched.taiKhoan ? (
+                        <>{formikLogin.errors.taiKhoan}</>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-8">
+                      <label className="text-2xl">Password</label>
+                     
+                    </div>
+                    <input
+                      onChange={formikLogin.handleChange}
+                      onBlur={formikLogin.handleBlur}
+                      type="password"
+                      name="matKhau"
+                      id="password"
+                      placeholder="*****"
+                      className="border-2 w-full text-xl px-6 py-5 rounded-md  "
+                    />
+                     <div className="text-red-900 ml-8">
+                     {formikLogin.errors.matKhau && formikLogin.touched.matKhau ? (
+                      <>{formikLogin.errors.matKhau}</>
+                    ) : null}
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-5">
+                  <div>
+                    <button
+                      disabled={isLogging ? true : false}
+                      type="submit"
+                      className="w-full text-xl px-11 py-6 rounded-md bg-gray-800 text-gray-200 items-center"
+                    >
+                      {isLogging && <CircularProgress size={20} color="secondary" />} &nbsp; Sign in
+                    </button>
+                  </div>
+                  <p className="px-20 text-2xl text-center ">
+                    Don't have an account yet?
+                    <NavLink
+                      rel="noopener noreferrer"
+                      to="/signup"
+                      className="hover:underline"
+                    >
+                      Sign up
+                    </NavLink>
+                    .
+                  </p>
+                </div>
+              </form>
+            </div>
           </Box>
         </Grid>
       </Grid>

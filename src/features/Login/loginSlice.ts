@@ -1,18 +1,17 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 
 import { INguoiDung } from '../../models/user';
-import { INguoiDungLogin } from './../../models/user';
 import { LoginType } from './types';
+import { RootState } from './../../app/store';
 
 export interface AuthState {
   isLoggedIn: boolean;
-  logging?: boolean;
-  currentUser?: INguoiDung;
+  currentUser: INguoiDung | null;
 }
 
 const initialState: AuthState = {
   isLoggedIn: false,
-  logging: false,
+  currentUser: null,
 };
 
 const authSile = createSlice({
@@ -20,34 +19,39 @@ const authSile = createSlice({
   initialState,
   reducers: {
     login(state, action: PayloadAction<LoginType>) {
-      state.logging = true;
       state.isLoggedIn = true;
     },
     loginSuccess(state, action: PayloadAction<INguoiDung>) {
-      state.isLoggedIn = true;
-      state.logging = false;
+      //return { ...state, currentUser: action.payload, isLoggedIn: true, logging: true };
+      // state.currentUser = action.payload;
+      state.isLoggedIn = false;
       state.currentUser = action.payload;
     },
-    loginFailed(state, action: PayloadAction<string>) {
-      state.logging = false;
+    loginFailed(state) {
       state.isLoggedIn = false;
     },
     logout(state) {
-      state.isLoggedIn = false;
-      // state.currentUser = undefined;
+      state.currentUser = null;
+    },
+    checkProfile(state, action: PayloadAction) {},
+    returnProfile(state, action: PayloadAction<INguoiDung>) {
+      state.currentUser = action.payload;
     },
   },
+  // extraReducers: {
+  //   [dataFetch]: (state:any, action: PayloadAction<INguoiDung>) => {
+  //     state.currentUser = action.payload;
+  //   },
+  // },
 });
 
 //Actions
 export const authActions = authSile.actions;
 
 //Selector
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
-export const selectIsLogging = (state: any) => state.auth.logging;
-export const selectUserLogin = (state: any) => state.auth.currentUser;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectUserLogin = (state: RootState) => state.auth.currentUser;
 
-export const username = (state: any) => state.auth.currentUser;
 //Reduces
 const authReducer = authSile.reducer;
 export default authReducer;

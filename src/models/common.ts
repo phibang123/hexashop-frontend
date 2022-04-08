@@ -15,6 +15,7 @@ export interface ListResponseOBJ<T> {
   dateTime: string;
   message: any;
   status: number;
+  success: boolean;
 }
 
 export interface ListResponseARR<T> {
@@ -22,4 +23,5 @@ export interface ListResponseARR<T> {
   dateTime: string;
   message: any;
   status: number;
+  success: boolean;
 }

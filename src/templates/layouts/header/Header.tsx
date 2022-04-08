@@ -18,7 +18,12 @@ import { authActions } from 'features/Login/loginSlice';
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const dispatch = useAppDispatch();
-  const userReducer = useAppSelector(state => state.login.currentUser)
+  useEffect(() =>
+  {
+    dispatch(authActions.checkProfile())
+  }, [])
+  
+  const userReducer = useAppSelector(state => state.auth.currentUser)
   console.log(userReducer)
   const [state, setState] = React.useState({
     top: false,
@@ -114,7 +119,7 @@ export default function Header() {
       <Menu.Item>
         <li
           className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-between"
-          // onClick={() => dispatch(authActions.logout())}
+          onClick={() => dispatch(authActions.logout())}
         >
           <i className="fa-solid fa-arrow-right-from-bracket"></i> <p>Log Out</p>
         </li>
@@ -124,7 +129,7 @@ export default function Header() {
   return (
     <div
       className={`${
-        scrollPosition > 200 ? 'fixed z-20 bg-white top-0 w-full max-w-full  px-104' : 'max-w-8xl'
+        scrollPosition > 230 ? 'fixed z-20 bg-white top-0 w-full max-w-full  px-104' : 'max-w-8xl'
       } transition-all  duration-500  mx-auto flex py-10 justify-between items-center `}
     >
       <NavLink exact to="/">
@@ -165,7 +170,7 @@ export default function Header() {
                     alt="user"
                     data-dropdown-toggle="dropdownInformation"
                     className="w-20 h-20 rounded-full  hover:-translate-y-2 transition-all duration-500 cursor-pointer"
-                    src={`http://${userReducer.avatar?.split(' ').join('%20')}`}
+                    src={userReducer.avatar}
                   ></img>
                 </Dropdown>
               </li>

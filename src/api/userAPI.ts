@@ -1,6 +1,7 @@
+import { INguoiDungInput, INguoiDungLogin } from './../models/user';
+import { ListResponseARR, ListResponseOBJ } from './../models/common';
+
 import { INguoiDung } from 'models';
-import { INguoiDungLogin } from './../models/user';
-import { ListResponseARR } from './../models/common';
 import { LoginType } from './../features/Login/types/index';
 import axiosClient from './axiosClient';
 
@@ -9,9 +10,13 @@ const userApi = {
     const url = '/QuanLyNguoiDung/DangNhap';
     return axiosClient.post(url, data);
   },
-  signup(data: INguoiDung): Promise<ListResponseARR<INguoiDung>> {
+  signup(data: INguoiDungInput): Promise<ListResponseARR<INguoiDung>> {
     const url = '/QuanLyNguoiDung/DangKy';
     return axiosClient.post(url, data);
+  },
+  getProfile(): Promise<ListResponseOBJ<INguoiDung>> {
+    const url = '/QuanLyNguoiDung/ThongTin';
+    return axiosClient.get(url);
   },
 };
 

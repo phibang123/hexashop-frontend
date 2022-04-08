@@ -19,7 +19,7 @@ export interface IThich {
   giaTien: number;
 }
 
-export interface INguoiDung {
+export interface INguoiDungInput {
   _id?: any;
   taiKhoan: string;
   matKhau: string;
@@ -29,6 +29,13 @@ export interface INguoiDung {
   avatar?: string;
   soDt: string;
   sex: 'Nam' | 'Nữ';
+}
+
+export interface INguoiDung extends INguoiDungInput {
+  _id: object;
+  adminInWeb: boolean;
+  gioHang: IGioiHang[];
+  thich: IThich[];
 }
 
 export interface INguoiDungLogin {
