@@ -12,5 +12,5 @@ export interface LoginRespon {
   dateTime: string;
   message: any;
   status: number;
-  data: dataS | string;
+  data: dataS;
 }

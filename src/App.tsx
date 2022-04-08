@@ -1,4 +1,5 @@
 import './App.css';
+import 'antd/dist/antd.css'
 
 import { Route, Router, Switch } from 'react-router';
 
@@ -14,22 +15,23 @@ import Infouser from 'features/Infouser/Infouser';
 import Login from 'features/Login/components/Login';
 import ProductTemplate from 'templates/Products/ProductTemplate';
 import Productlist from 'features/Products/Productlist';
-import SignUp from 'features/user/SignUp/SignUp';
+import SignUp from './features/Signup/components/Signup';
 import { createBrowserHistory } from 'history';
 
 function App() {
   return (
     <>
-      <Switch>
+      {/* <Switch>
         <HomeTemplate exact path="/" Component={Home}></HomeTemplate>
         <HomeTemplate exact path="/home" Component={Home}></HomeTemplate>
         <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
         <DetailTemplate exact path="/detail" Component={Detail}></DetailTemplate>
         <ProductTemplate exact path="/products" Component={Productlist}></ProductTemplate>
-        <InfomationTemP exact path="/info" Component={Infouser}></InfomationTemP>
+        <InfomationTemP exact path="/profile" Component={Infouser}></InfomationTemP>
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
-      </Switch>
+      </Switch> */}
+      <Counter></Counter>
     </>
   );
 }

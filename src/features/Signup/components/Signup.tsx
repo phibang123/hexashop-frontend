@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Yup from 'yup';
 
-import { Form, useFormik, withFormik } from 'formik';
+import { CircularProgress, Paper } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
@@ -9,21 +9,32 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import { CircularProgress } from '@mui/material';
+import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { NavLink } from "react-router-dom";
-import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { authActions } from '../loginSlice';
+import { useFormik } from 'formik';
+
+function Copyright(props: any) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function Signup() {
   const dispatch = useAppDispatch();
   const isLogging = useAppSelector(state => state.login.isLoggedIn)
   const formik = useFormik({
@@ -40,7 +51,7 @@ export default function SignInSide() {
     }),
     onSubmit: (values) => {
       // const action = dangKyAsynAction(values);
-      dispatch(authActions.login(values));
+      // dispatch(authActions.login(values));
     },
   });
 
@@ -82,14 +93,14 @@ export default function SignInSide() {
               <div className="">
                 <div className="mb-20">
                   <label className="block mb-2 text-4xl  font-medium text-gray-900 dark:text-gray-300">
-                    Account
+                    Tài khoản
                   </label>
                   <input
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     name="taiKhoan"
                     className="bg-gray-50 border text-4xl  border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Enter account"
+                    placeholder="user"
                   />
                   <div className="text-red-900 text-2xl">
                     {formik.errors.taiKhoan && formik.touched.taiKhoan ? (
@@ -97,16 +108,15 @@ export default function SignInSide() {
                     ) : null}
                   </div>
                 </div>
-                <div className="mb-16">
+                <div className="mb-24">
                   <label className="block mb-2  text-4xl font-medium text-gray-900 dark:text-gray-300">
-                    Password
+                    Mật khẩu
                   </label>
                   <input
                     className="bg-gray-50 text-4xl border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     type="password"
-                    placeholder='Enter password'
                     name="matKhau"
                   />
                   <div className="text-red-900 text-2xl">
@@ -115,16 +125,14 @@ export default function SignInSide() {
                     ) : null}
                   </div>
                 </div>
-                <NavLink to="/signup" exact className="text-3xl text-base">You don't have account</NavLink>
+
                 <div className="d-flex justify-content-between w-50 mt-10">
                   <button
                     className="text-white bg-blue-700 hover:bg-blue-800  text-4xl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="submit"
-                    disabled={isLogging ? true : false}
                   >
                     {isLogging && <CircularProgress size={20} color="secondary"/> } &nbsp; Login
                   </button>
-                 
 
                   {/* <button htmlType="submit" size='large' style={{ color: '#ffffff', width: '45%', backgroundColor: 'red', marginTop: '50px' }} onClick={() =>
                 {

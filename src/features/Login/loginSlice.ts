@@ -23,9 +23,10 @@ const authSile = createSlice({
       state.logging = true;
       state.isLoggedIn = true;
     },
-    loginSuccess(state, action: PayloadAction<INguoiDungLogin>) {
+    loginSuccess(state, action: PayloadAction<INguoiDung>) {
       state.isLoggedIn = true;
       state.logging = false;
+      state.currentUser = action.payload;
     },
     loginFailed(state, action: PayloadAction<string>) {
       state.logging = false;
@@ -33,7 +34,7 @@ const authSile = createSlice({
     },
     logout(state) {
       state.isLoggedIn = false;
-      state.currentUser = undefined;
+      // state.currentUser = undefined;
     },
   },
 });
@@ -44,7 +45,9 @@ export const authActions = authSile.actions;
 //Selector
 export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
 export const selectIsLogging = (state: any) => state.auth.logging;
+export const selectUserLogin = (state: any) => state.auth.currentUser;
 
+export const username = (state: any) => state.auth.currentUser;
 //Reduces
 const authReducer = authSile.reducer;
 export default authReducer;

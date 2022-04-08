@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+
 
 import Footer from '../layouts/footer/Footer';
 

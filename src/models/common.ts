@@ -10,6 +10,16 @@ export interface ListResponseParams<T> {
   pagination: PaginationParams;
 }
 
-export interface ListResponse<T> {
+export interface ListResponseOBJ<T> {
   data: T;
+  dateTime: string;
+  message: any;
+  status: number;
+}
+
+export interface ListResponseARR<T> {
+  data: T[];
+  dateTime: string;
+  message: any;
+  status: number;
 }

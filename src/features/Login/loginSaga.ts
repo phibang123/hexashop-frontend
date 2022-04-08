@@ -1,16 +1,16 @@
 import { INguoiDung, INguoiDungLogin } from 'models';
 import { LoginPayload, authActions } from '../Auth/authSlide';
-import { call, fork, put, take } from 'redux-saga/effects';
+import { LoginRespon, LoginType } from './types/index';
+import { all, call, fork, put, take, takeLatest } from 'redux-saga/effects';
 import { toastError, toastSuccess } from './../../utils/toast/hotToast';
 
-import { LoginRespon } from './types/index';
 import { PayloadAction } from '@reduxjs/toolkit';
 import axiosClient from 'api/axiosClient';
 import { push } from 'connected-react-router';
 import userApi from 'api/userAPI';
 
 function* handleLogin(payload: LoginPayload) {
-  console.log({ taiKhoan: payload.taiKhoan, matKhau: payload.matKhau });
+  console.log(456);
   try {
     const reponese: LoginRespon = yield call(() =>
       userApi.login({
@@ -18,32 +18,36 @@ function* handleLogin(payload: LoginPayload) {
         matKhau: payload.matKhau,
       })
     );
-
+    yield localStorage.setItem('access_token', reponese.data.token);
+    yield put(authActions.loginSuccess(reponese.data.user));
     yield put(push('/'));
     toastSuccess(reponese.message);
   } catch (error: any) {
-    console.log(error.response?.data);
-    yield put(authActions.loginFailed(error.response?.data));
-    toastError(error.response?.data.message);
+    console.log(error);
+    if (error.response?.data) {
+      yield put(authActions.loginFailed(error.response?.data));
+      return toastError(error.response?.data.message);
+    }
+    yield put(authActions.loginFailed('Error connect!'));
+    return toastError('Error connect!');
   }
 }
 
 function* handleLogout() {
+  console.log(123);
   localStorage.removeItem('access_token');
+  yield put(push('/login'));
 }
 
-function* watchLoginFlow() {
-  while (true) {
-    const isLoggedIn = Boolean(localStorage.getItem('access_token'));
-    if (!isLoggedIn) {
-      const action: PayloadAction<LoginPayload> = yield take(authActions.login.type);
-      yield fork(handleLogin, action.payload);
-    }
-    yield take(authActions.logout.type);
-    yield call(handleLogout);
-  }
+function* watchLogin() {
+  const action: PayloadAction<LoginPayload> = yield take(authActions.login.type);
+  yield fork(handleLogin, action.payload);
+  //yield takeLatest(authActions.login.type, handleLogin);
+}
+function* watchLogout() {
+  yield takeLatest(authActions.logout.type, handleLogout);
 }
 
 export function* loginSaga() {
-  yield fork(watchLoginFlow);
+  yield all([watchLogin(), watchLogout()]);
 }

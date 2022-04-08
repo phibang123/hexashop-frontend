@@ -19,7 +19,10 @@ ReactDOM.render(
         <CssBaseline />
         <App />
       </ConnectedRouter>
-      <Toaster />
+      <Toaster toastOptions={{
+        className: 'text-2xl',
+      }}
+     />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
