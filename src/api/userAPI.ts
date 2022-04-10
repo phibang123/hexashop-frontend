@@ -18,6 +18,26 @@ const userApi = {
     const url = '/QuanLyNguoiDung/ThongTin';
     return axiosClient.get(url);
   },
+  setAvatar(data: any): Promise<ListResponseOBJ<INguoiDung>> {
+    const url = '/QuanLyNguoiDung/Avatar';
+    return axiosClient.patch(url, data);
+  },
+  Like(data: string): Promise<ListResponseOBJ<INguoiDung>> {
+    const url = `/QuanLyNguoiDung/Like/${data}`;
+    return axiosClient.post(url);
+  },
+  addCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+    const url = `QuanLyNguoiDung/ThemVaoGioTangSoLuong/${data}`;
+    return axiosClient.post(url);
+  },
+  reduceCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+    const url = `QuanLyNguoiDung/XoaKhoiGioGiamSoLuong/${data}`;
+    return axiosClient.post(url);
+  },
+  deleteProductCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+    const url = `QuanLyNguoiDung/XoaKhoiGioHang/${data}`;
+    return axiosClient.post(url);
+  },
 };
 
 export default userApi;

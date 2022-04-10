@@ -49,7 +49,7 @@ export default function Signup() {
       matKhau: '',
       email: '',
       soDt: '',
-      sex: 'Nam',
+      sex: '',
       hoTen: '',
     },
     validationSchema: Yup.object({
@@ -178,7 +178,7 @@ export default function Signup() {
               aria-label="Default select example"
             >
               <option >Select Sex</option>
-              <option value="Nam" defaultValue={"Nam"}>
+              <option value="Nam" selected >
                 Men
               </option>
               <option value="Nữ">Women</option>

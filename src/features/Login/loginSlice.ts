@@ -34,6 +34,7 @@ const authSile = createSlice({
       state.currentUser = null;
     },
     checkProfile(state, action: PayloadAction) {},
+
     returnProfile(state, action: PayloadAction<INguoiDung>) {
       state.currentUser = action.payload;
     },

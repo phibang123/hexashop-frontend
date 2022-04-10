@@ -26,7 +26,7 @@ export interface ISanPhamInput {
 }
 
 export interface ISanPham extends ISanPhamInput {
-  _id?: object;
+  _id: string;
   tenSanPham: string;
   giaTien: number;
   sale: boolean;

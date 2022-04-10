@@ -18,17 +18,16 @@ import { authActions } from 'features/Login/loginSlice';
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const dispatch = useAppDispatch();
-  useEffect(() =>
-  {
-    dispatch(authActions.checkProfile())
-  }, [])
-  
-  const userReducer = useAppSelector(state => state.auth.currentUser)
-  console.log(userReducer)
+  const userReducer = useAppSelector((state) => state.auth.currentUser);
+
+  useEffect(() => {
+    dispatch(authActions.checkProfile());
+  }, []);
+ 
   const [state, setState] = React.useState({
     top: false,
     left: false,
-    bottom: false,
+    bottom: false,  
     right: false,
   });
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -84,44 +83,50 @@ export default function Header() {
   );
 
   const menu = (
-    <Menu className='w-80'>
-      <Menu.Item>
-        <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
-          <NavLink exact to="/profile" className="text-black flex justify-between text-left">
-            <i className="fa-solid fa-address-card"></i> <p >Profile</p>
+    <Menu className="w-64">
+      <Menu.Item key={1}>
+        <NavLink exact to="/profile" className="">
+          <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start">
+            <i className="fa-solid fa-address-card  mr-2"></i> <p>Profile</p>
+          </li>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key={2}> 
+        <NavLink exact to="/history">
+        <li
+          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
+          // onClick={() => dispatch(authActions.logout())}
+        >
+          <i className="fa-solid fa-file-invoice-dollar  mr-2"></i> <p>History</p>
+        </li>
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key={3}>
+      <NavLink exact to="/carts" className="">
+        <li
+          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
+          // onClick={() => dispatch(authActions.logout())}
+        >
+          <i className="fa-solid fa-cart-shopping  mr-2"></i> <p>Cart</p>
+          </li>
           </NavLink>
-        </li>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={4}>
+        <NavLink exact to="/likes">
         <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-between"
+          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
           // onClick={() => dispatch(authActions.logout())}
         >
-          <i className="fa-solid fa-file-invoice-dollar"></i> <p>History</p> 
+          <i className="fa-solid fa-heart mr-2"></i> <p>Like</p>
         </li>
+        </NavLink>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={5}>
         <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-between"
-          // onClick={() => dispatch(authActions.logout())}
-        >
-          <i className="fa-solid fa-cart-shopping"></i> <p>Cart</p>
-        </li>
-      </Menu.Item>
-      <Menu.Item>
-        <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-between"
-          // onClick={() => dispatch(authActions.logout())}
-        >
-          <i className="fa-solid fa-heart"></i> <p>Like</p>
-        </li>
-      </Menu.Item>
-      <Menu.Item>
-        <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-between"
+          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
           onClick={() => dispatch(authActions.logout())}
         >
-          <i className="fa-solid fa-arrow-right-from-bracket"></i> <p>Log Out</p>
+          <i className="fa-solid fa-arrow-right-from-bracket  mr-2"></i> <p>Log Out</p>
         </li>
       </Menu.Item>
     </Menu>
@@ -174,8 +179,6 @@ export default function Header() {
                   ></img>
                 </Dropdown>
               </li>
-
-             
             </Fragment>
           ) : (
             <Fragment>

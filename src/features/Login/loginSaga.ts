@@ -18,10 +18,12 @@ function* handleLogin(payload: LoginType) {
       })
     );
     yield localStorage.setItem('access_token', reponese.data.token);
+    toastSuccess('Login success');
+    yield delay(2000);
     yield put(authActions.loginSuccess(reponese.data.user));
+
     yield put(push('/'));
     yield window.location.reload();
-    toastSuccess(reponese.message);
     yield cancel();
   } catch (error: any) {
     if (error.response?.data) {

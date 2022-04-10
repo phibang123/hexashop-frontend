@@ -1,6 +1,6 @@
 import './Product.css';
 
-import DetailBanner from '../Detail/DetailBanner';
+import DetailBanner from '../Detail/components/DetailBanner';
 import React from 'react';
 
 export default function Productlist() {

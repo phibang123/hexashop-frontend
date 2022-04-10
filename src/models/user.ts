@@ -9,6 +9,7 @@ export type IGioiHang = {
   thanhTien: number;
   hinhAnh: string;
   ngayThem?: string;
+  moTa?: string;
 };
 
 export interface IThich {
@@ -17,6 +18,7 @@ export interface IThich {
   tenSanPham: string;
   hinhAnh: string;
   giaTien: number;
+  moTa?: string;
 }
 
 export interface INguoiDungInput {
@@ -28,11 +30,11 @@ export interface INguoiDungInput {
   hoTen: string;
   avatar?: string;
   soDt: string;
-  sex: 'Nam' | 'Nữ';
+  sex?: 'Nam' | 'Nữ' | '';
 }
 
 export interface INguoiDung extends INguoiDungInput {
-  _id: object;
+  _id: string;
   adminInWeb: boolean;
   gioHang: IGioiHang[];
   thich: IThich[];

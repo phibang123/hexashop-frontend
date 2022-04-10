@@ -1,5 +1,3 @@
-import { INguoiDung } from './user';
-
 export interface IGioiHangHistory {
   _idSanPham: string;
   tenSanPham: string;
@@ -11,6 +9,7 @@ export interface IGioiHangHistory {
   thanhTien: number;
   hinhAnh: string;
   ngayThem?: string;
+  moTa?: string;
 }
 
 export interface ILicSuMuaHang {

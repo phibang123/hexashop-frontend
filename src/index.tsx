@@ -19,7 +19,9 @@ ReactDOM.render(
         <CssBaseline />
         <App />
       </ConnectedRouter>
-      <Toaster toastOptions={{
+      <Toaster
+        position="top-right"
+        toastOptions={{
         className: 'text-2xl',
       }}
      />

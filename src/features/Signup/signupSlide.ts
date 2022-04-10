@@ -12,7 +12,7 @@ const initialState: AuthState = {
 };
 
 const signupSile = createSlice({
-  name: 'auth',
+  name: 'signup',
   initialState,
   reducers: {
     singup(state, action: PayloadAction<INguoiDungInput>) {

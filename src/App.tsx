@@ -4,15 +4,17 @@ import 'antd/dist/antd.css';
 import { Route, Router, Switch } from 'react-router';
 
 import About from './features/About/About';
-import { Counter } from './features/Counter/Counter';
+import Cart from 'features/Cart/components/Cart';
 import { CssBaseline } from '@mui/material';
-import Detail from 'features/Detail/Detail';
+import Detail from 'features/Detail/components/Detail';
 import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
+import HistoryPay from 'features/HistoryPay/components/HistoryPay';
 import Home from './features/Home/Home';
 import HomeTemplate from './templates/homeTemplate/HomeTemplate';
-import InfomationTemP from 'templates/InfomationTemplate/InfomationTemP';
-import Infouser from 'features/Infouser/Infouser';
+import Infouser from "features/Infouser/components/Infouser"
+import Likes from 'features/Likes/components/Likes';
 import Login from 'features/Login/components/Login';
+import NotFound from "features/NotFound"
 import ProductTemplate from 'templates/Products/ProductTemplate';
 import Productlist from 'features/Products/Productlist';
 import SignUp from './features/Signup/components/Signup';
@@ -23,11 +25,16 @@ function App() {
       <HomeTemplate exact path="/" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/home" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
-      <DetailTemplate exact path="/detail" Component={Detail}></DetailTemplate>
-      <ProductTemplate exact path="/products" Component={Productlist}></ProductTemplate>
-      <InfomationTemP exact path="/profile" Component={Infouser}></InfomationTemP>
+      <DetailTemplate exact path="/profile" Component={Infouser}></DetailTemplate>
+      <DetailTemplate exact path="/carts" Component={Cart}></DetailTemplate>
+      <DetailTemplate exact path="/likes" Component={Likes}></DetailTemplate>
+      <DetailTemplate exact path="/history" Component={HistoryPay}></DetailTemplate>
+      <DetailTemplate exact path="/detail/:id" Component={Detail}></DetailTemplate>
+      <DetailTemplate exact path="/products" Component={Productlist}></DetailTemplate>
+   
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
+      <Route path='*' exact={true} component={NotFound} />
     </Switch>
   );
 }
