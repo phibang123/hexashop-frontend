@@ -9,15 +9,14 @@ import { NavLink } from 'react-router-dom';
 import { Pagination } from 'antd';
 import { updateAction } from 'features/Infouser/InfouserSlide';
 
-export default function Productlist()
-{
-  const dispatch = useAppDispatch()
-  const allProject = useAppSelector(state => state.projectsReducer.allProduct)
+export default function Productlist() {
+  const dispatch = useAppDispatch();
+  const allProject = useAppSelector((state) => state.projectsReducer.allProduct);
   //const project = useAppSelector(state => state.projectReducer.sanPham)
-  const userNguoiDung = useAppSelector(state => state.auth.currentUser)
+  const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
   useEffect(() => {
-    dispatch(productsActions.getAllProduct())
-  }, [userNguoiDung])
+    dispatch(productsActions.getAllProduct());
+  }, [userNguoiDung]);
   // const checkLike = product?.luotThich.idNguoiDungs.findIndex((v) => {
   //   return v.tenNguoiDung === userNguoiDung?.hoTen;
   // });
@@ -36,49 +35,79 @@ export default function Productlist()
 
           <div className="grid grid-cols-4 gap-x-20">
             {allProject?.map((product) => (
-              <div key={product._id}  className="group col-span-1 rounded-lg overflow-hidden bg-gray-50 shadow-xl">
+              <div
+                key={product._id}
+                className="group col-span-1 rounded-lg overflow-hidden bg-gray-50 shadow-xl"
+              >
                 <div className="w-full aspect-w-1 aspect-h-1 bg-gray-50 overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                   <NavLink to={`/detail/${product._id}`}>
-                  <img
-                    src={product.hinhAnh} 
-                    alt={product.tenSanPham}
-                    className="w-full h-full object-center object-cover group-hover:opacity-75"
+                    <img
+                      src={product.hinhAnh}
+                      alt={product.tenSanPham}
+                      className="w-full h-full object-center object-cover group-hover:opacity-75"
                     />
-                    </NavLink>
+                  </NavLink>
                 </div>
-                <div className='px-5'>
-                <h3 className="mt-4 text-2xl text-gray-900">
-                  {product.tenSanPham.length > 30 ? product.tenSanPham.slice(0,25) + " ..." :  product.tenSanPham}
-                </h3>
-                  <div className='flex justify-between text-4xl mt-2'>
+                <div className="px-5">
+                  <h3 className="mt-4 text-2xl text-gray-900">
+                    {product.tenSanPham.length > 30
+                      ? product.tenSanPham.slice(0, 25) + ' ...'
+                      : product.tenSanPham}
+                  </h3>
+                  <div className="flex justify-between text-4xl mt-2">
                     <div>
-                      <p className={`mt-1 font-medium text-gray-900 ${product.sale ? "line-through" : ""}`}>{product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")}Đ</p>
-                      {
-                        product.sale ? <p className={`mt-1 font-medium text-red-700`}>  {`==> ${product.thanhTien}` }</p> : ""
-                      }
+                      <p
+                        className={`mt-1 font-medium text-gray-900 mb-0 ${
+                          product.sale ? 'line-through' : ''
+                        }`}
+                      >
+                        {product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ
+                      </p>
+                      {product.sale ? (
+                        <p className={`mt-1 font-medium text-red-700`}>
+                          {' '}
+                          {`==> ${product.thanhTien}`}
+                        </p>
+                      ) : (
+                        ''
+                      )}
                     </div>
-                    
+
                     <div className="">
-                     <span className='text-black'>{product.luotThich.tongLuotThich}</span>
-                  <i
-                    onClick={() =>
-                      dispatch(updateAction.setLike(product?._id))
-                    }
-                    className={`fa-solid fa-heart cursor-pointer ml-2  ${product?.luotThich.idNguoiDungs.findIndex((v) => {
-                        return v.tenNguoiDung === userNguoiDung?.hoTen
-                      })  !== -1 ? "text-red-900" :"text-black" }`}
-                  ></i>{' '}
-                </div>
+                      <span className="text-black">{product.luotThich.tongLuotThich}</span>
+                      <i
+                        onClick={() => dispatch(updateAction.setLike(product?._id))}
+                        className={`fa-solid fa-heart cursor-pointer ml-2  ${
+                          product?.luotThich.idNguoiDungs.findIndex((v) => {
+                            return v.tenNguoiDung === userNguoiDung?.hoTen;
+                          }) !== -1
+                            ? 'text-red-900'
+                            : 'text-black'
+                        }`}
+                      ></i>{' '}
+                    </div>
                   </div>
-                  
+                  <div className="flex justify-between ">
+                    <button
+                      className="border-2 border-gray-600 mr-5 bg-gray-800 text-white px-3 rounded-md"
+                      onClick={() => dispatch(updateAction.setAddCart(product?._id))}
+                    >
+                      Add To Cart
+                    </button>
+                    <button
+                      className="px-7 border-4 rounded-md py-3 bg-yellow-400 text-white"
+                      onClick={() => dispatch(updateAction.setAddCartRedirest(product?._id))}
+                    >
+                      Buy
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className='mt-24 text-right'>
-          <Pagination defaultCurrent={6} total={50} />
+          <div className="mt-24 text-right">
+            <Pagination defaultCurrent={6} total={50} />
           </div>
-
         </div>
       </div>
     </div>
