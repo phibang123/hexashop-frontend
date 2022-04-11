@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 
+import { INguoiDungEdit, INguoiDungInput } from 'models';
 import React, { useState } from 'react';
-import { toastError, toastSuccess } from 'utils/toast/hotToast';
+import { toastError, toastLoading, toastSuccess } from 'utils/toast/hotToast';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { CircularProgress } from '@mui/material';
-import { INguoiDungInput } from 'models';
 import { LoginRespon } from 'features/Login/types';
 import { Redirect } from 'react-router';
 import { authActions } from 'features/Login/loginSlice';
@@ -18,40 +18,38 @@ export default function Infouser() {
   const isLoadding = useAppSelector((state) => state.updateUser.isLoading);
   const [editB, seteditB] = useState(false)
   const dispatch = useAppDispatch();
-  const formikEditUser = useFormik({
+
+    const formikEditUser =  useFormik({
     initialValues: {
-      taiKhoan: userReducer?.taiKhoan || "",
       matKhau: '',
-      email: '',
-      diaChi: userReducer?.diaChi || "",
-      soDt: userReducer?.soDt || '',
-      sex: userReducer?.sex || '',
-      hoTen: userReducer?.hoTen || '',
+      diaChi: userReducer?.diaChi,
+      soDt: userReducer?.soDt ,
+      sex: userReducer?.sex ,
+      hoTen: userReducer?.hoTen ,
     },
     validationSchema: Yup.object({
-      taiKhoan: Yup.string().required('account not required'),
       matKhau: Yup.string()
         .min(6, 'Password must have min 6 characters')
-        .required('PassWord not required')
+        .required('PassWord not required')  
         .max(32, 'Password must have max 32 character'),
-      email: Yup.string().email('Invalid email format').required('email not required'),
       soDt: Yup.string().required('phone not required'),
       hoTen: Yup.string().required('Full Name not required'),
       diaChi: Yup.string().required('Address Name not required')
     }),
-    onSubmit: (values:INguoiDungInput) => {
-      // const action = dangKyAsynAction(values);
-     // dispatch(signUpActions.singup(values));
+    onSubmit: (values: INguoiDungEdit) => {
+      dispatch(updateAction.updateEditProfile(values));
+     
     },
-  });
+  }) 
+ 
 
   const [img, setImg] = useState<any>({
     avatar: null,
   });
-
-  if (!localStorage.getItem('access_token')) {
+  if (!localStorage.getItem('access_token') ) {
     return <Redirect to="/login" />;
   }
+ 
 
   const fileSelectedHandler = (event: any) => {
     setImg({
@@ -65,7 +63,9 @@ export default function Infouser() {
     e.preventDefault();
     const frmData = new FormData();
     await frmData.append('avatar', img.avatar, img.avatar.name);
-    try {
+    try
+    {
+      toastLoading()
       await axios
         .patch('http://localhost:3001/api/QuanLyNguoiDung/Avatar', frmData, {
           headers: {
@@ -87,7 +87,6 @@ export default function Infouser() {
       dispatch(updateAction.success);
     }
   };
-  console.log(img);
   return (
     <div id="infouser" className=" mx-auto px-8 py-8 mb-28">
       <div className="w-3/4 bg-gray-100 mx-auto bg-zinc-300 shadow overflow-hidden sm:rounded-2xl flex mt-36">
@@ -137,8 +136,8 @@ export default function Infouser() {
         </div>
         <div className="w-3/4">
           <div className="px-4 py-8 sm:px-6 border-4 flex justify-between items-center">
-            <div><h3 className="text-3xl leading-6 font-medium text-gray-900 ">Applicant Information</h3>
-            <p className="mt-1 max-w-2xl text-lg text-gray-500">
+            <div><h3 className="text-4xl leading-6 font-medium text-gray-900 ">Applicant Information</h3>
+            <p className="mt-1 max-w-2xl text-xl   text-gray-500">
               Personal details and application.
               </p></div>
             <div><button className='bg-gray-900 rounded-lg text-white px-5 py-3 text-2xl' onClick={() => seteditB(!editB)} >Edit Profile</button></div>
@@ -182,48 +181,36 @@ export default function Infouser() {
             
             
             </dl>
-          </div> : <div className="border-t border-4 border-gray-200">
+          </div> : <div className="border-t border-4 border-gray-200  px-8 py-12">
           <form onSubmit={formikEditUser.handleSubmit}>
-            <h1 className="mb-12 text-5xl text-center">Sign up</h1>
+            <h1 className="mb-12 text-3xl text-center">Edit profile</h1>
 
-            <div className="mb-7">
+                <div className="mb-7">
+                <label className="block mb-5 text-2xl">Address</label>
               <input
-                type="text"
+                    type="text"
+                    value={formikEditUser.values.diaChi}
                 onChange={formikEditUser.handleChange}
                 onBlur={formikEditUser.handleBlur}
                 className="block border border-grey-light w-full p-6 rounded  text-2xl"
-                name="taiKhoan"
-                placeholder="Account"
+                    name="diaChi"
+                placeholder="Enter Address"
               />
               <div className="text-red-900 ml-5">
-                {formikEditUser.errors.taiKhoan && formikEditUser.touched.taiKhoan ? (
-                  <>{formikEditUser.errors.taiKhoan}</>
+                {formikEditUser.errors.diaChi && formikEditUser.touched.diaChi ? (
+                  <>{formikEditUser.errors.diaChi}</>
                 ) : null}
               </div>
             </div>
-            <div className="mb-7">
-              <input
-                type="text"
-                onChange={formikEditUser.handleChange}
-                onBlur={formikEditUser.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded  text-2xl"
-                name="email"
-                placeholder="Email"
-              />
-              <div className="text-red-900 ml-5">
-                {formikEditUser.errors.email && formikEditUser.touched.email ? (
-                  <>{formikEditUser.errors.email}</>
-                ) : null}
-              </div>
-            </div>
-            <div className="mb-7">
+                <div className="mb-7">
+                <label className="block mb-5 text-2xl">Password</label>
               <input
                 type="password"
                 onChange={formikEditUser.handleChange}
                 onBlur={formikEditUser.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded text-2xl"
+                className="block border border-grey-light w-full p-6 rounded  text-2xl"
                 name="matKhau"
-                placeholder="Password"
+                placeholder="Enter password"
               />
               <div className="text-red-900 ml-5">
                 {formikEditUser.errors.matKhau && formikEditUser.touched.matKhau ? (
@@ -231,15 +218,16 @@ export default function Infouser() {
                 ) : null}
               </div>
             </div>
-            
-            <div className="mb-7">
+                <div className="mb-7">
+                <label className="block mb-5 text-2xl">Full Name</label>
               <input
                 type="text"
                 onChange={formikEditUser.handleChange}
-                onBlur={formikEditUser.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded mb-7 text-2xl"
+                    onBlur={formikEditUser.handleBlur}
+                    value={formikEditUser.values.hoTen}
+                className="block border border-grey-light w-full p-6 rounded text-2xl"
                 name="hoTen"
-                placeholder="Full Name"
+                placeholder="Enter Full Name"
               />
               <div className="text-red-900 ml-5">
                 {formikEditUser.errors.hoTen && formikEditUser.touched.hoTen ? (
@@ -247,14 +235,17 @@ export default function Infouser() {
                 ) : null}
               </div>
             </div>
-            <div className="mb-7">
+            
+                <div className="mb-7">
+                <label className="block mb-5 text-2xl">Number Phone</label>
               <input
                 type="text"
                 onChange={formikEditUser.handleChange}
                 onBlur={formikEditUser.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded text-2xl"
-                name="soDt"
-                placeholder="Number phone"
+                className="block border border-grey-light w-full p-6 rounded mb-7 text-2xl"
+                    name="soDt"
+                    value={formikEditUser.values.soDt}
+                placeholder="Enter Number Phone"
               />
               <div className="text-red-900 ml-5">
                 {formikEditUser.errors.soDt && formikEditUser.touched.soDt ? (
@@ -262,8 +253,12 @@ export default function Infouser() {
                 ) : null}
               </div>
             </div>
-            <select
-              onChange={formikEditUser.handleChange}
+          
+                <div className="mb-7">
+                <label className="block mb-5 text-2xl">Select Sex</label>
+                <select
+                    onChange={formikEditUser.handleChange}
+                    onBlur={formikEditUser.handleBlur}  
               className="form-select appearance-none
       block
       w-full
@@ -280,7 +275,9 @@ export default function Infouser() {
       m-0
       border-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              aria-label="Default select example"
+                    aria-label="Default select example"
+                    name="sex"
+                    value={formikEditUser.values.sex}
             >
               <option >Select Sex</option>
               <option value="Nam" selected >
@@ -288,14 +285,21 @@ export default function Infouser() {
               </option>
               <option value="Nữ">Women</option>
             </select>
+            </div>
 
-            {/* <button
+            <button
               type="submit"
-              disabled={isSignUp ? true : false}
+                  disabled={isLoadding ? true : false}
+                  onClick={() =>
+                  {
+                    setTimeout(() => {
+                      seteditB(false)
+                    }, 2000);
+                  }}
               className="w-full text-center py-6 text-2xl rounded bg-green text-white bg-gray-800 hover:bg-green-dark focus:outline-none my-4"
             >
-             {isSignUp && <CircularProgress size={20} color="secondary" />} &nbsp;  Create Account
-            </button> */}
+             {isLoadding && <CircularProgress size={20} color="secondary" />} &nbsp;  Create AccountEdit
+            </button>
 
            
           </form>

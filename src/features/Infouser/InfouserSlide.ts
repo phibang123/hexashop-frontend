@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ILicSuMuaHang } from 'models';
+import { INguoiDungEdit } from './../../models/user';
 import { LoginType } from './../Login/types/index';
 
 interface IinitialState {
@@ -22,6 +23,10 @@ const updateUser = createSlice({
     setAddCart(state, action: PayloadAction<string>) {},
     setAddCartRedirest(state, action: PayloadAction<string>) {},
     setReduceCart(state, action: PayloadAction<string>) {},
+    updateEditProfile(state, action: PayloadAction<INguoiDungEdit>) {
+      state.isLoading = true;
+    },
+
     buyCart(state) {},
     getPayment(sate) {},
 

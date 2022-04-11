@@ -22,7 +22,6 @@ export interface IThich {
 }
 
 export interface INguoiDungInput {
-  _id?: any;
   taiKhoan: string;
   matKhau: string;
   email: string;
@@ -30,6 +29,14 @@ export interface INguoiDungInput {
   hoTen: string;
   avatar?: string;
   soDt: string;
+  sex?: 'Nam' | 'Nữ' | '';
+}
+
+export interface INguoiDungEdit {
+  matKhau?: string;
+  diaChi?: string;
+  hoTen?: string;
+  soDt?: string;
   sex?: 'Nam' | 'Nữ' | '';
 }
 

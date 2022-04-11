@@ -116,7 +116,7 @@ export default function Detail(props: any) {
           <div className=" col-span-full">
             <List
               className="comment-list"
-              header={`${data?.length} replies`}
+              header={`${data?.length} Comment`}
               itemLayout="horizontal"
               dataSource={data}
               renderItem={(item) => (

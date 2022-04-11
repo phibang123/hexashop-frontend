@@ -1,22 +1,25 @@
 import { all, call, cancel, fork, put, take, takeLatest } from 'redux-saga/effects';
-import { toastError, toastSuccess } from './../../utils/toast/hotToast';
+import { toastError, toastLoading, toastSuccess } from './../../utils/toast/hotToast';
 
 import { INguoiDungInput } from './../../models/user';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ResignupRespon } from './types/index';
 import { push } from 'connected-react-router';
 import { signUpActions } from './signupSlide';
+import { toast } from 'react-hot-toast';
 import userApi from 'api/userAPI';
 
 function* handleSignup(payload: INguoiDungInput) {
   try {
+    yield toastLoading();
     yield call(() => userApi.signup(payload));
     yield put(signUpActions.signupSuccess());
     yield put(push('/login'));
-    toastSuccess('Đăng ký thành công');
+    yield toast.dismiss();
+    yield toastSuccess('Đăng ký thành công');
     yield cancel();
   } catch (error: any) {
-    console.log(error);
+    yield toast.dismiss();
     if (error.response?.data) {
       yield put(signUpActions.signupFails());
       toastError(error.response?.data.message);

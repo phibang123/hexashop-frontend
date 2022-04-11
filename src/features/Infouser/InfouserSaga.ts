@@ -1,29 +1,34 @@
+import { LoginRespon, ProfileRes } from './../Login/types/index';
 import { all, call, cancel, delay, fork, put, take, takeLatest } from 'redux-saga/effects';
-import { toastError, toastSuccess } from './../../utils/toast/hotToast';
+import { toastError, toastLoading, toastSuccess } from './../../utils/toast/hotToast';
 
 import { ILicSuMuaHang } from './../../models/historyPay';
+import { INguoiDungEdit } from './../../models/user';
 import { LichSuRespon } from 'features/HistoryPay/types';
 import { LikeRespon } from './../Likes/types/index';
-import { LoginRespon } from './../Login/types/index';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { authActions } from 'features/Login/loginSlice';
 import payment from 'api/paymentAPI';
 import { push } from 'connected-react-router';
+import { toast } from 'react-hot-toast';
 import { updateAction } from './InfouserSlide';
 import userApi from 'api/userAPI';
 
 function* handleSetLike(payload: string) {
   try {
+    toastLoading();
     const user: LikeRespon = yield call(() => userApi.Like(payload));
     yield put(authActions.loginSuccess(user.data));
+    toast.dismiss();
     toastSuccess('Success');
     yield cancel();
   } catch (error) {
+    toast.dismiss();
     toastError('Some thing wrong!');
     yield cancel();
   }
 }
-function* watchUpdateAvata() {
+function* watchSetLike() {
   while (true) {
     const action: PayloadAction<string> = yield take(updateAction.setLike.type);
     yield fork(handleSetLike, action.payload);
@@ -44,14 +49,40 @@ function* watchGetPayment() {
 
 //------------------------
 
-function* handleRemoveCart(payload: string) {
+function* handleUpdateProfile(payload: INguoiDungEdit) {
   try {
-    const user: LikeRespon = yield call(() => userApi.deleteProductCart(payload));
-    yield put(authActions.returnProfile(user.data));
+    toastLoading();
+    const userUpdate: ProfileRes = yield call(() => userApi.updateProfile(payload));
+    yield put(authActions.returnProfile(userUpdate.data));
+    toast.dismiss();
+    yield put(updateAction.success());
     toastSuccess('Success');
     yield cancel();
-  } catch (error) {
-    toastError('Some thing wrong!');
+  } catch (error: any) {
+    toast.dismiss();
+    toastError(error.response?.data.message);
+    yield cancel();
+  }
+}
+function* watchUpdateProfile() {
+  while (true) {
+    const action: PayloadAction<INguoiDungEdit> = yield take(updateAction.updateEditProfile.type);
+    yield fork(handleUpdateProfile, action.payload);
+  }
+}
+//------------------------
+
+function* handleRemoveCart(payload: string) {
+  try {
+    toastLoading();
+    const user: LikeRespon = yield call(() => userApi.deleteProductCart(payload));
+    yield put(authActions.returnProfile(user.data));
+    toast.dismiss();
+    toastSuccess('Success');
+    yield cancel();
+  } catch (error: any) {
+    toast.dismiss();
+    toastError(error.response?.data.message);
     yield cancel();
   }
 }
@@ -67,12 +98,15 @@ function* watchRemoveCart() {
 
 function* handleAddCart(payload: string) {
   try {
+    toastLoading();
     const user: LikeRespon = yield call(() => userApi.addCart(payload));
     yield put(authActions.returnProfile(user.data));
+    toast.dismiss();
     toastSuccess('Success');
     yield cancel();
   } catch (error: any) {
-    toastError('sản phẩm đã hết!');
+    toast.dismiss();
+    toastError(error.response?.data.message);
     yield cancel();
   }
 }
@@ -90,10 +124,10 @@ function* handleAddCartRedirest(payload: string) {
     const user: LikeRespon = yield call(() => userApi.addCart(payload));
     yield put(authActions.returnProfile(user.data));
     yield put(push('/carts'));
-    toastSuccess('Success');
+    yield toastSuccess('Success');
     yield cancel();
-  } catch (error) {
-    toastError('sản phẩm đã hết!');
+  } catch (error: any) {
+    yield toastError(error.response?.data.message);
     yield cancel();
   }
 }
@@ -107,12 +141,15 @@ function* watchAddCartRedirest() {
 //------------------------
 function* handleReduceCart(payload: string) {
   try {
+    yield toastLoading();
     const user: LikeRespon = yield call(() => userApi.reduceCart(payload));
     yield put(authActions.returnProfile(user.data));
-    toastSuccess('Success');
+    yield toast.dismiss();
+    yield toastSuccess('Success');
     yield cancel();
   } catch (error) {
-    toastError('Some thing wrong!');
+    yield toast.dismiss();
+    yield toastError('Some thing wrong!');
     yield cancel();
   }
 }
@@ -125,14 +162,16 @@ function* watchReduceCart() {
 //------------------------
 function* handleBuyCart() {
   try {
+    yield toastLoading();
     const lichsumua: LichSuRespon = yield call(() => payment.byProduct());
     yield put(updateAction.succesGetPayment(lichsumua.data));
     yield put(push('/history'));
-    toastSuccess('Buy project success');
+    yield toast.dismiss();
+    yield toastSuccess('Buy project success');
     yield cancel();
-  } catch (error) {
-    console.log(error);
-    toastError('Some thing wrong!');
+  } catch (error: any) {
+    yield toast.dismiss();
+    yield toastError(error.response?.data.message);
     yield cancel();
   }
 }
@@ -142,12 +181,13 @@ function* watchByCart() {
 }
 export function* updateUser() {
   yield all([
-    watchUpdateAvata(),
+    watchSetLike(),
     watchGetPayment(),
     watchRemoveCart(),
     watchAddCart(),
     watchReduceCart(),
     watchByCart(),
     watchAddCartRedirest(),
+    watchUpdateProfile(),
   ]);
 }

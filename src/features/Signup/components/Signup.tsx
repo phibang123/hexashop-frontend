@@ -176,6 +176,7 @@ export default function Signup() {
       border-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               aria-label="Default select example"
+              name="sex"
             >
               <option >Select Sex</option>
               <option value="Nam" selected >

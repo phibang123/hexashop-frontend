@@ -1,4 +1,4 @@
-import { Button, Dropdown, Menu } from 'antd';
+import { Badge, Button, Dropdown, Menu } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
@@ -107,7 +107,7 @@ export default function Header() {
           className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
           // onClick={() => dispatch(authActions.logout())}
         >
-          <i className="fa-solid fa-cart-shopping  mr-2"></i> <p>Cart</p>
+         <Badge count={userReducer?.gioHang.length || 0}> <i className=" fa-solid fa-cart-shopping  mr-2"></i></Badge>  <p className='ml-5'>Cart</p>
           </li>
           </NavLink>
       </Menu.Item>

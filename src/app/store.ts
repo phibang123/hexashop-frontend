@@ -5,6 +5,7 @@ import authReducer from 'features/Login/loginSlice';
 import createSagaMiddleware from 'redux-saga';
 import { history } from 'utils/history';
 import projectReducer from 'features/Detail/DetailSlide';
+import projectsReducer from 'features/Products/productSlice';
 import rootSaga from './rootSaga';
 import signupReducer from 'features/Signup/signupSlide';
 import updateUserReducer from 'features/Infouser/InfouserSlide';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   signup: signupReducer,
   updateUser: updateUserReducer,
   projectReducer: projectReducer,
+  projectsReducer: projectsReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

@@ -1,4 +1,4 @@
-import { INguoiDungInput, INguoiDungLogin } from './../models/user';
+import { INguoiDungEdit, INguoiDungInput, INguoiDungLogin } from './../models/user';
 import { ListResponseARR, ListResponseOBJ } from './../models/common';
 
 import { INguoiDung } from 'models';
@@ -26,17 +26,21 @@ const userApi = {
     const url = `/QuanLyNguoiDung/Like/${data}`;
     return axiosClient.post(url);
   },
-  addCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+  addCart(data: string): Promise<ListResponseOBJ<INguoiDung>> {
     const url = `QuanLyNguoiDung/ThemVaoGioTangSoLuong/${data}`;
     return axiosClient.post(url);
   },
-  reduceCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+  reduceCart(data: string): Promise<ListResponseOBJ<INguoiDung>> {
     const url = `QuanLyNguoiDung/XoaKhoiGioGiamSoLuong/${data}`;
     return axiosClient.post(url);
   },
-  deleteProductCart(data: string): Promise<ListResponseARR<INguoiDung>> {
+  deleteProductCart(data: string): Promise<ListResponseOBJ<INguoiDung>> {
     const url = `QuanLyNguoiDung/XoaKhoiGioHang/${data}`;
     return axiosClient.post(url);
+  },
+  updateProfile(data: INguoiDungEdit): Promise<ListResponseOBJ<INguoiDung>> {
+    const url = `QuanLyNguoiDung/ChinhSua`;
+    return axiosClient.patch(url, data);
   },
 };
 

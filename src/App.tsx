@@ -16,7 +16,7 @@ import Likes from 'features/Likes/components/Likes';
 import Login from 'features/Login/components/Login';
 import NotFound from "features/NotFound"
 import ProductTemplate from 'templates/Products/ProductTemplate';
-import Productlist from 'features/Products/Productlist';
+import Productlist from 'features/Products/components/Productlist';
 import SignUp from './features/Signup/components/Signup';
 
 function App() {

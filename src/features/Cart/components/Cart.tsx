@@ -2,9 +2,11 @@ import { IGioiHang, INguoiDung } from 'models';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { Modal } from 'antd';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { Redirect } from 'react-router';
 import moment from 'moment';
+import { push } from 'connected-react-router';
 import { updateAction } from 'features/Infouser/InfouserSlide';
 
 export default function Cart()
@@ -42,9 +44,11 @@ export default function Cart()
     return (
       <li className="flex flex-col py-10 sm:flex-row sm:justify-between   " key={index}>
         <div className="flex w-full space-x-6">
+         
           <img
-            className="flex-shrink-0 object-cover w-56 h-56 dark:border-transparent rounded outline-none  "
+            className="flex-shrink-0 object-cover w-56 h-56 dark:border-transparent rounded outline-none cursor-pointer"
             src={v.hinhAnh}
+           
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
               currentTarget.src =
@@ -52,10 +56,11 @@ export default function Cart()
             }}
             alt={v.tenSanPham}
           />
+
           <div className="flex flex-col justify-between w-full pb-8">
             <div className="flex justify-between w-full pb-5 space-x-5">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold leading-snug ">{v.tenSanPham}</h3>
+                <h3 className="text-2xl font-semibold leading-snug "> <NavLink to={`detail/${v._idSanPham}`} className="text-black"> {v.tenSanPham}</NavLink></h3>
                 <p className="text-xl dark:text-coolGray-400">{ v.moTa}</p>
                 <p className="text-xl dark:text-coolGray-400">Add cart when: {moment(v.ngayThem).format("hh:mm A - DD-MM-YYYY")}</p>
                 
@@ -246,6 +251,8 @@ export default function Cart()
       >
         <p>{modalText}</p>
       </Modal>
+
+      
     </div>
   );
 }
