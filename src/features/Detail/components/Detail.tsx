@@ -17,9 +17,9 @@ export default function Detail(props: any) {
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
   // const [comment, setComment] = React.useState({
-	// 	submitting: false,
-	// 	value: "",
-	// });
+  // 	submitting: false,
+  // 	value: "",
+  // });
   const dispatch = useAppDispatch();
   useEffect(() => {
     let { id } = props.match.params;
@@ -53,91 +53,130 @@ export default function Detail(props: any) {
   return (
     <div id="detail" className="border-top">
       <DetailBanner />
-      <div className="detail_content container mx-auto my-20">
-        <div className="d_content_big grid grid-cols-4 gap-4  m-auto max-w-8xl ">
-          <div className="img col-span-2">
-            <img className=" mb-9 h-2/3 m-auto w-3/4" src={project?.hinhAnh} alt="" />
-          </div>
-          <div className="ml-20 right-content col-span-2 ">
-            <div>
-              <h4>{project?.tenSanPham}</h4>
-              <span className="price">{project?.categories}</span>
-
-              <span>{project?.moTa}</span>
-              <div className="flex justify-between mt-5 items-center quantity-content">
-                <span className="font-medium text-5xl">Lieks:</span>
-                <div className="text-4xl">
-                  {project?.luotThich.tongLuotThich}
-                  <i
-                    onClick={() =>
-                      project ? dispatch(updateAction.setLike(project?._id)) : toastError('Error')
-                    }
-                    className={`fa-solid fa-heart cursor-pointer ${
-                      checkLike !== -1 ? 'text-red-800' : ''
-                    }`}
-                  ></i>{' '}
-                </div>
+      <div>
+        <section className="text-gray-700 body-font overflow-hidden bg-white">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="lg:w-4/5 mx-auto flex flex-wrap">
+              <div className="lg:w-1/2 ">
+                <img
+                  alt="ecommerce"
+                  className="w-full object-cover object-center rounded border border-gray-200 shadow-xl h-4/5 max-h-full"
+                  src={project?.hinhAnh}
+                />
               </div>
-              <div className="">
-                <div className="left-content">
-                  <h6>Quantity: {project?.soLuong}</h6>
+              <div className="lg:w-1/2 w-full lg:pl-20 lg:py-6 mt-10 lg:mt-0 ">
+                <h2 className="text-3xl title-font text-gray-500 tracking-widest">
+                  {project?.categories}
+                </h2>
+                <h1 className="text-gray-900 text-6xl title-font font-medium mb-1">
+                  {project?.tenSanPham}
+                </h1>
+                <div className="flex my-12">
+                  <span className="flex items-center text-3xl">
+                    <i
+                      onClick={() =>
+                        project ? dispatch(updateAction.setLike(project?._id)) : toastError('Error')
+                      }
+                      className={`fa-solid fa-heart cursor-pointer transition-all duration-500 ${
+                        checkLike !== -1 ? 'text-red-700 hover:text-black' : 'hover:text-red-700'
+                      }`}
+                    ></i>
+                    <span className="text-gray-600  ml-3">
+                      {project?.luotThich.tongLuotThich} Likes
+                    </span>
+                  </span>
+                  <span className="flex ml-3 pl-3 py-2 border-l-2 text-2xl  border-gray-200">
+                    <i className="fa-brands fa-facebook-f mx-3"></i>
+                    <i className="fa-brands fa-twitter mx-3"></i>
+                    <i className="fa-brands fa-github mx-3  "></i>
+                  </span>
                 </div>
-              </div>
-              <div className="total">
-                <h4 className={`${project?.sale ? 'line-through' : ''}`}>
-                  Total: {project?.thanhTien}
-                </h4>
-                <h3> {project?.sale ? 'Sale' + project.thanhTien : ''} </h3>
-                <div className="flex justify-end ">
+                <p className="leading-relaxed my-5 text-3xl">{project?.moTa}</p>
+                <div className="flex justify-between mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5 ">
+                  <div className="flex text-2xl my-5">
+                    <span className="mr-3">Quantity: </span>
+                    <span>{project?.soLuong}</span>
+                  </div>
+                  {project?.sale ? (
+                    <div className="flex ml-6 text-2xl my-5 items-center">
+                      <span className="mr-3 text-red-600">Sale: </span>
+                      <div className="relative ">
+                        <span className="text-2xl font-semibold inline-block py-1 px-2  rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
+                          {project?.phanTramSale}%
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className="flex my-10">
+                  <div>
+                    <span
+                      className={`title-font  text-5xl font-extrabold text-gray-900 ${
+                        project?.sale ? 'text-red-700' : ''
+                      }`}
+                    >
+                      {project?.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ
+                    </span>
+                    {project?.sale ? (
+                      <span className="title-font font-medium text-2xl line-through mx-5">
+                        {' '}
+                        {project?.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </div>
+                <div className="flex text-4xl">
                   <button
-                    className="border-2 border-gray-600 mr-5 bg-gray-800 text-white px-3 rounded-md"
+                    className="flex text-white mr-10 bg-yellow-500 border-0 py-5 px-6 focus:outline-none hover:bg-yellow-600 rounded items-center "
                     onClick={() =>
                       project
                         ? dispatch(updateAction.setAddCart(project?._id))
                         : toastError('Error')
                     }
                   >
-                    Add To Cart
+                    Get to cart <i className="fa-solid fa-cart-arrow-down ml-3"></i>
                   </button>
                   <button
-                    className="px-7 border-4 rounded-md py-3 bg-yellow-400 text-white"
+                    className="flex text-white bg-red-500 border-0 py-5 px-6 focus:outline-none hover:bg-red-600 rounded items-center "
                     onClick={() =>
                       project
                         ? dispatch(updateAction.setAddCartRedirest(project?._id))
                         : toastError('Error')
                     }
                   >
-                    Buy
+                    Buy <i className="fa-solid fa-money-bill-1-wave ml-3"></i>
                   </button>
                 </div>
               </div>
+              <List
+                className="comment-list"
+                header={`${data?.length} Comment`}
+                itemLayout="horizontal"
+                dataSource={data}
+                renderItem={(item) => (
+                  <li>
+                    <Comment author={item.author} avatar={item.avatar} content={item.content} />
+                  </li>
+                )}
+              />
+              {/* <Comment
+avatar={<Avatar src={userNguoiDung?.avatar} alt={userNguoiDung?.hoTen} />}
+content={
+  <Editor
+    onChange={this.handleChange}
+    onSubmit={this.handleSubmit}
+    submitting={submitting}
+    value={value}
+  />
+}
+/> */}
             </div>
           </div>
-          <div className=" col-span-full">
-            <List
-              className="comment-list"
-              header={`${data?.length} Comment`}
-              itemLayout="horizontal"
-              dataSource={data}
-              renderItem={(item) => (
-                <li>
-                  <Comment author={item.author} avatar={item.avatar} content={item.content} />
-                </li>
-              )}
-            />
-            {/* <Comment
-              avatar={<Avatar src={userNguoiDung?.avatar} alt={userNguoiDung?.hoTen} />}
-              content={
-                <Editor
-                  onChange={this.handleChange}
-                  onSubmit={this.handleSubmit}
-                  submitting={submitting}
-                  value={value}
-                />
-              }
-            /> */}
-          </div>
-        </div>
+        </section>
       </div>
     </div>
   );

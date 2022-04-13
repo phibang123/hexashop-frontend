@@ -10,6 +10,7 @@ import { LoginRespon } from 'features/Login/types';
 import { Redirect } from 'react-router';
 import { authActions } from 'features/Login/loginSlice';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { updateAction } from '../InfouserSlide';
 import { useFormik } from 'formik';
 
@@ -67,7 +68,7 @@ export default function Infouser() {
     {
       toastLoading()
       await axios
-        .patch('http://localhost:3001/api/QuanLyNguoiDung/Avatar', frmData, {
+        .patch('https://hexashop-api.herokuapp.com/api/QuanLyNguoiDung/Avatar', frmData, {
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
@@ -76,13 +77,15 @@ export default function Infouser() {
         })
         .then((result) =>
         {
-          console.log(result)
+          toast.dismiss()
           dispatch(authActions.loginSuccess(result.data.data));
           dispatch(updateAction.success);
           toastSuccess('Success');
         });
  
-    } catch (error) {
+    } catch (error)
+    {
+      toast.dismiss()
       toastError('Some thing wrong!');
       dispatch(updateAction.success);
     }

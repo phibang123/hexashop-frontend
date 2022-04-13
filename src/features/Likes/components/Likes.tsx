@@ -19,7 +19,7 @@ export default function Likes() {
   const mapLike = userReducer?.thich.map((v, index) => {
     return (
       <div className="xl:w-1/4 md:w-1/2 p-4" key={index}>
-        <div className="bg-gray-100 p-6 rounded-lg">
+        <div className="bg-gray-100 p-6 rounded-lg h-full">
           <NavLink exact to={`/detail/${v._idSanPham}`}>
           <img
             className="h-72 rounded w-full object-cover object-center mb-6"
@@ -30,7 +30,7 @@ export default function Likes() {
             {v.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
           </h3>
           </NavLink>
-          <h2 className="text-2xl text-gray-900 font-medium title-font mb-4">{v.tenSanPham}</h2>
+          <h2 className="text-2xl text-gray-900 font-medium title-font mb-4">{v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + "..." : v.tenSanPham}</h2>
           <p className="leading-relaxed text-xl ">{v.moTa}</p>
           <button
             className="px-8 py-3 font-semibold rounded bg-gray-800 text-white"

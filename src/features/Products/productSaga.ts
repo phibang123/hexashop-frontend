@@ -8,7 +8,6 @@ import userApi from 'api/userAPI';
 
 function* handleGetAllProduct() {
   try {
-    console.log(123);
     const allProduct: projectAllRes = yield call(() => pruduct.getAll());
     yield put(productsActions.getAllProductSuccess(allProduct.data));
   } catch (error: any) {}

@@ -44,7 +44,7 @@ export default function Productlist() {
                     <img
                       src={product.hinhAnh}
                       alt={product.tenSanPham}
-                      className="w-full h-full object-center object-cover group-hover:opacity-75"
+                      className="w-full max-h-96 object-center object-cover "
                     />
                   </NavLink>
                 </div>
@@ -54,27 +54,7 @@ export default function Productlist() {
                       ? product.tenSanPham.slice(0, 25) + ' ...'
                       : product.tenSanPham}
                   </h3>
-                  <div className="flex justify-between text-4xl mt-2">
-                    <div>
-                      <p
-                        className={`mt-1 font-medium text-gray-900 mb-0 ${
-                          product.sale ? 'line-through' : ''
-                        }`}
-                      >
-                        {product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ
-                      </p>
-                      {product.sale ? (
-                        <p className={`mt-1 font-medium text-red-700`}>
-                          {' '}
-                          {`==> ${product.thanhTien}`}
-                        </p>
-                      ) : (
-                        ''
-                      )}
-                    </div>
-
-                    <div className="">
-                      <span className="text-black">{product.luotThich.tongLuotThich}</span>
+                  <div className="text-2xl">
                       <i
                         onClick={() => dispatch(updateAction.setLike(product?._id))}
                         className={`fa-solid fa-heart cursor-pointer ml-2  ${
@@ -84,23 +64,35 @@ export default function Productlist() {
                             ? 'text-red-900'
                             : 'text-black'
                         }`}
-                      ></i>{' '}
+                    ></i>{' '}
+                      <span className="text-black">{product.luotThich.tongLuotThich}</span>
+                    
                     </div>
+                  <div className="flex justify-between text-3xl mt-2">
+                    <div>
+                      <p
+                        className={`mt-1 font-bold items-center mb-0  ${
+                          product.sale ? 'text-red-600' : 'text-gray-900'
+                        }`}
+                      >
+                        {product.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ
+                        {product.sale ? <span className="ml-5 text-2xl font-semibold inline-block py-1 px-2  rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
+                          {product?.phanTramSale}%
+                        </span> : ""}
+                      </p>
+                      {product.sale ? (
+                        <p className={`mt-3 text-xl font-medium text-gray-600 line-through`}>
+                          {' '}
+                          {`${product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ`}
+                        </p>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+
+                  
                   </div>
-                  <div className="flex justify-between ">
-                    <button
-                      className="border-2 border-gray-600 mr-5 bg-gray-800 text-white px-3 rounded-md"
-                      onClick={() => dispatch(updateAction.setAddCart(product?._id))}
-                    >
-                      Add To Cart
-                    </button>
-                    <button
-                      className="px-7 border-4 rounded-md py-3 bg-yellow-400 text-white"
-                      onClick={() => dispatch(updateAction.setAddCartRedirest(product?._id))}
-                    >
-                      Buy
-                    </button>
-                  </div>
+               
                 </div>
               </div>
             ))}
