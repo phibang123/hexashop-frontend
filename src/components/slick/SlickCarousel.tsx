@@ -2,24 +2,15 @@ import './SlickCarousel.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import React, { useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
+import { ISanPham } from 'models/product';
+import { NavLink } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import Slider from 'react-slick';
-
-// import Slider from 'react-slick';
-// import Slider from 'react-slick';
-
-// function SampleNextArrow(props) {
-// 	const { className, style, onClick } = props;
-// 	return (
-// 		<div
-// 			className={`${className} ${styleSlick["slick-next"]}`}
-// 			style={{ ...style, display: "block" }}
-// 			onClick={onClick}
-// 		></div>
-// 	);
-// }
+import { toastError } from 'utils/toast/hotToast';
+import { updateAction } from 'features/Infouser/InfouserSlide';
 
 function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props;
@@ -32,7 +23,100 @@ function SamplePrevArrow(props: any) {
   );
 }
 
-export default function SlickCarousel() {
+function SlickCarousel(props: any) {
+  const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
+
+  const dispatch = useAppDispatch();
+  console.log(props.sanPham);
+
+  const renderSlice = props?.sanPham?.map((v: ISanPham, index: number) => {
+    return (
+      <div key={index}>
+        <div className="flex justify-center">
+          <div className=" max-w-xl group  rounded-md overflow-hidden">
+            <div className="">
+              <div className="relative flex justify-center">
+                <NavLink to={`/detail/${v._id}`}>
+                  <img
+                    className="w-full object-cover object-center rounded border border-gray-200 shadow-xl "
+                    src={v.hinhAnh}
+                    alt=""
+                  />
+                </NavLink>
+                <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
+                  <div className="col-span-1 ">
+                    <NavLink
+                      to={`/detail/${v._id}`}
+                      className="h-20  w-20 flex justify-center items-center bg-white m-auto "
+                    >
+                      <i className="fa fa-eye text-dark-primary text-3xl "></i>
+                    </NavLink>
+                  </div>
+                  <div className="col-span-1 ">
+                    <button
+                      onClick={() =>
+                        v ? dispatch(updateAction.setAddCart(v?._id)) : toastError('Error')
+                      }
+                      className="h-20  w-20 flex justify-center items-center bg-white m-auto "
+                    >
+                      <i className="fa-solid fa-cart-arrow-down text-dark-primary text-3xl"></i>
+                    </button>
+                  </div>
+                  <div className="col-span-1 ">
+                    <button
+                      onClick={() =>
+                        v ? dispatch(updateAction.setAddCartRedirest(v?._id)) : toastError('Error')
+                      }
+                      className="h-20  w-20 flex justify-center items-center bg-white m-auto "
+                    >
+                      <i className="fa-solid fa-bag-shopping text-dark-primary text-3xl"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="py-6 flex flex-col justify-between">
+              <div className="flex justify-between items-center my-5">
+                <h5 className="text-gray-900 text-4xl font-medium mb-2">
+                  {' '}
+                  {v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + '...' : v.tenSanPham}
+                </h5>
+                <div className="text-4xl">
+                  <span className="text-gray-600  ml-3">
+                    {v?.luotThich.tongLuotThich}
+                    <i
+                      onClick={() =>
+                        v ? dispatch(updateAction.setLike(v?._id)) : toastError('Error')
+                      }
+                      className={`fa-solid fa-heart cursor-pointer transition-all duration-500 
+                        ${
+                          v?.luotThich.idNguoiDungs.findIndex((v) => {
+                            return v.tenNguoiDung === userNguoiDung?.hoTen;
+                          }) !== -1
+                            ? 'text-red-700 hover:text-black'
+                            : 'text-hover:text-red-700 hover:text-red-700'
+                        }
+                        `}
+                    ></i>{' '}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <p className={` text-4xl ${v.sale ? 'text-red-700' : 'text-gray-400'}`}>
+                  {v.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ{' '}
+                  {v.sale ? (
+                    <span className="text-2xl line-through text-gray-400">{v.giaTien}</span>
+                  ) : (
+                    ''
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  });
   const [slick, setSlick] = useState({
     display: true,
   });
@@ -70,245 +154,11 @@ export default function SlickCarousel() {
             display: slick.display ? 'block' : 'none',
           }}
         >
-          <Slider {...settings}>
-            <div>
-              <div className="flex justify-center">
-                <div className=" max-w-xl group">
-                  <div className="">
-                    <div className="relative flex justify-center">
-                      <a href="#!">
-                        <img
-                          className=""
-                          src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/women-03.jpg"
-                          alt=""
-                        />
-                      </a>
-                      <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-center my-5">
-                      <h5 className="text-gray-900 text-4xl font-medium mb-2">Classin Spring</h5>
-                      <Rating
-                        style={{ color: 'black', fontSize: '2rem' }}
-                        size="large"
-                        name="half-rating"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-4xl">$130.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="flex justify-center">
-                <div className=" max-w-xl group">
-                  <div className="">
-                    <div className="relative flex justify-center">
-                      <a href="#!">
-                        <img
-                          className=""
-                          src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/women-03.jpg"
-                          alt=""
-                        />
-                      </a>
-                      <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-center my-5">
-                      <h5 className="text-gray-900 text-4xl font-medium mb-2">Classin Spring</h5>
-                      <Rating
-                        style={{ color: 'black', fontSize: '2rem' }}
-                        size="large"
-                        name="half-rating"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-4xl">$130.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="flex justify-center">
-                <div className=" max-w-xl group">
-                  <div className="">
-                    <div className="relative flex justify-center">
-                      <a href="#!">
-                        <img
-                          className=""
-                          src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/women-03.jpg"
-                          alt=""
-                        />
-                      </a>
-                      <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-center my-5">
-                      <h5 className="text-gray-900 text-4xl font-medium mb-2">Classin Spring</h5>
-                      <Rating
-                        style={{ color: 'black', fontSize: '2rem' }}
-                        size="large"
-                        name="half-rating"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-4xl">$130.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="flex justify-center">
-                <div className=" max-w-xl group">
-                  <div className="">
-                    <div className="relative flex justify-center">
-                      <a href="#!">
-                        <img
-                          className=""
-                          src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/women-03.jpg"
-                          alt=""
-                        />
-                      </a>
-                      <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-center my-5">
-                      <h5 className="text-gray-900 text-4xl font-medium mb-2">Classin Spring</h5>
-                      <Rating
-                        style={{ color: 'black', fontSize: '2rem' }}
-                        size="large"
-                        name="half-rating"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-4xl">$130.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="flex justify-center">
-                <div className=" max-w-xl group">
-                  <div className="">
-                    <div className="relative flex justify-center">
-                      <a href="#!">
-                        <img
-                          className=""
-                          src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/women-03.jpg"
-                          alt=""
-                        />
-                      </a>
-                      <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                        <div className="col-span-1 ">
-                          <button className="h-20  w-20 flex justify-center items-center bg-white m-auto ">
-                            <i className="fa fa-eye text-dark-primary text-3xl "></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="py-6 flex flex-col justify-between">
-                    <div className="flex justify-between items-center my-5">
-                      <h5 className="text-gray-900 text-4xl font-medium mb-2">Classin Spring</h5>
-                      <Rating
-                        style={{ color: 'black', fontSize: '2rem' }}
-                        size="large"
-                        name="half-rating"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-4xl">$130.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Slider>
+          <Slider {...settings}>{renderSlice}</Slider>
         </div>
       </div>
     </div>
   );
 }
+
+export default memo(SlickCarousel);

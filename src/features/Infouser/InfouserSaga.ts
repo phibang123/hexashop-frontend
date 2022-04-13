@@ -22,9 +22,14 @@ function* handleSetLike(payload: string) {
     toast.dismiss();
     toastSuccess('Success');
     yield cancel();
-  } catch (error) {
+  } catch (error: any) {
     toast.dismiss();
-    toastError('Some thing wrong!');
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
+    toastError(error.response?.data.message);
     yield cancel();
   }
 }
@@ -39,7 +44,12 @@ function* handleGetPayment() {
   try {
     const lichsumua: LichSuRespon = yield call(() => payment.getByUser());
     yield put(updateAction.succesGetPayment(lichsumua.data));
-  } catch (error) {
+  } catch (error: any) {
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     toastError('Some thing wrong!');
   }
 }
@@ -60,6 +70,11 @@ function* handleUpdateProfile(payload: INguoiDungEdit) {
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     toastError(error.response?.data.message);
     yield cancel();
   }
@@ -82,6 +97,11 @@ function* handleRemoveCart(payload: string) {
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     toastError(error.response?.data.message);
     yield cancel();
   }
@@ -106,6 +126,11 @@ function* handleAddCart(payload: string) {
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     toastError(error.response?.data.message);
     yield cancel();
   }
@@ -127,6 +152,11 @@ function* handleAddCartRedirest(payload: string) {
     yield toastSuccess('Success');
     yield cancel();
   } catch (error: any) {
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     yield toastError(error.response?.data.message);
     yield cancel();
   }
@@ -147,8 +177,13 @@ function* handleReduceCart(payload: string) {
     yield toast.dismiss();
     yield toastSuccess('Success');
     yield cancel();
-  } catch (error) {
+  } catch (error: any) {
     yield toast.dismiss();
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
     yield toastError('Some thing wrong!');
     yield cancel();
   }

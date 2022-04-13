@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { authActions } from 'features/Login/loginSlice';
+import { productsActions } from 'features/Products/productSlice';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
@@ -21,7 +22,12 @@ export default function Header() {
   const userReducer = useAppSelector((state) => state.auth.currentUser);
 
   useEffect(() => {
+    dispatch(productsActions.getAllProduct());
+  }, [userReducer]);
+
+  useEffect(() => {
     dispatch(authActions.checkProfile());
+    dispatch(productsActions.getAllProduct());
   }, []);
  
   const [state, setState] = React.useState({

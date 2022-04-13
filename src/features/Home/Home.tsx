@@ -1,7 +1,36 @@
-import React from 'react';
-import SlickCarousel from '../../components/slick/SlickCarousel';
+import React, { useCallback, useMemo, useState } from 'react';
+
+import SlickCarouselKid from '../../components/slick/SlickCarousel';
+import SlickCarouselMen from '../../components/slick/SlickCarousel';
+import SlickCarouselWomen from '../../components/slick/SlickCarousel';
+import { useAppSelector } from 'app/hooks';
 
 export default function Home() {
+  const allProject = useAppSelector((state) => state.projectsReducer.allProduct);
+  const productWomen = useMemo(() =>
+  {
+    let productWomen = allProject?.filter((v) => {
+      return v.categories.includes('nu_gioi');
+    });
+    return productWomen
+  }, [allProject]);
+
+  
+
+  const productMen = useMemo(() => {
+   let productMen =  allProject?.filter((v) => {
+      return v.categories.includes('nam_gioi');
+   });
+    return productMen
+  }, [allProject]);
+
+  const productKid = useMemo(() => {
+    let productKid =  allProject?.filter((v) => {
+      return v.categories.includes('tre_em');
+    });
+    return productKid
+  }, [allProject]);
+
   return (
     <>
       <div className="border-y-2 py-20 border-dashed mt-5">
@@ -107,9 +136,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <SlickCarousel></SlickCarousel>
-      <SlickCarousel></SlickCarousel>
-      <SlickCarousel></SlickCarousel>
+      <SlickCarouselWomen sanPham={productWomen}></SlickCarouselWomen>
+      {/* <SlickCarouselMen ></SlickCarouselMen>
+      <SlickCarouselKid ></SlickCarouselKid> */}
       <div className="border-t-2 border-dashed">
         <div className="2xl:max-w-8xl mx-auto my-32 grid grid-cols-4 grid-rows-2 gap-12">
           <div className="col-span-2 row-span-2">
