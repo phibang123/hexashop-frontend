@@ -1,8 +1,10 @@
+import { productPaginition } from 'features/Products/types';
+
 export interface PaginationParams {
-  _limit: number;
-  _page: number;
-  _sort: number;
-  _total: number;
+  limit?: number;
+  page?: number;
+  //sort?: number;
+  //_total: number;
 }
 
 export interface ListResponseParams<T> {
@@ -20,6 +22,17 @@ export interface ListResponseOBJ<T> {
 
 export interface ListResponseARR<T> {
   data: T[];
+  dateTime: string;
+  message: any;
+  status: number;
+  success: boolean;
+}
+
+export interface ListResponsePagination<T> {
+  data: {
+    total: number;
+    data: T[];
+  };
   dateTime: string;
   message: any;
   status: number;

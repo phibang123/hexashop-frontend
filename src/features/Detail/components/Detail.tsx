@@ -11,16 +11,12 @@ import { push } from 'connected-react-router';
 import { toastError } from 'utils/toast/hotToast';
 import { updateAction } from 'features/Infouser/InfouserSlide';
 
-//const { TextArea } = Input;
 export default function Detail(props: any) {
   const project = useAppSelector((state) => state.projectReducer.sanPham);
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
-  // const [comment, setComment] = React.useState({
-  // 	submitting: false,
-  // 	value: "",
-  // });
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     let { id } = props.match.params;
     dispatch(projectAction.getProjectDetail(id));
@@ -29,6 +25,7 @@ export default function Detail(props: any) {
   const checkLike = project?.luotThich.idNguoiDungs.findIndex((v) => {
     return v.tenNguoiDung === userNguoiDung?.hoTen;
   });
+
   const data = project?.comment.map((v) => {
     return {
       author: v.tenNguoiDung,
@@ -74,15 +71,26 @@ export default function Detail(props: any) {
                 <div className="flex my-12">
                   <span className="flex items-center text-3xl">
                     <i
-                      onClick={() =>
-                        project ? dispatch(updateAction.setLike(project?._id)) : toastError('Error')
-                      }
                       className={`fa-solid fa-heart cursor-pointer transition-all duration-500 ${
                         checkLike !== -1 ? 'text-red-700 hover:text-black' : 'hover:text-red-700'
                       }`}
                     ></i>
                     <span className="text-gray-600  ml-3">
-                      {project?.luotThich.tongLuotThich} Likes
+                      {project?.luotThich.tongLuotThich}{' '}
+                      <button
+                        onClick={() =>
+                          project
+                            ? dispatch(updateAction.setLike(project?._id))
+                            : toastError('Error')
+                        }
+                        className={`mx-5 rounded  text-white px-3 py-1 transition-all duration-500 ${
+                          checkLike !== -1
+                            ? 'bg-red-700 hover:bg-gray-900'
+                            : 'bg-gray-900 hover:bg-red-700'
+                        } `}
+                      >
+                        {checkLike !== -1 ? 'Unlike' : 'Like'}
+                      </button>
                     </span>
                   </span>
                   <span className="flex ml-3 pl-3 py-2 border-l-2 text-2xl  border-gray-200">

@@ -5,3 +5,15 @@ export interface projectAllRes {
   status: number;
   data: ISanPham[];
 }
+
+export interface productPaginition {
+  data: ISanPham[];
+  total: number;
+}
+
+export interface projectAllPaginitionRes {
+  dateTime: string;
+  message: any;
+  status: number;
+  data: productPaginition;
+}

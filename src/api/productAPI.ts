@@ -1,4 +1,9 @@
-import { ListResponseARR, ListResponseOBJ } from './../models/common';
+import {
+  ListResponseARR,
+  ListResponseOBJ,
+  ListResponsePagination,
+  PaginationParams,
+} from './../models/common';
 
 import { ISanPham } from './../models/product';
 import axiosClient from './axiosClient';
@@ -6,6 +11,12 @@ import axiosClient from './axiosClient';
 const pruduct = {
   getAll(): Promise<ListResponseARR<ISanPham>> {
     const url = 'QuanLySanPham/LayTatCaSanPham';
+    return axiosClient.get(url);
+  },
+  getAllPaganition(pagination: PaginationParams): Promise<ListResponsePagination<ISanPham>> {
+    const url = `QuanLySanPham/LayTatCaSanPhamPhanTrang?page=${
+      pagination.page ? pagination.page : ''
+    }&limit=${pagination.limit ? pagination.limit : ''}`;
     return axiosClient.get(url);
   },
   getProjectById(id: string): Promise<ListResponseOBJ<ISanPham>> {

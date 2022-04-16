@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { ISanPham } from 'models/product';
 import { NavLink } from 'react-router-dom';
 import { Rating } from '@mui/material';
+import { Skeleton } from 'antd';
 import Slider from 'react-slick';
 import { toastError } from 'utils/toast/hotToast';
 import { updateAction } from 'features/Infouser/InfouserSlide';
@@ -23,22 +24,24 @@ function SamplePrevArrow(props: any) {
   );
 }
 
+
+
 function SlickCarousel(props: any) {
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
   const dispatch = useAppDispatch();
-  console.log(props.sanPham);
 
+  const customNameCatorory = props.sanPham?.[0].categories.split("/")[1].replace("_", " ").toUpperCase()
   const renderSlice = props?.sanPham?.map((v: ISanPham, index: number) => {
     return (
-      <div key={index}>
-        <div className="flex justify-center">
+      <div key={index} className="p-10">
+        <div className="flex justify-center ">
           <div className=" max-w-xl group  rounded-md overflow-hidden">
             <div className="">
-              <div className="relative flex justify-center">
+              <div className="relative flex justify-center  ">
                 <NavLink to={`/detail/${v._id}`}>
                   <img
-                    className="w-full object-cover object-center rounded border border-gray-200 shadow-xl "
+                    className="w-full rounded border border-gray-200 h-[52rem]"
                     src={v.hinhAnh}
                     alt=""
                   />
@@ -122,8 +125,8 @@ function SlickCarousel(props: any) {
   });
   const settings = {
     infinite: true,
-    autoplay: false,
     speed: 2000,
+    autoplay: false,
     autoplaySpeed: 2000,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -141,10 +144,10 @@ function SlickCarousel(props: any) {
       <div className="2xl:max-w-8xl mx-auto mt-40 mb-10 ">
         <div className="">
           <h1 className="text-dark-primary font-bold text-6xl leading-relaxed mb-5">
-            Women's Latest
+            {props.sanPham  ? customNameCatorory : <Skeleton.Input active></Skeleton.Input>}
           </h1>
           <p className="text-gray-400 text-2xl italic">
-            Details to details is what makes Hexashop different from the other themes.
+          {props.sanPham  ? " Details to details is what makes Hexashop different from the other themes." : <Skeleton paragraph={{rows: 6}} active></Skeleton>}
           </p>
         </div>
       </div>
