@@ -82,7 +82,7 @@ function SlickCarousel(props: any) {
               <div className="flex justify-between items-center my-5">
                 <h5 className="text-gray-900 text-4xl font-medium mb-2">
                   {' '}
-                  {v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + '...' : v.tenSanPham}
+                  {v.tenSanPham.length > 14 ? v.tenSanPham.slice(0, 14) + ' ...' : v.tenSanPham}
                 </h5>
                 <div className="text-4xl">
                   <span className="text-gray-600  ml-3">
@@ -126,7 +126,7 @@ function SlickCarousel(props: any) {
   const settings = {
     infinite: true,
     speed: 2000,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,

@@ -169,7 +169,7 @@ export default function Detail(props: any) {
                   )}
                   {!project && <Skeleton.Input active></Skeleton.Input>}
                 </div>
-                <p className="leading-relaxed my-5 text-3xl">{project?.moTa}</p>
+                <p className="leading-relaxed my-5 text-3xl  w-11/12">{project?.moTa}</p>
                 <div className="flex justify-between mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5 w-11/12">
                   {project && (
                     <div className="flex text-2xl my-5">
