@@ -41,16 +41,14 @@ export default function Home() {
               <img
                 className="w-full h-full object-cover"
                 // "https://templatemo.com/templates/templatemo_571_hexashop/assets/images/left-banner-image.jpg"
-                src="https://images2.alphacoders.com/908/thumbbig-908474.webp"
+                src="https://images8.alphacoders.com/899/thumb-1920-899993.jpg"
               ></img>
-              <div className="absolute z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-gray-300">
-                <h1 className="text-8xl mb-5 font-bold text-gray-300">We are Hexashop</h1>
+              <div className="absolute z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-gray-900">
+                <h1 className="text-8xl mb-5 font-bold text-gray-900">We are Hexashop</h1>
                 <p className="text-2xl mb-10 italic font-thin ">
                   Awesome, clean & creative HTML5 Template
                 </p>
-                <button className="tex	t-3xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
-                  Purchase Now!
-                </button>
+              
               </div>{' '}
             </div>
           ) : (
@@ -65,18 +63,18 @@ export default function Home() {
             <div className="row-span-2 group  relative  col-span-2 ">
               <img
                 className="w-full h-full object-cover"
-                src="https://i.pinimg.com/564x/37/9e/27/379e277e2f0382c9d59ea087e89ade33.jpg"
+                src="https://images.alphacoders.com/965/thumb-1920-965894.jpg"
               ></img>
-              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-5xl mb-10 font-semibold text-gray-300">Woman</h1>
+              <div className="absolute text-gray-900 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className="text-5xl mb-10 font-semibold text-gray-900">Woman</h1>
                 <p className=" text-2xl mb-5 italic font-thin">Best Clothes for woman</p>
               </div>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
-                <h1 className="text-5xl mb-10 font-semibold text-gray-300">woman </h1>
-                <p className=" text-2xl mb-5 italic font-thin">Best Clothes for woman</p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-300">Women </h1>
+                <p className="text-2xl mb-5 italic font-thin">Best Clothes for Women</p>
+                <NavLink to="/categories/nu_gioi" className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
                   Buy now!
-                </button>
+                </NavLink>
               </div>
             </div>
           ) : (
@@ -90,18 +88,18 @@ export default function Home() {
             <div className="row-span-2 group relative col-span-2">
               <img
                 className="w-full h-full object-cover"
-                src="https://images3.alphacoders.com/120/thumbbig-1202320.jpg"
+                src="https://images5.alphacoders.com/981/thumb-1920-981801.jpg"
               ></img>
-              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-5xl mb-10 font-semibold text-gray-300">Men</h1>
+              <div className="absolute text-gray-900 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className="text-5xl mb-10 font-semibold text-gray-900">Men</h1>
                 <p className="text-2xl mb-5 italic font-thin">Best Clothes for Men</p>
               </div>
               <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-300">Men </h1>
                 <p className="text-2xl mb-5 italic font-thin">Best Clothes for Men</p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                <NavLink to="/categories/nam_gioi" className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
                   Buy now!
-                </button>
+                </NavLink>
               </div>
             </div>
           ) : (
@@ -115,11 +113,11 @@ export default function Home() {
             <div className="row-span-2 group relative col-span-2">
               <img
                 className="w-full h-full object-cover"
-                src="https://images7.alphacoders.com/815/thumbbig-815138.webp"
+                src="https://images8.alphacoders.com/911/thumbbig-911594.jpg"
               ></img>
-              <div className="absolute text-gray-300  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold text-gray-300 ">Kid</h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
+              <div className="absolute text-gray-900  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-900 ">Kid</h1>
+                <p className="text-2xl mb-5 italic font-thin">
                   Best Clothes for Kid
                 </p>
               </div>
@@ -128,9 +126,9 @@ export default function Home() {
                 <p className="text-slate-100 text-2xl mb-5 italic font-thin">
                   Best Clothes for Kid
                 </p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                <NavLink  to="/categories/tre_em" className="text-4xl bg-transparent  border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
                   Buy now!
-                </button>
+                </NavLink>
               </div>
             </div>
           ) : (
@@ -144,10 +142,10 @@ export default function Home() {
             <div className="row-span-2 group relative col-span-2">
               <img
                 className="w-full h-full object-cover"
-                src="https://i.pinimg.com/564x/f5/36/df/f536df875ccfe569f1ae9e8455b417f9.jpg"
+                src="https://images4.alphacoders.com/121/thumbbig-1214522.jpg"
               ></img>
-              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className=" text-5xl mb-10 font-semibold text-gray-300">All Product</h1>
+              <div className="absolute text-gray-900 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-900">All Product</h1>
                 <p className=" text-2xl mb-5 italic font-thin">Best Clothes for All Product</p>
               </div>
               <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
@@ -155,7 +153,7 @@ export default function Home() {
                 <p className=" text-2xl mb-5 italic font-thin">Best Clothes for All Product</p>
                 <NavLink to='/products'
                
-                  className="border-0 text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
+                  className="border-0 text-4xl bg-transparent  border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
                 >
                   Buy now!
                 </NavLink>

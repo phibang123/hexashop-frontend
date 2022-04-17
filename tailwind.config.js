@@ -27,7 +27,7 @@ module.exports = {
         'dark-primary': '#2a2a2a',
       },
       backgroundImage: {
-        'about-pattern': "url('https://images7.alphacoders.com/114/thumbbig-1145723.webp')",
+        'about-pattern': "url('https://images4.alphacoders.com/727/727966.jpg')",
       },
       padding : {
         '104': '26rem',

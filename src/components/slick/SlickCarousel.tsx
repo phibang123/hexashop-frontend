@@ -41,7 +41,7 @@ function SlickCarousel(props: any) {
               <div className="relative flex justify-center  ">
                 <NavLink to={`/detail/${v._id}`}>
                   <img
-                    className="w-full rounded border border-gray-200 h-[52rem]"
+                    className="w-full rounded border border-gray-200 "
                     src={v.hinhAnh}
                     alt=""
                   />
@@ -128,7 +128,7 @@ function SlickCarousel(props: any) {
     speed: 2000,
     autoplay: false,
     autoplaySpeed: 2000,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: (
       <div>

@@ -88,7 +88,7 @@ export default function Detail(props: any) {
       <DetailBanner />
       <div>
         <section className="body-font overflow-hidden bg-gray-100">
-          <div className="container px-5 pb-24 mx-auto mt-10">
+          <div className="container px-5 pt-10 pb-24 mx-auto mt-10">
             <div className="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl bg-white rounded-md overflow-hidden">
               <div className="lg:w-1/3  p-5 ">
                 {project && (
