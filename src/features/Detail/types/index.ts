@@ -6,3 +6,8 @@ export interface ProjectDetailRepon {
   status: number;
   data: ISanPham;
 }
+
+export interface PayloadIComment {
+  comment: string;
+  id: string;
+}

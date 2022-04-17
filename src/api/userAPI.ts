@@ -1,7 +1,8 @@
-import { INguoiDungEdit, INguoiDungInput, INguoiDungLogin } from './../models/user';
+import { ICommentInput, INguoiDungEdit, INguoiDungInput, INguoiDungLogin } from './../models/user';
 import { ListResponseARR, ListResponseOBJ } from './../models/common';
 
 import { INguoiDung } from 'models';
+import { ISanPham } from './../models/product';
 import { LoginType } from './../features/Login/types/index';
 import axiosClient from './axiosClient';
 
@@ -41,6 +42,10 @@ const userApi = {
   updateProfile(data: INguoiDungEdit): Promise<ListResponseOBJ<INguoiDung>> {
     const url = `QuanLyNguoiDung/ChinhSua`;
     return axiosClient.patch(url, data);
+  },
+  commentProduct(data: ICommentInput, id: string): Promise<ListResponseOBJ<ISanPham>> {
+    const url = `QuanLyNguoiDung/Comment/${id}`;
+    return axiosClient.post(url, data);
   },
 };
 

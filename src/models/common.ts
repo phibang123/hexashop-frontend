@@ -5,6 +5,8 @@ export interface PaginationParams {
   page?: number;
   //sort?: number;
   //_total: number;
+  categori?: string;
+  categories?: string;
 }
 
 export interface ListResponseParams<T> {

@@ -20,7 +20,6 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 export default function Header() {
   const dispatch = useAppDispatch();
   const userReducer = useAppSelector((state) => state.auth.currentUser);
-  console.log(userReducer,"alo")
   useEffect(() => {
     dispatch(productsActions.getAllProduct());
   }, [userReducer]);
@@ -49,7 +48,6 @@ export default function Header() {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -154,13 +152,22 @@ export default function Header() {
             </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
+    
+            <NavLink exact to="/categories/nam_gioi" className="text-black">
             Men's
+            </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
-            Women's
+        
+            <NavLink exact to="/categories/nu_gioi" className="text-black">
+               Women's
+            </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
+           
+            <NavLink exact to="/categories/tre_em" className="text-black">
             Kid's
+            </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
             <NavLink exact to="/products" className="text-black">

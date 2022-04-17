@@ -16,7 +16,9 @@ const pruduct = {
   getAllPaganition(pagination: PaginationParams): Promise<ListResponsePagination<ISanPham>> {
     const url = `QuanLySanPham/LayTatCaSanPhamPhanTrang?page=${
       pagination.page ? pagination.page : ''
-    }&limit=${pagination.limit ? pagination.limit : ''}`;
+    }&limit=${pagination.limit ? pagination.limit : ''}&categori=${
+      pagination.categori ? pagination.categori : ''
+    }&categories=${pagination.categories ? pagination.categori : ''}`;
     return axiosClient.get(url);
   },
   getProjectById(id: string): Promise<ListResponseOBJ<ISanPham>> {

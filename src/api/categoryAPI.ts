@@ -1,8 +1,11 @@
+import { ListResponseARR, ListResponsePagination } from './../models/common';
+
+import { ICategoryResponse } from './../models/categores';
 import axiosClient from './axiosClient';
 
 const cateegories = {
-  getAll() {
-    const url = 'QuanLyCategoreis/LayToanBo';
+  getAll(data: string): Promise<ListResponseARR<ICategoryResponse>> {
+    const url = `QuanLyCategoreis/LayToanBo?categoriesName=${data ? data : ''}`;
     return axiosClient.get(url);
   },
 };

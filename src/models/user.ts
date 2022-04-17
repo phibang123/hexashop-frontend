@@ -51,3 +51,7 @@ export interface INguoiDungLogin {
   token: string;
   user: INguoiDung;
 }
+
+export interface ICommentInput {
+  comment: string;
+}

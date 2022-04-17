@@ -21,7 +21,7 @@ export default function About() {
 				<div className="col-span-1 h-full">
 					<img
 						className="h-full object-cover"
-						src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/about-left-image.jpg"
+						src="https://images7.alphacoders.com/110/thumbbig-1107308.jpg"
 					></img>
 				</div>
 				<div className="col-span-1">

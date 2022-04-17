@@ -1,9 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
+import { NavLink } from 'react-router-dom';
 import { Skeleton } from 'antd';
 import SlickCarouselKid from '../../components/slick/SlickCarousel';
 import SlickCarouselMen from '../../components/slick/SlickCarousel';
 import SlickCarouselWomen from '../../components/slick/SlickCarousel';
+import { push } from 'connected-react-router';
 import { useAppSelector } from 'app/hooks';
 
 export default function Home() {
@@ -37,13 +39,13 @@ export default function Home() {
             <div className="row-span-full  relative col-span-4 h-full">
               {' '}
               <img
-                className="w-full h-full"
+                className="w-full h-full object-cover"
                 // "https://templatemo.com/templates/templatemo_571_hexashop/assets/images/left-banner-image.jpg"
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/left-banner-image.jpg"
+                src="https://images2.alphacoders.com/908/thumbbig-908474.webp"
               ></img>
-              <div className="absolute z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2">
-                <h1 className="text-slate-50 text-8xl mb-5 font-bold">We are Hexashop</h1>
-                <p className="text-slate-100 text-2xl mb-10 italic font-thin">
+              <div className="absolute z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-gray-300">
+                <h1 className="text-8xl mb-5 font-bold text-gray-300">We are Hexashop</h1>
+                <p className="text-2xl mb-10 italic font-thin ">
                   Awesome, clean & creative HTML5 Template
                 </p>
                 <button className="tex	t-3xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
@@ -62,19 +64,69 @@ export default function Home() {
           {allProject ? (
             <div className="row-span-2 group  relative  col-span-2 ">
               <img
-                className="w-full"
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/baner-right-image-01.jpg "
+                className="w-full h-full object-cover"
+                src="https://i.pinimg.com/564x/37/9e/27/379e277e2f0382c9d59ea087e89ade33.jpg"
               ></img>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold">Woman</h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className="text-5xl mb-10 font-semibold text-gray-300">Woman</h1>
+                <p className=" text-2xl mb-5 italic font-thin">Best Clothes for woman</p>
               </div>
               <div className="absolute  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman </h1>
+                <h1 className="text-5xl mb-10 font-semibold text-gray-300">woman </h1>
+                <p className=" text-2xl mb-5 italic font-thin">Best Clothes for woman</p>
+                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                  Buy now!
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Skeleton
+              paragraph={{ rows: 8 }}
+              active
+              className="row-span-2 group  relative  col-span-2"
+            ></Skeleton>
+          )}
+          {allProject ? (
+            <div className="row-span-2 group relative col-span-2">
+              <img
+                className="w-full h-full object-cover"
+                src="https://images3.alphacoders.com/120/thumbbig-1202320.jpg"
+              ></img>
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className="text-5xl mb-10 font-semibold text-gray-300">Men</h1>
+                <p className="text-2xl mb-5 italic font-thin">Best Clothes for Men</p>
+              </div>
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-300">Men </h1>
+                <p className="text-2xl mb-5 italic font-thin">Best Clothes for Men</p>
+                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                  Buy now!
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Skeleton
+              paragraph={{ rows: 8 }}
+              active
+              className="row-span-2 group  relative  col-span-2"
+            ></Skeleton>
+          )}
+          {allProject ? (
+            <div className="row-span-2 group relative col-span-2">
+              <img
+                className="w-full h-full object-cover"
+                src="https://images7.alphacoders.com/815/thumbbig-815138.webp"
+              ></img>
+              <div className="absolute text-gray-300  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className="text-slate-50 text-5xl mb-10 font-semibold text-gray-300 ">Kid</h1>
                 <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
+                  Best Clothes for Kid
+                </p>
+              </div>
+              <div className="absolute text-gray-300  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-300 ">Kid </h1>
+                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
+                  Best Clothes for Kid
                 </p>
                 <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
                   Buy now!
@@ -91,81 +143,22 @@ export default function Home() {
           {allProject ? (
             <div className="row-span-2 group relative col-span-2">
               <img
-                className="w-full"
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/baner-right-image-02.jpg"
+                className="w-full h-full object-cover"
+                src="https://i.pinimg.com/564x/f5/36/df/f536df875ccfe569f1ae9e8455b417f9.jpg"
               ></img>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman</h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-300">All Product</h1>
+                <p className=" text-2xl mb-5 italic font-thin">Best Clothes for All Product</p>
               </div>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman </h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+              <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
+                <h1 className=" text-5xl mb-10 font-semibold text-gray-300">All Product </h1>
+                <p className=" text-2xl mb-5 italic font-thin">Best Clothes for All Product</p>
+                <NavLink to='/products'
+               
+                  className="border-0 text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
+                >
                   Buy now!
-                </button>
-              </div>
-            </div>
-          ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
-              active
-              className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
-          )}
-          {allProject ? (
-            <div className="row-span-2 group relative col-span-2">
-              <img
-                className="w-full"
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/baner-right-image-03.jpg"
-              ></img>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman</h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
-              </div>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman </h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
-                  Buy now!
-                </button>
-              </div>
-            </div>
-          ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
-              active
-              className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
-          )}
-          {allProject ? (
-            <div className="row-span-2 group relative col-span-2">
-              <img
-                className="w-full"
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/baner-right-image-04.jpg"
-              ></img>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman</h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
-              </div>
-              <div className="absolute  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
-                <h1 className="text-slate-50 text-5xl mb-10 font-semibold ">Woman </h1>
-                <p className="text-slate-100 text-2xl mb-5 italic font-thin">
-                  Best Clothes for woman
-                </p>
-                <button className="text-4xl bg-transparent border-2 border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
-                  Buy now!
-                </button>
+                </NavLink>
               </div>
             </div>
           ) : (
@@ -224,16 +217,16 @@ export default function Home() {
           <div className="col-start-4 col-end-5 row-start-1 row-end-2  bg-gray-200">
             <div className="w-full h-full">
               <img
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/explore-image-01.jpg"
-                className="max-w-full max-h-max"
+                src="https://images3.alphacoders.com/113/thumb-1920-1135031.jpg"
+                className="w-full  object-cover h-full"
               ></img>
             </div>
           </div>
           <div className="col-start-3 col-end-4 row-start-2 row-end-3  bg-gray-200">
             <div className="w-full h-full">
               <img
-                src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/explore-image-02.jpg"
-                className="w-full h-max"
+                src="https://images4.alphacoders.com/113/thumb-1920-1137894.jpg"
+                className="w-full  object-cover h-full"
               ></img>
             </div>
           </div>
@@ -256,36 +249,36 @@ export default function Home() {
           <p className="text-gray-400 text-2xl italic">
             Details to details is what makes Hexashop different from the other themes.
           </p>
-          <div className="grid grid-cols-6 mt-10">
+          <div className="grid grid-cols-6 mt-10 h-80">
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover"
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-01.jpg"
+              src="https://images7.alphacoders.com/115/thumb-1920-1152964.jpg"
             ></img>
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover"
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-02.jpg"
+              src="	https://images5.alphacoders.com/113/thumbbig-1134009.jpg"
             ></img>
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover"
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-03.jpg"
+              src="	https://images5.alphacoders.com/114/thumbbig-1142155.png"
             ></img>
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover"
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-04.jpg"
+              src="	https://images7.alphacoders.com/121/thumbbig-1215771.png"
             ></img>
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover"
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-05.jpg"
+              src="https://images4.alphacoders.com/113/thumbbig-1130744.jpg"
             ></img>
             <img
-              className="col-span-1"
+              className="col-span-1 h-full object-cover "
               alt="socioal 1"
-              src="	https://templatemo.com/templates/templatemo_571_hexashop/assets/images/instagram-06.jpg"
+              src="https://images4.alphacoders.com/120/thumbbig-1202332.jpg"
             ></img>
           </div>
         </div>

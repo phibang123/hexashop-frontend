@@ -5,6 +5,7 @@ import { Route, Router, Switch } from 'react-router';
 
 import About from './features/About/About';
 import Cart from 'features/Cart/components/Cart';
+import Categories from 'features/Categories/components/Categories';
 import { CssBaseline } from '@mui/material';
 import Detail from 'features/Detail/components/Detail';
 import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
@@ -32,6 +33,8 @@ function App() {
       <DetailTemplate exact path="/detail/:id" Component={Detail}></DetailTemplate>
       <DetailTemplate exact path="/products" Component={Productlist}></DetailTemplate>
    
+      <DetailTemplate exact path="/categories/:categories" Component={Categories}></DetailTemplate>
+      
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
       <Route path='*' exact={true} component={NotFound} />

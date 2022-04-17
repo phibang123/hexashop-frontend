@@ -27,7 +27,7 @@ module.exports = {
         'dark-primary': '#2a2a2a',
       },
       backgroundImage: {
-        'about-pattern': "url('https://templatemo.com/templates/templatemo_571_hexashop/assets/images/about-us-page-heading.jpg')",
+        'about-pattern': "url('https://images7.alphacoders.com/114/thumbbig-1145723.webp')",
       },
       padding : {
         '104': '26rem',
