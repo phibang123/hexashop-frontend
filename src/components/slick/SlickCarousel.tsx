@@ -46,7 +46,7 @@ function SlickCarousel(props: any) {
                     alt=""
                   />
                 </NavLink>
-                <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 ">
+                <div className="grid w-3/4 grid-cols-3 absolute z-10 top-full opacity-0  group-hover:-translate-y-32 group-hover:opacity-100 transition-all duration-500 h ">
                   <div className="col-span-1 ">
                     <NavLink
                       to={`/detail/${v._id}`}

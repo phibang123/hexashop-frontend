@@ -94,7 +94,7 @@ export default function Detail(props: any) {
                 {project && (
                   <img
                     alt="ecommerce"
-                    className="w-full h-full object-cover object-center rounded-md border  max-h-full"
+                    className="w-full h-full object-cover h-[55rem] object-center rounded-md border  max-h-full h"
                     src={project?.hinhAnh}
                   />
                 )}

@@ -70,13 +70,11 @@ function* handleUpdateProfile(payload: INguoiDungEdit) {
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    yield cancel();
     if (error.response?.data.status === 401) {
-      yield put(push('/login'));
-      toastError(error.response?.data.message);
-      yield cancel();
+      toastError('Plase login before comment');
     }
     toastError(error.response?.data.message);
-    yield cancel();
   }
 }
 function* watchUpdateProfile() {
