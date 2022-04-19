@@ -3,7 +3,7 @@ import { productPaginition } from 'features/Products/types';
 export interface PaginationParams {
   limit?: number;
   page?: number;
-  //sort?: number;
+  sort?: string;
   //_total: number;
   categori?: string;
   categories?: string;

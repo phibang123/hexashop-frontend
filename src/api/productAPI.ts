@@ -18,7 +18,9 @@ const pruduct = {
       pagination.page ? pagination.page : ''
     }&limit=${pagination.limit ? pagination.limit : ''}&categori=${
       pagination.categori ? pagination.categori : ''
-    }&categories=${pagination.categories ? pagination.categori : ''}`;
+    }&categories=${pagination.categories ? pagination.categori : ''}&sortBy=${
+      pagination.sort ? pagination.sort : ''
+    }`;
     return axiosClient.get(url);
   },
   getProjectById(id: string): Promise<ListResponseOBJ<ISanPham>> {

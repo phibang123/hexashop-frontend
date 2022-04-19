@@ -7,31 +7,36 @@ import { PayloadIComment } from './types/index';
 
 interface IinitialState {
   sanPham: ISanPham | null;
-  isLoadding: boolean;
+  isLoaddingComment: boolean;
+  isLoadddingProduct: boolean;
 }
 
 const initialState: IinitialState = {
   sanPham: null,
-  isLoadding: false,
+  isLoaddingComment: false,
+  isLoadddingProduct: false,
 };
 
 const projectDetail = createSlice({
   name: 'project',
   initialState,
   reducers: {
-    getProjectDetail(state, action: PayloadAction<string>) {},
+    getProjectDetail(state, action: PayloadAction<string>) {
+      state.isLoadddingProduct = true;
+    },
 
     pushCommentProduct(state, action: PayloadAction<PayloadIComment>) {
       console.log(action.payload);
-      state.isLoadding = true;
+      state.isLoaddingComment = true;
     },
 
     getProjectDetailCommentSuccess(state, action: PayloadAction<ISanPham>) {
       state.sanPham = action.payload;
-      state.isLoadding = false;
+      state.isLoaddingComment = false;
     },
     getProjectDetailSuccess(state, action: PayloadAction<ISanPham>) {
       state.sanPham = action.payload;
+      state.isLoadddingProduct = false;
     },
   },
 });

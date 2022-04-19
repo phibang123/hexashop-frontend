@@ -29,7 +29,8 @@ const Editors = ({ onChange, onSubmit, submitting, value }: any) => (
 
 export default function Detail(props: any) {
   const project = useAppSelector((state) => state.projectReducer.sanPham);
-  const isLoadingComment = useAppSelector((state) => state.projectReducer.isLoadding);
+  const isLoadingComment = useAppSelector((state) => state.projectReducer.isLoaddingComment);
+  const isLoadingProduct = useAppSelector((state) => state.projectReducer.isLoadddingProduct);
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
   const dispatch = useAppDispatch();
@@ -91,49 +92,53 @@ export default function Detail(props: any) {
           <div className="container px-5 pt-10 pb-24 mx-auto mt-10">
             <div className="lg:w-4/5 mx-auto flex flex-wrap shadow-2xl bg-white rounded-md overflow-hidden">
               <div className="lg:w-1/3  p-5 ">
-                {project && (
+                {!isLoadingProduct && (
                   <img
                     alt="ecommerce"
                     className="w-full h-full object-cover h-[55rem] object-center rounded-md border  max-h-full h"
                     src={project?.hinhAnh}
                   />
                 )}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {!project && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                {isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                {isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
               </div>
 
               <div className="lg:w-2/3 w-full lg:pl-20 lg:py-6 mt-10 lg:mt-0 ">
                 <h2 className="text-3xl title-font text-gray-500 tracking-widest">
                   <NavLink className="mr-2" to={`/${customeCategories?.[1]}`}>
-                    {customeCategories?.[1]}{' '}
-                    {project && <span className="text-gray-800">{`>`}</span>}
+                    {!isLoadingProduct && customeCategories?.[1]}{' '}
+                    {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
                   </NavLink>
                   <NavLink className="mr-2" to={`/${customeCategories?.[2]}`}>
-                    {customeCategories?.[2]}{' '}
-                    {project && <span className="text-gray-800">{`>`}</span>}
+                    {!isLoadingProduct && customeCategories?.[2]}{' '}
+                    {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
                   </NavLink>
                   <NavLink className="mr-2" to={`/${customeCategories?.[3]}`}>
-                    {customeCategories?.[3]}{' '}
-                    {project && <span className="text-gray-800">{`>`}</span>}
+                    {!isLoadingProduct && customeCategories?.[3]}{' '}
+                    {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
                   </NavLink>
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </h2>
                 <h1 className="text-gray-900 text-6xl title-font font-medium mb-1">
-                  {project?.tenSanPham}
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
+                  {!isLoadingProduct && project?.tenSanPham}
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </h1>
                 <div className="flex my-12">
-                  {project && (
+                  {!isLoadingProduct && (
                     <span className="flex items-center text-3xl">
                       <i
                         className={`fa-solid fa-heart cursor-pointer transition-all duration-500 ${
@@ -160,30 +165,30 @@ export default function Detail(props: any) {
                       </span>
                     </span>
                   )}
-                  {project && (
+                  {!isLoadingProduct && (
                     <span className="flex ml-3 pl-3 py-2 border-l-2 text-2xl  border-gray-200">
                       <i className="fa-brands fa-facebook-f mx-3"></i>
                       <i className="fa-brands fa-twitter mx-3"></i>
                       <i className="fa-brands fa-github mx-3  "></i>
                     </span>
                   )}
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </div>
-                <p className="leading-relaxed my-5 text-3xl  w-11/12">{project?.moTa}</p>
+                <p className="leading-relaxed my-5 text-3xl  w-11/12">{!isLoadingProduct && project?.moTa}</p>
                 <div className="flex justify-between mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5 w-11/12">
-                  {project && (
+                  {!isLoadingProduct && (
                     <div className="flex text-2xl my-5">
                       <span className="mr-3">Quantity: </span>
                       <span>{project?.soLuong}</span>
                     </div>
                   )}
-                  {!project && <Skeleton.Input active block></Skeleton.Input>}
-                  {project?.sale ? (
+                  {isLoadingProduct && <Skeleton.Input active block></Skeleton.Input>}
+                  {!isLoadingProduct && project?.sale ? (
                     <div className="flex ml-6 text-2xl my-5 items-center">
                       <span className="mr-3 text-red-600">Sale: </span>
                       <div className="relative ">
                         <span className="text-2xl font-semibold inline-block py-1 px-2  rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
-                          {project?.phanTramSale}%
+                          { project?.phanTramSale}%
                         </span>
                       </div>
                     </div>
@@ -192,7 +197,7 @@ export default function Detail(props: any) {
                   )}
                 </div>
                 <div className="flex my-10">
-                  {project && (
+                  {!isLoadingProduct && (
                     <div>
                       <span
                         className={`title-font  text-5xl font-extrabold text-gray-900 ${
@@ -211,10 +216,10 @@ export default function Detail(props: any) {
                       )}
                     </div>
                   )}
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </div>
                 <div className="flex text-4xl">
-                  {project && (
+                  {!isLoadingProduct && (
                     <button
                       className="flex text-white mr-10 bg-yellow-500 border-0 py-5 px-6 focus:outline-none hover:bg-yellow-600 rounded items-center "
                       onClick={() =>
@@ -226,8 +231,8 @@ export default function Detail(props: any) {
                       Get to cart <i className="fa-solid fa-cart-arrow-down ml-3"></i>
                     </button>
                   )}
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
-                  {project && (
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
+                  {!isLoadingProduct && (
                     <button
                       className="flex text-white bg-red-500 border-0 py-5 px-6 focus:outline-none hover:bg-red-600 rounded items-center "
                       onClick={() =>
@@ -239,7 +244,7 @@ export default function Detail(props: any) {
                       Buy <i className="fa-solid fa-money-bill-1-wave ml-3"></i>
                     </button>
                   )}
-                  {!project && <Skeleton.Input active></Skeleton.Input>}
+                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </div>
               </div>
             </div>
