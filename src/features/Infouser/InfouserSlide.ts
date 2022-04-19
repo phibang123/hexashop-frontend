@@ -2,16 +2,19 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ILicSuMuaHang } from 'models';
 import { INguoiDungEdit } from './../../models/user';
+import { LichSuPaginition } from './../HistoryPay/types/index';
 import { LoginType } from './../Login/types/index';
 
 interface IinitialState {
   isLoading: boolean;
   payment: ILicSuMuaHang[] | null;
+  total: number;
 }
 
 const initialState: IinitialState = {
   isLoading: false,
   payment: null,
+  total: 0,
 };
 
 const updateUser = createSlice({
@@ -28,10 +31,14 @@ const updateUser = createSlice({
     },
 
     buyCart(state) {},
-    getPayment(sate) {},
+    getPayment(state) {
+      state.isLoading = true;
+    },
 
-    succesGetPayment(sate, action: PayloadAction<ILicSuMuaHang[]>) {
-      sate.payment = action.payload;
+    succesGetPayment(state, action: PayloadAction<LichSuPaginition>) {
+      state.payment = action.payload.data;
+      state.total = action.payload.total;
+      state.isLoading = false;
     },
     success(state) {
       state.isLoading = false;

@@ -1,5 +1,3 @@
-import './Product.css';
-
 import { Pagination, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import productsReducer, { productsActions } from '../productSlice';
@@ -26,13 +24,13 @@ export default function Productlist() {
   let arrayCheckLoding = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
-    <div id="product">
+    <div className='border-t-4 pt-2 border-dotted'>
       <div>
         <DetailBanner />
       </div>
-      <div className="section-heading text-center  mx-0">
-        <h2>Our Latest Products</h2>
-        <span>Check out all of our products.</span>
+      <div className=" text-center mb-8 mt-10 mx-0">
+        <h2 className='text-6xl font-bold text-gray-900'>Our Latest Products</h2>
+        <span className='text-3xl font-medium italic text-gray-400'>Check out all of our products.</span>
       </div>
       <div className="bg-white">
         <div className="max-w-8xl mx-auto py-16 px-4 ">

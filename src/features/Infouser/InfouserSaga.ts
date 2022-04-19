@@ -72,7 +72,8 @@ function* handleUpdateProfile(payload: INguoiDungEdit) {
     toast.dismiss();
     yield cancel();
     if (error.response?.data.status === 401) {
-      toastError('Plase login before comment');
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
     }
     toastError(error.response?.data.message);
   }

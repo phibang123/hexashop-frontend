@@ -1,8 +1,8 @@
 import { IGioiHang, ILicSuMuaHang, INguoiDung } from 'models';
+import { Modal, Skeleton } from 'antd';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
-import { Modal } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import moment from 'moment';
@@ -13,6 +13,7 @@ import { updateUser } from 'features/Infouser/InfouserSaga';
 export default function HistoryPay() {
   const dispatch = useAppDispatch();
   const lichSuMua: ILicSuMuaHang[] | null = useAppSelector((state) => state.updateUser.payment);
+  const isLoading = useAppSelector((state) => state.updateUser.isLoading)
   useEffect(() => {
     dispatch(updateAction.getPayment());
   }, []);
@@ -109,7 +110,8 @@ export default function HistoryPay() {
       ),
     });
   };
-  const mapLichSu = lichSuMua?.map((v, index) => {
+  let arrayCheckLoding = [1, 2, 3, 4, 5, 6];
+  const mapLichSu = !isLoading ? lichSuMua?.map((v, index) => {
     return (
       <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
         <div className="h-full flex items-start">
@@ -172,7 +174,18 @@ export default function HistoryPay() {
         </div>
       </div>
     );
-  });
+  }) : arrayCheckLoding.map((v, index) =>
+  {
+    return (
+      <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
+        <Skeleton.Input block active></Skeleton.Input>
+        <Skeleton.Input block active></Skeleton.Input>
+        <Skeleton.Input block active></Skeleton.Input>
+        <Skeleton.Input block active></Skeleton.Input>
+        <Skeleton.Avatar active></Skeleton.Avatar>
+    </div>
+    )
+  })
   return (
     <div>
       <section className="text-gray-600 body-font my-20 max-w-8xl m-auto ">
