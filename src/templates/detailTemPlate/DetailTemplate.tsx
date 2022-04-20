@@ -1,4 +1,8 @@
+import React, { Fragment } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+
 import Footer from '../layouts/footer/Footer';
+import FromHelp from '../layouts/fromHelp/FromHelp';
 import Header from '../layouts/header/Header';
 import { Route } from 'react-router';
 
@@ -16,7 +20,7 @@ export default function DetailTemplate(props: IpropsTemPlate) {
       render={(propsRoute: object) => {
         return (
           <>
-            <Header></Header>
+           <Header></Header>
             <Component {...propsRoute} />
             <Footer></Footer>
           </>
