@@ -9,7 +9,6 @@ import Cart from 'features/Cart/components/Cart';
 import Categories from 'features/Categories/components/Categories';
 import { CssBaseline } from '@mui/material';
 import Detail from 'features/Detail/components/Detail';
-import FetailTemplate from './templates/detailTemplate/DetailTemplate';
 import HistoryPay from 'features/HistoryPay/components/HistoryPay';
 import Home from './features/Home/Home';
 import HomeAdmin from "./Admin/Home/components/HomeAdmin"
@@ -21,6 +20,7 @@ import NotFound from "features/NotFound"
 import ProductTemplate from 'templates/productTemplate/ProductTemplate';
 import Productlist from 'features/Products/components/Productlist';
 import SignUp from './features/Signup/components/Signup';
+import ZetailTemplate from './templates/detailTemplate/DetailTemplate';
 
 function App() {
   return (
@@ -28,14 +28,14 @@ function App() {
       <HomeTemplate exact path="/" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/home" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
-      <FetailTemplate exact path="/profile" Component={Infouser}></FetailTemplate>
-      <FetailTemplate exact path="/carts" Component={Cart}></FetailTemplate>
-      <FetailTemplate exact path="/likes" Component={Likes}></FetailTemplate>
-      <FetailTemplate exact path="/history" Component={HistoryPay}></FetailTemplate>
-      <FetailTemplate exact path="/detail/:id" Component={Detail}></FetailTemplate>
-      <FetailTemplate exact path="/products" Component={Productlist}></FetailTemplate>
+      <ZetailTemplate exact path="/profile" Component={Infouser}></ZetailTemplate>
+      <ZetailTemplate exact path="/carts" Component={Cart}></ZetailTemplate>
+      <ZetailTemplate exact path="/likes" Component={Likes}></ZetailTemplate>
+      <ZetailTemplate exact path="/history" Component={HistoryPay}></ZetailTemplate>
+      <ZetailTemplate exact path="/detail/:id" Component={Detail}></ZetailTemplate>
+      <ZetailTemplate exact path="/products" Component={Productlist}></ZetailTemplate>
    
-      <FetailTemplate exact path="/categories/:categories" Component={Categories}></FetailTemplate>
+      <ZetailTemplate exact path="/categories/:categories" Component={Categories}></ZetailTemplate>
       
       <AdminTemplate exact path="/admin/" Component={HomeAdmin}></AdminTemplate>
 
