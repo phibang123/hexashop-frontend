@@ -100,7 +100,7 @@ export default function Header() {
           className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
           onClick={() => dispatch(authActions.logout())}
         >
-          <i className="fa-solid fa-arrow-right-from-bracket  mr-2"></i> <p>Log Out</p>
+          <i className="fa-solid fa-arrow-right-from-bracket mr-2"></i> <p>Log Out</p>
         </li>
       </Menu.Item>
     </Menu>
