@@ -2,6 +2,7 @@ import { IGioiHang, INguoiDung } from 'models';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { Modal } from 'antd';
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { Redirect } from 'react-router';
@@ -61,13 +62,13 @@ export default function Cart()
             <div className="flex justify-between w-full pb-5 space-x-5">
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold leading-snug "> <NavLink to={`detail/${v._idSanPham}`} className="text-black"> {v.tenSanPham}</NavLink></h3>
-                <p className="text-xl dark:text-coolGray-400">{ v.moTa}</p>
+                <p className="text-xl dark:text-coolGray-400">{v.moTa?.length || 0 > 230 ? v.moTa?.slice(0,230) +"..." : v?.moTa}</p>
                 <p className="text-xl dark:text-coolGray-400">Add cart when: {moment(v.ngayThem).format("hh:mm A - DD-MM-YYYY")}</p>
                 
               </div>
-              <div className="text-right">
-                <p className="text-2xl font-semibold">{v.sale ? v.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") : v.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} Đ</p>
-                <p className="text-xl line-through">{v.sale ? v.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") : ''}</p>
+              <div className="text-right" style={{width: "inherit"}}>
+                <p className="text-2xl font-semibold">{v.sale ? MoneyVietName(v.thanhTien) :  MoneyVietName( v.giaTien)}</p>
+                <p className="text-xl line-through">{v.sale ?  MoneyVietName( v.giaTien)  : ''}</p>
                 <p className="text-xl font-bold">Total: {v.soLuong}</p>
               </div>
             </div>
@@ -117,14 +118,15 @@ export default function Cart()
           <ul className="flex flex-col divide-y divide-coolGray-700">{mapCart}</ul>
           <div className="space-y-1 text-right text-3xl">
             <p>
-              Total amount:
-              <span className="font-semibold">{sumTotal?.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} €</span>
+             Money have to pay:
+              <span className="font-semibold">     {MoneyVietName(sumTotalReal || 0)}</span>
              
             </p>
-            <p>
-              Money have to pay:
-              <span className="font-bold text-2xl">{sumTotalReal?.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")} €</span>
-            </p>
+            {sumTotalReal ==  sumTotal ? "" :  <p>
+              Total amount:
+              <span className="font-bold text-2xl line-through">   {MoneyVietName(sumTotal || 0)}</span>
+            </p> }
+           
             <p className="text-2xl dark:text-coolGray-400">
               Not including taxes and shipping costs
             </p>

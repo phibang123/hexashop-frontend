@@ -4,6 +4,7 @@ import { ILicSuMuaHang } from 'models';
 import { INguoiDungEdit } from './../../models/user';
 import { LichSuPaginition } from './../HistoryPay/types/index';
 import { LoginType } from './../Login/types/index';
+import { PaginationParams } from './../../models/common';
 
 interface IinitialState {
   isLoading: boolean;
@@ -27,6 +28,10 @@ const updateUser = createSlice({
     setAddCartRedirest(state, action: PayloadAction<string>) {},
     setReduceCart(state, action: PayloadAction<string>) {},
     updateEditProfile(state, action: PayloadAction<INguoiDungEdit>) {
+      state.isLoading = true;
+    },
+
+    changePagePayment(state, action: PayloadAction<PaginationParams>) {
       state.isLoading = true;
     },
 

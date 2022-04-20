@@ -87,7 +87,7 @@ export default function SignInSide() {
                       onBlur={formikLogin.handleBlur}
                       name="taiKhoan"
                       id="email"
-                      placeholder="leroy@jenkins.com"
+                      placeholder="acoount"
                       className="w-full text-xl px-6 py-5 border rounded-md  "
                     />
                     <div className="text-red-900 ml-5">

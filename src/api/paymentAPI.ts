@@ -1,5 +1,6 @@
+import { ListResponseARR, PaginationParams } from './../models/common';
+
 import { ILicSuMuaHang } from './../models/historyPay';
-import { ListResponseARR } from './../models/common';
 import axiosClient from './axiosClient';
 
 const payment = {
@@ -7,8 +8,10 @@ const payment = {
     const url = 'QuanLyLichSuMuaHang/LichSuMuaHang';
     return axiosClient.get(url);
   },
-  getByUser(): Promise<ListResponseARR<ILicSuMuaHang>> {
-    const url = 'QuanLyLichSuMuaHang/LichSuMuaHang';
+  getByUser(pagination: PaginationParams): Promise<ListResponseARR<ILicSuMuaHang>> {
+    const url = `QuanLyLichSuMuaHang/LichSuMuaHang?page=${
+      pagination.page ? pagination.page : ''
+    }&limit=${pagination.limit ? pagination.limit : ''}`;
     return axiosClient.get(url);
   },
   byProduct(): Promise<ListResponseARR<ILicSuMuaHang>> {

@@ -48,15 +48,16 @@ export default function Home() {
                 <p className="text-2xl mb-10 italic font-thin ">
                   Awesome, clean & creative HTML5 Template
                 </p>
-              
               </div>{' '}
             </div>
           ) : (
-            <Skeleton
-              paragraph={{ rows: 20 }}
+            <Skeleton.Input
               active
-              className="row-span-full  relative col-span-4 h-full"
-            ></Skeleton>
+              block
+              size="large"
+              className="row-span-full   col-span-4 "
+              style={{ height: '610px' }}
+            ></Skeleton.Input>
           )}
 
           {allProject ? (
@@ -72,17 +73,22 @@ export default function Home() {
               <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-300">Women </h1>
                 <p className="text-2xl mb-5 italic font-thin">Best Clothes for Women</p>
-                <NavLink to="/categories/nu_gioi" className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                <NavLink
+                  to="/categories/nu_gioi"
+                  className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
+                >
                   Buy now!
                 </NavLink>
               </div>
             </div>
           ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
+            <Skeleton.Input
               active
+              block
+              size="large"
+              style={{ height: '300px' }}
               className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
+            ></Skeleton.Input>
           )}
           {allProject ? (
             <div className="row-span-2 group relative col-span-2">
@@ -97,17 +103,23 @@ export default function Home() {
               <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-300">Men </h1>
                 <p className="text-2xl mb-5 italic font-thin">Best Clothes for Men</p>
-                <NavLink to="/categories/nam_gioi" className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                <NavLink
+                  to="/categories/nam_gioi"
+                  className="text-4xl bg-transparent border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
+                >
                   Buy now!
                 </NavLink>
               </div>
             </div>
           ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
-              active
-              className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
+            <div className="row-span-2 group  relative  col-span-2 h-full">
+              <Skeleton.Input
+                active
+                block
+                size="large"
+                style={{ height: '300px' }}
+              ></Skeleton.Input>
+            </div>
           )}
           {allProject ? (
             <div className="row-span-2 group relative col-span-2">
@@ -117,26 +129,30 @@ export default function Home() {
               ></img>
               <div className="absolute text-gray-900  z-10 top-1/2 left-1/2 w-max -translate-x-1/2 -translate-y-1/2 text-center group-hover:invisible group-hover:opacity-0 transition-all duration-500">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-900 ">Kid</h1>
-                <p className="text-2xl mb-5 italic font-thin">
-                  Best Clothes for Kid
-                </p>
+                <p className="text-2xl mb-5 italic font-thin">Best Clothes for Kid</p>
               </div>
               <div className="absolute text-gray-300  z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-300 ">Kid </h1>
                 <p className="text-slate-100 text-2xl mb-5 italic font-thin">
                   Best Clothes for Kid
                 </p>
-                <NavLink  to="/categories/tre_em" className="text-4xl bg-transparent  border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded">
+                <NavLink
+                  to="/categories/tre_em"
+                  className="text-4xl bg-transparent  border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
+                >
                   Buy now!
                 </NavLink>
               </div>
             </div>
           ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
-              active
-              className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
+            <div className="row-span-2 group  relative  col-span-2 h-full">
+              <Skeleton.Input
+                active
+                block
+                size="large"
+                style={{ height: '300px' }}
+              ></Skeleton.Input>
+            </div>
           )}
           {allProject ? (
             <div className="row-span-2 group relative col-span-2">
@@ -151,8 +167,8 @@ export default function Home() {
               <div className="absolute text-gray-300 z-10 top-1/2 left-1/2 w-11/12 h-5/6 -translate-x-1/2 -translate-y-1/2 text-center group-hover:visible group-hover:opacity-80 invisible opacity-0 bg-black transition-all duration-500 flex justify-center items-center flex-col">
                 <h1 className=" text-5xl mb-10 font-semibold text-gray-300">All Product </h1>
                 <p className=" text-2xl mb-5 italic font-thin">Best Clothes for All Product</p>
-                <NavLink to='/products'
-               
+                <NavLink
+                  to="/products"
                   className="border-0 text-4xl bg-transparent  border-white hover:bg-white font-thin  text-white hover:text-black transition-all py-2 px-4 rounded"
                 >
                   Buy now!
@@ -160,15 +176,20 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <Skeleton
-              paragraph={{ rows: 8 }}
-              active
-              className="row-span-2 group  relative  col-span-2"
-            ></Skeleton>
+            <div className="row-span-2 group  relative  col-span-2 h-full">
+              <Skeleton.Input
+                active
+                block
+                size="large"
+                style={{ height: '300px' }}
+              ></Skeleton.Input>
+            </div>
           )}
         </div>
       </div>
+
       <SlickCarouselWomen sanPham={productWomen}></SlickCarouselWomen>
+
 
       <SlickCarouselMen sanPham={productMen}></SlickCarouselMen>
 

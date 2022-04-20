@@ -6,6 +6,7 @@ import React, { memo, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { ISanPham } from 'models/product';
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import { Skeleton } from 'antd';
@@ -30,9 +31,9 @@ function SlickCarousel(props: any) {
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
   const dispatch = useAppDispatch();
-
+  let arrayCheckLoding = [1, 2, 3, 4, 5, 6];
   const customNameCatorory = props.sanPham?.[0].categories.split("/")[1].replace("_", " ").toUpperCase()
-  const renderSlice = props?.sanPham?.map((v: ISanPham, index: number) => {
+  const renderSlice = props?.sanPham ? props?.sanPham?.map((v: ISanPham, index: number) => {
     return (
       <div key={index} className="p-10">
         <div className="flex justify-center ">
@@ -106,9 +107,9 @@ function SlickCarousel(props: any) {
               </div>
               <div>
                 <p className={` text-4xl ${v.sale ? 'text-red-700' : 'text-gray-400'}`}>
-                  {v.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ{' '}
+                 {MoneyVietName(v.thanhTien)}
                   {v.sale ? (
-                    <span className="text-2xl line-through text-gray-400">{v.giaTien}</span>
+                    <span className="text-2xl line-through text-gray-400 ml-2">{MoneyVietName(v.giaTien)}</span>
                   ) : (
                     ''
                   )}
@@ -119,6 +120,15 @@ function SlickCarousel(props: any) {
         </div>
       </div>
     );
+  }) : arrayCheckLoding.map((v, index) =>
+  {
+    return (
+      <div key={index} className="h-full p-10 mx-5">
+        <Skeleton.Input key={index} active block  size="large" style={{ height: "300px" }}></Skeleton.Input>
+        <Skeleton></Skeleton>
+    </div>
+      
+    )
   });
   const [slick, setSlick] = useState({
     display: true,
@@ -130,13 +140,13 @@ function SlickCarousel(props: any) {
     autoplaySpeed: 2000,
     slidesToShow: 4,
     slidesToScroll: 1,
-    nextArrow: (
-      <div>
-        <p>k</p>
-        <i className="material-icons">navigate_next</i>
-      </div>
-    ),
-    // nextArrow: <SampleNextArrow />,
+    // nextArrow: (
+    //   <div>
+    //     <p>k</p>
+    //     <i className="material-icons">navigate_next</i>
+    //   </div>
+    // ),
+    //nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
   return (
@@ -144,11 +154,13 @@ function SlickCarousel(props: any) {
       <div className="2xl:max-w-8xl mx-auto mt-40 mb-10 ">
         <div className="">
           <h1 className="text-dark-primary font-bold text-6xl leading-relaxed mb-5">
-            {props.sanPham  ? customNameCatorory : <Skeleton.Input active></Skeleton.Input>}
+            {props.sanPham && customNameCatorory}
+            
           </h1>
-          <p className="text-gray-400 text-2xl italic">
+            {!props.sanPham &&  <Skeleton.Input active></Skeleton.Input>}
+          {/* <p className="text-gray-400 text-2xl italic">
           {props.sanPham  ? " Details to details is what makes Hexashop different from the other themes." : <Skeleton paragraph={{rows: 6}} active></Skeleton>}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="2xl:max-w-9xl mx-auto mb-40">

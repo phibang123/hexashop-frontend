@@ -39,30 +39,34 @@ export default function Detail(props: any) {
     value: '',
   });
   let { id } = props.match.params;
-  useEffect(() => {
+  useEffect(() =>
+  {
     dispatch(projectAction.getProjectDetail(id));
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
   }, [userNguoiDung]);
+  useEffect(() => {
+    dispatch(projectAction.loadingEffect())
+  }, [])
+  
 
   
   const checkLike = project?.luotThich.idNguoiDungs.findIndex((v) => {
     return v.tenNguoiDung === userNguoiDung?.hoTen;
   });
 
-  const data = project?.comment.map((v) => {
+  const data = !isLoadingProduct ? project?.comment.map((v) => {
     return {
       author: v.tenNguoiDung,
       avatar: v.avatar,
       content: <p>{v.ngoiDungComment}</p>,
     };
-  });
+  }) : [];
 
   const handleChangeInput = (e: any) => {
     let { value, name } = e.target;
 
     setComment({
       value: value,
-  
     });
   };
 
@@ -110,14 +114,15 @@ export default function Detail(props: any) {
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
                 { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
-                {isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
+                { isLoadingProduct && <Skeleton.Input className="w-full" active block></Skeleton.Input>}
               </div>
 
               <div className="lg:w-2/3 w-full lg:pl-20 lg:py-6 mt-10 lg:mt-0 ">
+              {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 <h2 className="text-3xl title-font text-gray-500 tracking-widest">
                   <NavLink className="mr-2" to={`/${customeCategories?.[1]}`}>
                     {!isLoadingProduct && customeCategories?.[1]}{' '}
@@ -129,9 +134,8 @@ export default function Detail(props: any) {
                   </NavLink>
                   <NavLink className="mr-2" to={`/${customeCategories?.[3]}`}>
                     {!isLoadingProduct && customeCategories?.[3]}{' '}
-                    {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
+                    {!isLoadingProduct && <span className="text-gray-800"></span>}
                   </NavLink>
-                  {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 </h2>
                 <h1 className="text-gray-900 text-6xl title-font font-medium mb-1">
                   {!isLoadingProduct && project?.tenSanPham}
@@ -228,7 +232,7 @@ export default function Detail(props: any) {
                           : toastError('Error')
                       }
                     >
-                      Get to cart <i className="fa-solid fa-cart-arrow-down ml-3"></i>
+                      Add to cart <i className="fa-solid fa-cart-arrow-down ml-3"></i>
                     </button>
                   )}
                   {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}

@@ -21,10 +21,10 @@ const projectDetail = createSlice({
   name: 'project',
   initialState,
   reducers: {
-    getProjectDetail(state, action: PayloadAction<string>) {
+    getProjectDetail(state, action: PayloadAction<string>) {},
+    loadingEffect(state) {
       state.isLoadddingProduct = true;
     },
-
     pushCommentProduct(state, action: PayloadAction<PayloadIComment>) {
       console.log(action.payload);
       state.isLoaddingComment = true;

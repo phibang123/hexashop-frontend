@@ -6,6 +6,7 @@ import { ILicSuMuaHang } from './../../models/historyPay';
 import { INguoiDungEdit } from './../../models/user';
 import { LichSuRespon } from 'features/HistoryPay/types';
 import { LikeRespon } from './../Likes/types/index';
+import { PaginationParams } from './../../models/common';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { authActions } from 'features/Login/loginSlice';
 import payment from 'api/paymentAPI';
@@ -42,7 +43,7 @@ function* watchSetLike() {
 //------------------------
 function* handleGetPayment() {
   try {
-    const lichsumua: LichSuRespon = yield call(() => payment.getByUser());
+    const lichsumua: LichSuRespon = yield call(() => payment.getByUser({ limit: 6, page: 1 }));
     yield put(updateAction.succesGetPayment(lichsumua.data));
   } catch (error: any) {
     if (error.response?.data.status === 401) {
@@ -55,6 +56,27 @@ function* handleGetPayment() {
 }
 function* watchGetPayment() {
   yield takeLatest(updateAction.getPayment.type, handleGetPayment);
+}
+
+//------------------------
+function* handleGetPaymentChangPage(payload: PaginationParams) {
+  try {
+    const lichsumua: LichSuRespon = yield call(() => payment.getByUser(payload));
+    yield put(updateAction.succesGetPayment(lichsumua.data));
+  } catch (error: any) {
+    if (error.response?.data.status === 401) {
+      yield put(push('/login'));
+      toastError(error.response?.data.message);
+      yield cancel();
+    }
+    toastError('Some thing wrong!');
+  }
+}
+function* watchGetPaymentChangPage() {
+  while (true) {
+    const action: PayloadAction<PaginationParams> = yield take(updateAction.changePagePayment.type);
+    yield fork(handleGetPaymentChangPage, action.payload);
+  }
 }
 
 //------------------------
@@ -223,5 +245,6 @@ export function* updateUser() {
     watchByCart(),
     watchAddCartRedirest(),
     watchUpdateProfile(),
+    watchGetPaymentChangPage(),
   ]);
 }

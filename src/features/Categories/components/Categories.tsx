@@ -18,7 +18,7 @@ export default function Categories(props: any) {
     if (!categories.includes('&')) {
       if (categories.includes('!')) {
         const text = categories.split('!');
-        dispatch(categoriesAction.getCategoriesProduct(text[0]));
+        // dispatch(categoriesAction.getCategoriesProduct(text[0]));
         dispatch(
           productsActions.getAllProductPaginition({
             limit: 6,
@@ -28,7 +28,7 @@ export default function Categories(props: any) {
           })
         );
       } else {
-        dispatch(categoriesAction.getCategoriesProduct(categories));
+        // dispatch(categoriesAction.getCategoriesProduct(categories));
         dispatch(
           productsActions.getAllProductPaginition({ limit: 6, categori: categories, page: 1 })
         );
@@ -37,7 +37,7 @@ export default function Categories(props: any) {
       if (categories.includes('!')) {
         const text: string = categories.split('!');
         const textCustomCategories: string = text[0].replace(/&/g, '/');
-        dispatch(categoriesAction.getCategoriesProduct(categories.split('&')[0]));
+        // dispatch(categoriesAction.getCategoriesProduct(categories.split('&')[0]));
         dispatch(
           productsActions.getAllProductPaginition({
             limit: 6,
@@ -48,7 +48,7 @@ export default function Categories(props: any) {
         );
       } else {
         const text: string = categories.replace(/&/g, '/');
-        dispatch(categoriesAction.getCategoriesProduct(categories.split('&')[0]));
+        // dispatch(categoriesAction.getCategoriesProduct(categories.split('&')[0]));
         dispatch(productsActions.getAllProductPaginition({ limit: 6, categori: text, page: 1 }));
       }
     }
@@ -60,6 +60,10 @@ export default function Categories(props: any) {
       setNameSort('Sort By');
     }
   }, [categories]);
+  useEffect(() => {
+    dispatch(categoriesAction.getCategoriesProduct(categories))
+  }, [])
+  
 
   const productPagination = useAppSelector((state) => state.projectsReducer.producPaginition);
   const isLoadingProductPagination = useAppSelector(
@@ -71,46 +75,48 @@ export default function Categories(props: any) {
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
   const menu = (
     <Menu className="w-64">
-      <NavLink to={`${categories.split('!')[0]}!createdAt:desc`}>
-        <Menu.Item key={1}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+    
+        <Menu.Item  className='text-center' key={1}>
+        <NavLink to={`${categories.split('!')[0]}!createdAt:desc`}>
+          <span className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Product new
-          </li>
-        </Menu.Item>
+          </span>
       </NavLink>
-      <Menu.Item key={2}>
+
+        </Menu.Item>
+      <Menu.Item className='text-center' key={2}>
         <NavLink to={`${categories.split('!')[0]}!luotThich:desc`}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+          <span className="hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Like <ArrowUpwardOutlined className="pb-2" />
-          </li>
+          </span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key={3}>
+      <Menu.Item  className='text-center' key={3}>
         <NavLink to={`${categories.split('!')[0]}!luotThich:asc`}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+          <span className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Like <ArrowDownwardOutlined className="pb-2" />
-          </li>
+          </span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key={4}>
+      <Menu.Item  className='text-center' key={4}>
         <NavLink to={`${categories.split('!')[0]}!thanhTien:desc`}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+          <span className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Price Up
-          </li>
+          </span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key={5}>
+      <Menu.Item  className='text-center' key={5}>
         <NavLink to={`${categories.split('!')[0]}!thanhTien:asc`}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+          <span className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Price Down
-          </li>
+          </span>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key={6}>
+      <Menu.Item  className='text-center' key={6}>
         <NavLink to={`${categories.split('!')[0]}`}>
-          <li className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl text-center">
+          <span className="align-middle  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl">
             Cancal
-          </li>
+          </span>
         </NavLink>
       </Menu.Item>
     </Menu>
