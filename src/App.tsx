@@ -8,11 +8,11 @@ import AdminTemplate from "templates/adminTemplate/AdminTempalte"
 import Cart from 'features/Cart/components/Cart';
 import Categories from 'features/Categories/components/Categories';
 import Detail from 'features/Detail/components/Detail';
-import DetailTemplate from './templates/detailTemplate/DetailTemplate'
+import DetailTemplate from 'templates/detailTemplate/DetailTemplate'
 import HistoryPay from 'features/HistoryPay/components/HistoryPay';
 import Home from './features/Home/Home';
 import HomeAdmin from "./Admin/Home/components/HomeAdmin"
-import HomeTemplate from './templates/homeTemplate/HomeTemplate';
+import HomeTemplate from 'templates/homeTemplate/HomeTemplate';
 import Infouser from "features/Infouser/components/Infouser"
 import Likes from 'features/Likes/components/Likes';
 import Login from 'features/Login/components/Login';
