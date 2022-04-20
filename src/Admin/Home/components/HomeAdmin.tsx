@@ -20,7 +20,7 @@ export default function Home() {
                             <div className="rounded-full p-5 bg-green-600"><i className="fa fa-wallet fa-2x fa-inverse"></i></div>
                         </div>
                         <div className="flex-1 text-right md:text-center">
-                            <h2 className="font-bold uppercase text-gray-600">Total Revenue</h2>
+                            <h2 className="font-bold uppercase text-gray-600">Total Revenuee</h2>
                            <p className="font-bold text-3xl">$3249 <span className="text-green-500"><i className="fas fa-caret-up"></i></span></p>
                         </div>
                     </div>

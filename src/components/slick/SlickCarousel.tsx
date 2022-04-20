@@ -106,7 +106,7 @@ function SlickCarousel(props: any) {
                 </div>
               </div>
               <div>
-                <p className={` text-4xl ${v.sale ? 'text-red-700' : 'text-gray-400'}`}>
+                <p className={` text-4xl  ${v.sale ? 'text-red-700' : 'text-gray-400'}`}>
                  {MoneyVietName(v.thanhTien)}
                   {v.sale ? (
                     <span className="text-2xl line-through text-gray-400 ml-2">{MoneyVietName(v.giaTien)}</span>
