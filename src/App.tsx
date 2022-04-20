@@ -9,7 +9,7 @@ import Cart from 'features/Cart/components/Cart';
 import Categories from 'features/Categories/components/Categories';
 import { CssBaseline } from '@mui/material';
 import Detail from 'features/Detail/components/Detail';
-import DetailTemplate from './templates/detailTemplate/DetailTemplate';
+import FetailTemplate from './templates/detailTemplate/DetailTemplate';
 import HistoryPay from 'features/HistoryPay/components/HistoryPay';
 import Home from './features/Home/Home';
 import HomeAdmin from "./Admin/Home/components/HomeAdmin"
@@ -28,14 +28,14 @@ function App() {
       <HomeTemplate exact path="/" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/home" Component={Home}></HomeTemplate>
       <HomeTemplate exact path="/about" Component={About}></HomeTemplate>
-      <DetailTemplate exact path="/profile" Component={Infouser}></DetailTemplate>
-      <DetailTemplate exact path="/carts" Component={Cart}></DetailTemplate>
-      <DetailTemplate exact path="/likes" Component={Likes}></DetailTemplate>
-      <DetailTemplate exact path="/history" Component={HistoryPay}></DetailTemplate>
-      <DetailTemplate exact path="/detail/:id" Component={Detail}></DetailTemplate>
-      <DetailTemplate exact path="/products" Component={Productlist}></DetailTemplate>
+      <FetailTemplate exact path="/profile" Component={Infouser}></FetailTemplate>
+      <FetailTemplate exact path="/carts" Component={Cart}></FetailTemplate>
+      <FetailTemplate exact path="/likes" Component={Likes}></FetailTemplate>
+      <FetailTemplate exact path="/history" Component={HistoryPay}></FetailTemplate>
+      <FetailTemplate exact path="/detail/:id" Component={Detail}></FetailTemplate>
+      <FetailTemplate exact path="/products" Component={Productlist}></FetailTemplate>
    
-      <DetailTemplate exact path="/categories/:categories" Component={Categories}></DetailTemplate>
+      <FetailTemplate exact path="/categories/:categories" Component={Categories}></FetailTemplate>
       
       <AdminTemplate exact path="/admin/" Component={HomeAdmin}></AdminTemplate>
 
