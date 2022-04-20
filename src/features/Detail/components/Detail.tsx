@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import DetailBanner from './DetailBanner';
 import { INguoiDung } from 'models';
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import { projectAction } from '../DetailSlide';
 import { push } from 'connected-react-router';
@@ -44,7 +45,9 @@ export default function Detail(props: any) {
     dispatch(projectAction.getProjectDetail(id));
     // window.scrollTo(0, 0)
   }, [userNguoiDung]);
-  useEffect(() => {
+  useEffect(() =>
+  {
+    window.scrollTo(0, 0)
     dispatch(projectAction.loadingEffect())
   }, [])
   
@@ -124,15 +127,15 @@ export default function Detail(props: any) {
               <div className="lg:w-2/3 w-full lg:pl-20 lg:py-6 mt-10 lg:mt-0 ">
               {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                 <h2 className="text-3xl title-font text-gray-500 tracking-widest">
-                  <NavLink className="mr-2" to={`/${customeCategories?.[1]}`}>
+                  <NavLink className="mr-2" to={`/categories/${customeCategories?.[1]}`}>
                     {!isLoadingProduct && customeCategories?.[1]}{' '}
                     {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
                   </NavLink>
-                  <NavLink className="mr-2" to={`/${customeCategories?.[2]}`}>
+                  <NavLink className="mr-2" to={`/categories/${customeCategories?.[1]}&${customeCategories?.[2]}`}>
                     {!isLoadingProduct && customeCategories?.[2]}{' '}
                     {!isLoadingProduct && <span className="text-gray-800">{`>`}</span>}
                   </NavLink>
-                  <NavLink className="mr-2" to={`/${customeCategories?.[3]}`}>
+                  <NavLink className="mr-2" to={`/categories/${customeCategories?.[1]}&${customeCategories?.[2]}&${customeCategories?.[3]}`}>
                     {!isLoadingProduct && customeCategories?.[3]}{' '}
                     {!isLoadingProduct && <span className="text-gray-800"></span>}
                   </NavLink>
@@ -208,12 +211,12 @@ export default function Detail(props: any) {
                           project?.sale ? 'text-red-700' : ''
                         }`}
                       >
-                        {project?.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ
+                         {MoneyVietName(project?.thanhTien || 0)}
                       </span>
                       {project?.sale ? (
                         <span className="title-font font-medium text-2xl line-through mx-5">
                           {' '}
-                          {project?.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')} Đ
+                          {MoneyVietName(project?.giaTien || 0)}
                         </span>
                       ) : (
                         ''

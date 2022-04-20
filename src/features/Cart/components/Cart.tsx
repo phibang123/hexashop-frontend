@@ -10,8 +10,7 @@ import moment from 'moment';
 import { push } from 'connected-react-router';
 import { updateAction } from 'features/Infouser/InfouserSlide';
 
-export default function Cart()
-{
+export default function Cart() {
   //modal comfirm
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
@@ -27,7 +26,7 @@ export default function Cart()
       setVisible(false);
       setModalText('Do you want buy product');
       setConfirmLoading(false);
-      dispatch(updateAction.buyCart())
+      dispatch(updateAction.buyCart());
     }, 2000);
   };
 
@@ -36,7 +35,7 @@ export default function Cart()
     setVisible(false);
   };
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const userReducer = useAppSelector((state) => state.auth.currentUser);
   if (!localStorage.getItem('access_token')) {
     return <Redirect to="/login" />;
@@ -45,11 +44,9 @@ export default function Cart()
     return (
       <li className="flex flex-col py-10 sm:flex-row sm:justify-between   " key={index}>
         <div className="flex w-full space-x-6">
-         
           <img
             className="flex-shrink-0 object-cover w-56 h-56 dark:border-transparent rounded outline-none cursor-pointer"
             src={v.hinhAnh}
-           
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
               currentTarget.src =
@@ -61,14 +58,25 @@ export default function Cart()
           <div className="flex flex-col justify-between w-full pb-8">
             <div className="flex justify-between w-full pb-5 space-x-5">
               <div className="space-y-4">
-                <h3 className="text-2xl font-semibold leading-snug "> <NavLink to={`detail/${v._idSanPham}`} className="text-black"> {v.tenSanPham}</NavLink></h3>
-                <p className="text-xl dark:text-coolGray-400">{v.moTa?.length || 0 > 230 ? v.moTa?.slice(0,230) +"..." : v?.moTa}</p>
-                <p className="text-xl dark:text-coolGray-400">Add cart when: {moment(v.ngayThem).format("hh:mm A - DD-MM-YYYY")}</p>
-                
+                <h3 className="text-2xl font-semibold leading-snug ">
+                  {' '}
+                  <NavLink to={`detail/${v._idSanPham}`} className="text-black">
+                    {' '}
+                    {v.tenSanPham}
+                  </NavLink>
+                </h3>
+                <p className="text-xl dark:text-coolGray-400">
+                  {v.moTa?.length || 0 > 230 ? v.moTa?.slice(0, 230) + '...' : v?.moTa}
+                </p>
+                <p className="text-xl dark:text-coolGray-400">
+                  Add cart when: {moment(v.ngayThem).format('hh:mm A - DD-MM-YYYY')}
+                </p>
               </div>
-              <div className="text-right" style={{width: "inherit"}}>
-                <p className="text-2xl font-semibold">{v.sale ? MoneyVietName(v.thanhTien) :  MoneyVietName( v.giaTien)}</p>
-                <p className="text-xl line-through">{v.sale ?  MoneyVietName( v.giaTien)  : ''}</p>
+              <div className="text-right" style={{ width: 'inherit' }}>
+                <p className="text-2xl font-semibold">
+                  {v.sale ? MoneyVietName(v.thanhTien) : MoneyVietName(v.giaTien)}
+                </p>
+                <p className="text-xl line-through">{v.sale ? MoneyVietName(v.giaTien) : ''}</p>
                 <p className="text-xl font-bold">Total: {v.soLuong}</p>
               </div>
             </div>
@@ -85,19 +93,24 @@ export default function Cart()
                   <rect width="32" height="200" x="312" y="216"></rect>
                   <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
                 </svg>
-                <span onClick={
-                  () => dispatch(updateAction.setRemoveCart(v._idSanPham))
-                }>Remove</span>
+                <span onClick={() => dispatch(updateAction.setRemoveCart(v._idSanPham))}>
+                  Remove
+                </span>
                 <div>
-                <button className='bg-blue-800 text-white px-3 text-2xl rounded mx-5' onClick={
-                  () => dispatch(updateAction.setAddCart(v._idSanPham))
-                }>+</button>
-                <button className='bg-red-800 text-white px-3 text-2xl rounded' onClick={
-                  () => dispatch(updateAction.setReduceCart(v._idSanPham))
-                }>-</button>
+                  <button
+                    className="bg-blue-800 text-white px-3 text-2xl rounded mx-5"
+                    onClick={() => dispatch(updateAction.setAddCart(v._idSanPham))}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="bg-red-800 text-white px-3 text-2xl rounded"
+                    onClick={() => dispatch(updateAction.setReduceCart(v._idSanPham))}
+                  >
+                    -
+                  </button>
                 </div>
               </button>
-              
             </div>
           </div>
         </div>
@@ -106,27 +119,33 @@ export default function Cart()
   });
   const sumTotal = userReducer?.gioHang.reduce((a: number, b: IGioiHang) => {
     return a + b.giaTien;
-  }, 0)
+  }, 0);
   const sumTotalReal = userReducer?.gioHang.reduce((a: number, b: IGioiHang) => {
     return a + b.thanhTien;
-  }, 0)
+  }, 0);
   return (
-    <div className='my-20'> 
+    <div className="my-20">
       {userReducer?.gioHang[0] ? (
         <div className="flex flex-col max-w-7xl p-6 space-y-4 sm:p-10 m-auto rounded-xl my-20 shadow-2xl bg-gray-100">
           <h2 className="text-3xl font-bold text-center">Your cart</h2>
           <ul className="flex flex-col divide-y divide-coolGray-700">{mapCart}</ul>
           <div className="space-y-1 text-right text-3xl">
             <p>
-             Money have to pay:
-              <span className="font-semibold">     {MoneyVietName(sumTotalReal || 0)}</span>
-             
+              Money have to pay:
+              <span className="font-semibold"> {MoneyVietName(sumTotalReal || 0)}</span>
             </p>
-            {sumTotalReal ==  sumTotal ? "" :  <p>
-              Total amount:
-              <span className="font-bold text-2xl line-through">   {MoneyVietName(sumTotal || 0)}</span>
-            </p> }
-           
+            {sumTotalReal == sumTotal ? (
+              ''
+            ) : (
+              <p>
+                Total amount:
+                <span className="font-bold text-2xl line-through">
+                  {' '}
+                  {MoneyVietName(sumTotal || 0)}
+                </span>
+              </p>
+            )}
+
             <p className="text-2xl dark:text-coolGray-400">
               Not including taxes and shipping costs
             </p>
@@ -137,7 +156,7 @@ export default function Cart()
               onClick={showModal}
               className=" border  bg-gray-800 hover:bg-gray-900 text-white font-bold py-6 px-4 rounded"
             >
-              <span className="sr-only sm:not-sr-only">Continue to</span>Checkout
+              <span className="sr-only sm:not-sr-only">Continue to</span>By Product
             </button>
           </div>
         </div>
@@ -253,8 +272,6 @@ export default function Cart()
       >
         <p>{modalText}</p>
       </Modal>
-
-      
     </div>
   );
 }

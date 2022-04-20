@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import DetailBanner from 'features/Detail/components/DetailBanner';
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import { categoriesAction } from '../CategoriesSlide';
 import { productsActions } from 'features/Products/productSlice';
@@ -123,20 +124,27 @@ export default function Categories(props: any) {
   );
   let arrayCheckLoding = [1, 2, 3, 4, 5, 6];
   //map Categories
-  const mapCategories = categoriesProduct?.[0].chilrens.map((v, index) => {
+  const mapCategories = categoriesProduct?.[0].chilrens.map((v, index) =>
+  {
+    let [str1Paren, ...customParen]: string[] = v.category.split('/');
     return (
+      
       <div className="space-y-2" key={index}>
         <h2 className="text-3xl font-semibold tracking-widest uppercase dark:text-coolGray-400">
+          
+          <NavLink  activeStyle={{ color: 'blue' }}   className="text-gray-700"      to={`/categories${'/' + customParen.join('&')}`}>
           {v.name}
+
+          </NavLink>
         </h2>
         <div className="flex flex-col text-2xl space-y-1">
           {v.chilrens.map((vc, index) => {
-            let [str1, ...custom]: string[] = vc.category.split('/');
+            let [str1Child, ...customChild]: string[] = vc.category.split('/');
             return (
               <NavLink
                 activeStyle={{ color: 'blue' }}
                 className="ml-3 text-gray-700"
-                to={`/categories${'/' + custom.join('&')}`}
+                to={`/categories${'/' + customChild.join('&')}`}
                 key={index}
               >
                 {vc.name}
@@ -188,8 +196,8 @@ export default function Categories(props: any) {
                   className={`mt-1 font-bold items-center mb-0  ${
                     product.sale ? 'text-red-600' : 'text-gray-900'
                   }`}
-                >
-                  {product.thanhTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ
+              >
+                  {MoneyVietName(product.thanhTien)}
                   {product.sale ? (
                     <span className="ml-5 text-2xl font-semibold inline-block py-1 px-2  rounded text-pink-600 bg-pink-200 uppercase last:mr-0 mr-1">
                       {product?.phanTramSale}%
@@ -200,8 +208,9 @@ export default function Categories(props: any) {
                 </p>
                 {product.sale ? (
                   <p className={`mt-3 text-xl font-medium text-gray-600 line-through`}>
-                    {' '}
-                    {`${product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}Đ`}
+                  {' '}
+                  {MoneyVietName(product.giaTien)}
+                   
                   </p>
                 ) : (
                   ''

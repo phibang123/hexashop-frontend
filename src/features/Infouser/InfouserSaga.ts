@@ -227,6 +227,7 @@ function* handleBuyCart() {
     yield cancel();
   } catch (error: any) {
     yield toast.dismiss();
+    console.log(error.response);
     yield toastError(error.response?.data.message);
     yield cancel();
   }

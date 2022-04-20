@@ -3,6 +3,7 @@ import { Modal, Pagination, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import moment from 'moment';
@@ -10,28 +11,33 @@ import payment from 'api/paymentAPI';
 import { updateAction } from 'features/Infouser/InfouserSlide';
 import { updateUser } from 'features/Infouser/InfouserSaga';
 
-export default function HistoryPay() {
+export default function HistoryPay()
+{
   const dispatch = useAppDispatch();
   const [current, setCurrent] = useState(1);
   const lichSuMua: ILicSuMuaHang[] | null = useAppSelector((state) => state.updateUser.payment);
   const totalLichSuMuaHang: number = useAppSelector((state) => state.updateUser.total);
   const isLoading = useAppSelector((state) => state.updateUser.isLoading);
-  useEffect(() => {
+  useEffect(() =>
+  {
     dispatch(updateAction.getPayment());
   }, []);
 
-  if (!localStorage.getItem('access_token')) {
+  if (!localStorage.getItem('access_token'))
+  {
     return <Redirect to="/login" />;
   }
 
-  const modalHistoryPay = (v: ILicSuMuaHang) => {
+  const modalHistoryPay = (v: ILicSuMuaHang) =>
+  {
     Modal.success({
       content: (
         <div>
           <div className="flex flex-col max-w-5xl space-y-4 divide-y  divide-coolGray-700 dark:bg-coolGray-900 dark:text-coolGray-100">
             <h2 className="text-2xl font-semibold">Order items</h2>
             <ul className="flex flex-col pt-4 space-y-2">
-              {v.tongSanPham.map((product, index) => {
+              {v.tongSanPham.map((product, index) =>
+              {
                 return (
                   <li className="flex items-start justify-between" key={index}>
                     <h3>
@@ -40,14 +46,13 @@ export default function HistoryPay() {
                     </h3>
                     <div className="text-right">
                       <span className="block">
-                        ${product.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                        {MoneyVietName(product.giaTien)}
                       </span>
                       <span className="text-sm dark:text-coolGray-400">
                         sale{' '}
+
                         {product.sale
-                          ? (product.giaTien - product.thanhTien)
-                              .toString()
-                              .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
+                          ? MoneyVietName(product.giaTien - product.thanhTien)
                           : '0'}
                       </span>
                     </div>
@@ -60,9 +65,7 @@ export default function HistoryPay() {
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span>
-                    {(v.tongTien + v.soTienGiam)
-                      .toString()
-                      .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                    {MoneyVietName(v.tongTien + v.soTienGiam)}
                   </span>
                 </div>
                 <div className="flex items-center space-x-2 text-xs">
@@ -79,7 +82,7 @@ export default function HistoryPay() {
               </div>
               <div className="flex justify-between">
                 <span>Discount</span>
-                <span>{v.soTienGiam.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}</span>
+                <span>{MoneyVietName(v.soTienGiam)}</span>
               </div>
             </div>
             <div className="pt-4 space-y-2">
@@ -108,7 +111,7 @@ export default function HistoryPay() {
                 <div className="flex justify-between">
                   <span>Total</span>
                   <span className="font-semibold">
-                    ${v.tongTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+                    {MoneyVietName(v.tongTien)}
                   </span>
                 </div>
                 <button
@@ -128,85 +131,86 @@ export default function HistoryPay() {
   };
   let arrayCheckLoding = [1, 2, 3, 4, 5, 6];
   const mapLichSu = !isLoading
-    ? lichSuMua?.map((v, index) => {
-        return (
-          <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
-            <div className="h-full flex items-start">
-              <div className="w-18 flex-shrink-0 flex flex-col text-center leading-none">
-                <span className="text-gray-500 pb-6 mb-2 border-b-6 border-gray-200 text-2xl">
-                  {' '}
-                  {moment(v.ngayDat).format('MMMM')}
-                </span>
-                <span className="font-medium text-3xl text-gray-800 title-font leading-none ">
-                  {moment(v.ngayDat).format('Do')}
-                </span>
+    ? lichSuMua?.map((v, index) =>
+    {
+      return (
+        <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
+          <div className="h-full flex items-start">
+            <div className="w-18 flex-shrink-0 flex flex-col text-center leading-none">
+              <span className="text-gray-500 pb-6 mb-2 border-b-6 border-gray-200 text-2xl">
+                {' '}
+                {moment(v.ngayDat).format('MMMM')}
+              </span>
+              <span className="font-medium text-3xl text-gray-800 title-font leading-none ">
+                {moment(v.ngayDat).format('Do')}
+              </span>
+            </div>
+            <div className="flex-grow pl-6">
+              <div>
+                <h2 className="tracking-widest text-2xl title-font font-medium text-indigo-500 mb-1">
+                  Status: {v.trangThai}
+                </h2>
+                <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
+                  quantity: {v.tongSanPham?.length}
+                </h1>
               </div>
-              <div className="flex-grow pl-6">
+              <div className="flex justify-between  mt-5">
+                <h1 className="title-font text-3xl font-medium text-gray-900 mb-3">
+                  Total: {MoneyVietName(v.tongTien)}
+                </h1>
                 <div>
-                  <h2 className="tracking-widest text-2xl title-font font-medium text-indigo-500 mb-1">
-                    Status: {v.trangThai}
-                  </h2>
                   <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                    quantity: {v.tongSanPham?.length}
+                    Total:{' '}
+                    {MoneyVietName(v.tongTien + v.soTienGiam)} 
+                  </h1>
+                  <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
+                    Sale: - {MoneyVietName(v.soTienGiam)} 
                   </h1>
                 </div>
-                <div className="flex justify-between  mt-5">
-                  <h1 className="title-font text-3xl font-medium text-gray-900 mb-3">
-                    Total: {v.tongTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
-                  </h1>
-                  <div>
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      Total:{' '}
-                      {(v.tongTien + v.soTienGiam)
-                        .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
-                    </h1>
-                    <h1 className="title-font text-xl font-medium text-gray-900 mb-3">
-                      Sale: - {v.soTienGiam.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
-                    </h1>
-                  </div>
-                </div>
+              </div>
 
-                <div className="flex justify-between items-center">
-                  <a className="inline-flex items-center">
-                    <img
-                      alt={v.hoTen}
-                      src={v.avatar}
-                      className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
-                    />
-                    <span className="flex-grow flex flex-col pl-3">
-                      <span className="title-font font-medium text-gray-900 text-2xl ">
-                        {v.hoTen}
-                      </span>
+              <div className="flex justify-between items-center">
+                <a className="inline-flex items-center">
+                  <img
+                    alt={v.hoTen}
+                    src={v.avatar}
+                    className="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
+                  />
+                  <span className="flex-grow flex flex-col pl-3">
+                    <span className="title-font font-medium text-gray-900 text-2xl ">
+                      {v.hoTen}
                     </span>
-                  </a>
-                  <button
-                    onClick={() => {
-                      modalHistoryPay(v);
-                    }}
-                    data-modal-toggle="defaultModal"
-                    type="button"
-                    className="mr-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Details
-                  </button>
-                </div>
+                  </span>
+                </a>
+                <button
+                  onClick={() =>
+                  {
+                    modalHistoryPay(v);
+                  }}
+                  data-modal-toggle="defaultModal"
+                  type="button"
+                  className="mr-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Details
+                </button>
               </div>
             </div>
           </div>
-        );
-      })
-    : arrayCheckLoding.map((v, index) => {
-        return (
-          <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
-            <Skeleton.Input block active></Skeleton.Input>
-            <Skeleton.Input block active></Skeleton.Input>
-            <Skeleton.Input block active></Skeleton.Input>
-            <Skeleton.Input block active></Skeleton.Input>
-            <Skeleton.Avatar active></Skeleton.Avatar>
-          </div>
-        );
-      });
+        </div>
+      );
+    })
+    : arrayCheckLoding.map((v, index) =>
+    {
+      return (
+        <div className="py-12 px-8  bg-gray-50 shadow-xl " key={index}>
+          <Skeleton.Input block active></Skeleton.Input>
+          <Skeleton.Input block active></Skeleton.Input>
+          <Skeleton.Input block active></Skeleton.Input>
+          <Skeleton.Input block active></Skeleton.Input>
+          <Skeleton.Avatar active></Skeleton.Avatar>
+        </div>
+      );
+    });
   return (
     <div>
       <section className="text-gray-600 body-font my-20 max-w-8xl m-auto ">
@@ -321,7 +325,8 @@ export default function HistoryPay() {
           defaultPageSize={6}
           current={current}
           className="text-right"
-          onChange={(page, pageSize) => {
+          onChange={(page, pageSize) =>
+          {
             dispatch(updateAction.changePagePayment({ page: page, limit: pageSize }));
             setCurrent(page);
           }}

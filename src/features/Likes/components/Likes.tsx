@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import { LikeRespon } from '../types';
 import { LoginRespon } from 'features/Login/types';
+import { MoneyVietName } from 'utils/customeMoney/customeMony';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { Redirect } from 'react-router';
@@ -26,12 +27,12 @@ export default function Likes() {
             src={v.hinhAnh}
             alt={v.tenSanPham}
           />
-          <h3 className="tracking-widest text-indigo-500 text-3xl font-medium title-font">
-            {v.giaTien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}
+            <h3 className="tracking-widest text-indigo-500 text-3xl font-medium title-font">
+            {MoneyVietName(v.giaTien)} 
           </h3>
           </NavLink>
           <h2 className="text-2xl text-gray-900 font-medium title-font mb-4">{v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + "..." : v.tenSanPham}</h2>
-          <p className="leading-relaxed text-xl ">{v.moTa}</p>
+          <p className="leading-relaxed text-xl ">  {v.moTa?.length || 0 > 125 ? v.moTa?.slice(0, 125) + " ..." : v.moTa }</p>
           <button
             className="px-8 py-3 font-semibold rounded bg-gray-800 text-white"
             onClick={() => dispatch(updateAction.setLike(v._idSanPham))}
