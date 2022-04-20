@@ -254,7 +254,7 @@ export default function Categories(props: any) {
       return string;
     }
   };
-
+  console.log(productPagination?.length ||0 > 6)
   const customeSkeletonObject = (string: string | object | void | undefined) => {
     if (isLoadingCategories || string === undefined) {
       return (
@@ -354,7 +354,7 @@ export default function Categories(props: any) {
               </div>
             </div>
             <div className="lg:w-4/5 mx-auto ">
-              {customeSkeleton(<Pagination
+              {productPagination?.length  === 6 ? customeSkeleton(<Pagination
                 defaultPageSize={6}
                 className="text-right"
                 current={current}
@@ -405,7 +405,7 @@ export default function Categories(props: any) {
                   setCurrent(page);
                 }}
                 total={totalPagination}
-              />)}
+              /> ) : <div></div>}
             </div>
           </div>
         </section>

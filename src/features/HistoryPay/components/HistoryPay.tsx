@@ -321,7 +321,7 @@ export default function HistoryPay()
             </article>
           </div>
         )}
-        <Pagination
+       {lichSuMua?.length === 6 ?  <Pagination
           defaultPageSize={6}
           current={current}
           className="text-right"
@@ -331,7 +331,7 @@ export default function HistoryPay()
             setCurrent(page);
           }}
           total={totalLichSuMuaHang}
-        />
+        /> : "" }
       </section>
 
       <div
