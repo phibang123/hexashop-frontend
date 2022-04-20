@@ -8,7 +8,7 @@ import AdminTemplate from "templates/adminTemplate/AdminTempalte"
 import Cart from 'features/Cart/components/Cart';
 import Categories from 'features/Categories/components/Categories';
 import Detail from 'features/Detail/components/Detail';
-import DetailTemplate from 'templates/detailTemplate/DetailTemplate'
+import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
 import HistoryPay from 'features/HistoryPay/components/HistoryPay';
 import Home from './features/Home/Home';
 import HomeAdmin from "./Admin/Home/components/HomeAdmin"
