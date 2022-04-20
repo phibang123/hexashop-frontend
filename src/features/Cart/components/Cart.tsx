@@ -37,6 +37,7 @@ export default function Cart() {
 
   const dispatch = useAppDispatch();
   const userReducer = useAppSelector((state) => state.auth.currentUser);
+  const isLoadingButtonDissabel = useAppSelector((state) => state.updateUser.isLoading);
   if (!localStorage.getItem('access_token')) {
     return <Redirect to="/login" />;
   }
@@ -80,8 +81,8 @@ export default function Cart() {
                 <p className="text-xl font-bold">Total: {v.soLuong}</p>
               </div>
             </div>
-            <div className="flex text-2xl divide-x">
-              <button type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
+            <div className="flex text-2xl divide-x items-center">
+              <button type="button" disabled={isLoadingButtonDissabel} onClick={() => dispatch(updateAction.setRemoveCart(v._idSanPham))} className="flex items-center px-2 py-1 pl-0 space-x-1 border-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -93,24 +94,27 @@ export default function Cart() {
                   <rect width="32" height="200" x="312" y="216"></rect>
                   <path d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z"></path>
                 </svg>
-                <span onClick={() => dispatch(updateAction.setRemoveCart(v._idSanPham))}>
+                <span>
                   Remove
                 </span>
+              </button>
+
                 <div>
-                  <button
+                <button
+                  disabled={isLoadingButtonDissabel}
                     className="bg-blue-800 text-white px-3 text-2xl rounded mx-5"
                     onClick={() => dispatch(updateAction.setAddCart(v._idSanPham))}
                   >
                     +
                   </button>
-                  <button
-                    className="bg-red-800 text-white px-3 text-2xl rounded"
+                <button
+                  disabled={isLoadingButtonDissabel}
+                    className="bg-red-800 text-white px-4 text-2xl rounded"
                     onClick={() => dispatch(updateAction.setReduceCart(v._idSanPham))}
                   >
                     -
                   </button>
                 </div>
-              </button>
             </div>
           </div>
         </div>
@@ -153,6 +157,7 @@ export default function Cart() {
           <div className="flex justify-end space-x-4">
             <button
               type="button"
+              disabled={isLoadingButtonDissabel}
               onClick={showModal}
               className=" border  bg-gray-800 hover:bg-gray-900 text-white font-bold py-6 px-4 rounded"
             >

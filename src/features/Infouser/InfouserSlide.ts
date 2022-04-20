@@ -22,11 +22,21 @@ const updateUser = createSlice({
   name: 'updateuser',
   initialState,
   reducers: {
-    setLike(state, action: PayloadAction<string>) {},
-    setRemoveCart(state, action: PayloadAction<string>) {},
-    setAddCart(state, action: PayloadAction<string>) {},
-    setAddCartRedirest(state, action: PayloadAction<string>) {},
-    setReduceCart(state, action: PayloadAction<string>) {},
+    setLike(state, action: PayloadAction<string>) {
+      state.isLoading = true;
+    },
+    setRemoveCart(state, action: PayloadAction<string>) {
+      state.isLoading = true;
+    },
+    setAddCart(state, action: PayloadAction<string>) {
+      state.isLoading = true;
+    },
+    setAddCartRedirest(state, action: PayloadAction<string>) {
+      state.isLoading = true;
+    },
+    setReduceCart(state, action: PayloadAction<string>) {
+      state.isLoading = true;
+    },
     updateEditProfile(state, action: PayloadAction<INguoiDungEdit>) {
       state.isLoading = true;
     },
@@ -36,6 +46,7 @@ const updateUser = createSlice({
     },
 
     buyCart(state) {},
+
     getPayment(state) {
       state.isLoading = true;
     },
@@ -45,6 +56,7 @@ const updateUser = createSlice({
       state.total = action.payload.total;
       state.isLoading = false;
     },
+
     success(state) {
       state.isLoading = false;
     },

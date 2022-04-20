@@ -22,9 +22,11 @@ function* handleSetLike(payload: string) {
     yield put(authActions.loginSuccess(user.data));
     toast.dismiss();
     toastSuccess('Success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -46,6 +48,7 @@ function* handleGetPayment() {
     const lichsumua: LichSuRespon = yield call(() => payment.getByUser({ limit: 6, page: 1 }));
     yield put(updateAction.succesGetPayment(lichsumua.data));
   } catch (error: any) {
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -64,6 +67,7 @@ function* handleGetPaymentChangPage(payload: PaginationParams) {
     const lichsumua: LichSuRespon = yield call(() => payment.getByUser(payload));
     yield put(updateAction.succesGetPayment(lichsumua.data));
   } catch (error: any) {
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -93,6 +97,7 @@ function* handleUpdateProfile(payload: INguoiDungEdit) {
   } catch (error: any) {
     toast.dismiss();
     yield cancel();
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -115,9 +120,11 @@ function* handleRemoveCart(payload: string) {
     yield put(authActions.returnProfile(user.data));
     toast.dismiss();
     toastSuccess('Success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -144,9 +151,11 @@ function* handleAddCart(payload: string) {
     yield put(authActions.returnProfile(user.data));
     toast.dismiss();
     toastSuccess('Success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
     toast.dismiss();
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -167,12 +176,16 @@ function* watchAddCart() {
 
 function* handleAddCartRedirest(payload: string) {
   try {
+    yield toastLoading();
     const user: LikeRespon = yield call(() => userApi.addCart(payload));
     yield put(authActions.returnProfile(user.data));
+    yield toast.dismiss();
     yield put(push('/carts'));
     yield toastSuccess('Success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -197,9 +210,11 @@ function* handleReduceCart(payload: string) {
     yield put(authActions.returnProfile(user.data));
     yield toast.dismiss();
     yield toastSuccess('Success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
     yield toast.dismiss();
+    yield put(updateAction.success());
     if (error.response?.data.status === 401) {
       yield put(push('/login'));
       toastError(error.response?.data.message);
@@ -224,9 +239,11 @@ function* handleBuyCart() {
     yield put(push('/history'));
     yield toast.dismiss();
     yield toastSuccess('Buy project success');
+    yield put(updateAction.success());
     yield cancel();
   } catch (error: any) {
     yield toast.dismiss();
+    yield put(updateAction.success());
     console.log(error.response);
     yield toastError(error.response?.data.message);
     yield cancel();

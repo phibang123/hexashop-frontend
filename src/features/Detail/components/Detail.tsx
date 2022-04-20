@@ -32,6 +32,7 @@ export default function Detail(props: any) {
   const project = useAppSelector((state) => state.projectReducer.sanPham);
   const isLoadingComment = useAppSelector((state) => state.projectReducer.isLoaddingComment);
   const isLoadingProduct = useAppSelector((state) => state.projectReducer.isLoadddingProduct);
+  const isLoadingButtonDissabel = useAppSelector((state) => state.updateUser.isLoading);
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
 
   const dispatch = useAppDispatch();
@@ -43,7 +44,6 @@ export default function Detail(props: any) {
   useEffect(() =>
   {
     dispatch(projectAction.getProjectDetail(id));
-    // window.scrollTo(0, 0)
   }, [userNguoiDung]);
   useEffect(() =>
   {
@@ -156,6 +156,7 @@ export default function Detail(props: any) {
                       <span className="text-gray-600  ml-3">
                         {project?.luotThich.tongLuotThich}{' '}
                         <button
+                          disabled={isLoadingButtonDissabel || isLoadingComment}
                           onClick={() =>
                             project
                               ? dispatch(updateAction.setLike(project?._id))
@@ -228,6 +229,7 @@ export default function Detail(props: any) {
                 <div className="flex text-4xl">
                   {!isLoadingProduct && (
                     <button
+                    disabled={isLoadingButtonDissabel || isLoadingComment}
                       className="flex text-white mr-10 bg-yellow-500 border-0 py-5 px-6 focus:outline-none hover:bg-yellow-600 rounded items-center "
                       onClick={() =>
                         project
@@ -241,6 +243,7 @@ export default function Detail(props: any) {
                   {isLoadingProduct && <Skeleton.Input active></Skeleton.Input>}
                   {!isLoadingProduct && (
                     <button
+                    disabled={isLoadingButtonDissabel || isLoadingComment}
                       className="flex text-white bg-red-500 border-0 py-5 px-6 focus:outline-none hover:bg-red-600 rounded items-center "
                       onClick={() =>
                         project
