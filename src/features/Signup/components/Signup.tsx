@@ -62,7 +62,7 @@ export default function Signup() {
       soDt: Yup.string().required('phone not required'),
       hoTen: Yup.string().required('Full Name not required'),
     }),
-    onSubmit: (values:INguoiDungInput) => {
+    onSubmit: (values: INguoiDungInput) => {
       // const action = dangKyAsynAction(values);
       dispatch(signUpActions.singup(values));
     },
@@ -82,104 +82,140 @@ export default function Signup() {
             <h1 className="mb-12 text-5xl text-center">Sign up</h1>
 
             <div className="mb-7">
+              <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+              Account
+              </label>
               <input
                 type="text"
                 onChange={formikSignup.handleChange}
                 onBlur={formikSignup.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded  text-2xl"
+                className={`w-full text-xl px-6 py-5 ${
+                  formikSignup.errors.taiKhoan && formikSignup.touched.taiKhoan
+                    ? ' border-solid border-red-700'
+                    : ''
+                }  rounded-md  shadow appearance-none  text-gray-700 leading-tight`}
                 name="taiKhoan"
-                placeholder="Account"
+                placeholder="abcdef"
               />
-              <div className="text-red-900 ml-5">
+              <div className="text-red-900 ml-5 xl:text-xl">
                 {formikSignup.errors.taiKhoan && formikSignup.touched.taiKhoan ? (
-                  <>{formikSignup.errors.taiKhoan}</>
+                  <p>{formikSignup.errors.taiKhoan}</p>
                 ) : null}
               </div>
             </div>
             <div className="mb-7">
+            <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+            Email
+              </label>
               <input
                 type="text"
                 onChange={formikSignup.handleChange}
                 onBlur={formikSignup.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded  text-2xl"
+                className={`w-full text-xl px-6 py-5 ${
+                  formikSignup.errors.email && formikSignup.touched.email
+                    ? ' border-solid border-red-700'
+                    : ''
+                }  rounded-md  shadow appearance-none  text-gray-700 leading-tight`}
                 name="email"
-                placeholder="Email"
+                placeholder="b@gmial.com"
               />
-              <div className="text-red-900 ml-5">
+              <div className="text-red-900 ml-5 xl:text-xl">
                 {formikSignup.errors.email && formikSignup.touched.email ? (
-                  <>{formikSignup.errors.email}</>
+                  <p>{formikSignup.errors.email}</p>
                 ) : null}
               </div>
             </div>
             <div className="mb-7">
+            <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+            Password
+              </label>
               <input
                 type="password"
                 onChange={formikSignup.handleChange}
                 onBlur={formikSignup.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded text-2xl"
+                className={`w-full text-xl px-6 py-5 ${
+                  formikSignup.errors.matKhau && formikSignup.touched.matKhau
+                    ? ' border-solid border-red-700'
+                    : ''
+                }  rounded-md  shadow appearance-none  text-gray-700 leading-tight`}
                 name="matKhau"
-                placeholder="Password"
+                placeholder="***********"
               />
-              <div className="text-red-900 ml-5">
+              <div className="text-red-900 ml-5 xl:text-xl">
                 {formikSignup.errors.matKhau && formikSignup.touched.matKhau ? (
-                  <>{formikSignup.errors.matKhau}</>
+                  <p>{formikSignup.errors.matKhau}</p>
                 ) : null}
               </div>
             </div>
-            
+
             <div className="mb-7">
+            <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+            Full Name
+              </label>
               <input
                 type="text"
                 onChange={formikSignup.handleChange}
                 onBlur={formikSignup.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded mb-7 text-2xl"
+                className={`w-full text-xl px-6 py-5 ${
+                  formikSignup.errors.hoTen && formikSignup.touched.hoTen
+                    ? ' border-solid border-red-700'
+                    : ''
+                }  rounded-md  shadow appearance-none  text-gray-700 leading-tight`}
                 name="hoTen"
-                placeholder="Full Name"
+                placeholder="Alex ..."
               />
-              <div className="text-red-900 ml-5">
+              <div className="text-red-900 ml-5 xl:text-xl">
                 {formikSignup.errors.hoTen && formikSignup.touched.hoTen ? (
-                  <>{formikSignup.errors.hoTen}</>
+                  <p>{formikSignup.errors.hoTen}</p>
                 ) : null}
               </div>
             </div>
             <div className="mb-7">
+            <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+            Number phone
+              </label>
               <input
                 type="text"
                 onChange={formikSignup.handleChange}
                 onBlur={formikSignup.handleBlur}
-                className="block border border-grey-light w-full p-6 rounded text-2xl"
+                className={`w-full text-xl px-6 py-5 ${
+                  formikSignup.errors.soDt && formikSignup.touched.soDt
+                    ? ' border-solid border-red-700'
+                    : ''
+                }  rounded-md  shadow appearance-none  text-gray-700 leading-tight`}
                 name="soDt"
-                placeholder="Number phone"
+                placeholder="0999999"
               />
-              <div className="text-red-900 ml-5">
+              <div className="text-red-900 ml-5 xl:text-xl">
                 {formikSignup.errors.soDt && formikSignup.touched.soDt ? (
-                  <>{formikSignup.errors.soDt}</>
+                  <p>{formikSignup.errors.soDt}</p>
                 ) : null}
               </div>
             </div>
+            <label className="block text-gray-500 font-bold xl:text-2xl text-left mb-1 pr-4">
+             Sex
+              </label>
             <select
               onChange={formikSignup.handleChange}
               className="form-select appearance-none
+              rounded-md  shadow  text-gray-700 leading-tight
       block
       w-full
       px-6
       py-5
       text-2xl
       font-extralight
-      text-gray-700
       bg-white bg-clip-padding bg-no-repeat
-     
-      rounded
+      border-collapse
       transition
       ease-in-out
       m-0
-      border-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               aria-label="Default select example"
               name="sex"
             >
-              <option >Select Sex</option>
-              <option value="Nam" selected >
+              <option>Select Sex</option>
+              <option value="Nam" selected>
                 Men
               </option>
               <option value="Nữ">Women</option>
@@ -190,7 +226,7 @@ export default function Signup() {
               disabled={isSignUp ? true : false}
               className="w-full text-center py-6 text-2xl rounded bg-green text-white bg-gray-800 hover:bg-green-dark focus:outline-none my-4"
             >
-             {isSignUp && <CircularProgress size={20} color="secondary" />} &nbsp;  Create Account
+              {isSignUp && <CircularProgress size={20} color="secondary" />} &nbsp; Create Account
             </button>
 
             <div className="text-grey-dark mt-9 text-2xl   text-center">

@@ -5,10 +5,14 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+
     extend: {
       container: {  
         maxWidth: "100rem", 
       },
+      // screens: {
+      //   "iphone": '380px' 
+      // },
       maxWidth: {
         '9xl': '126rem',
         '8xl': '120rem',

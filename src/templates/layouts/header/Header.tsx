@@ -28,11 +28,11 @@ export default function Header() {
     dispatch(authActions.checkProfile());
     dispatch(productsActions.getAllProduct());
   }, []);
- 
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
-    bottom: false,  
+    bottom: false,
     right: false,
   });
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -53,9 +53,6 @@ export default function Header() {
     };
   }, []);
 
-
- 
-
   const menu = (
     <Menu className="w-64">
       <Menu.Item key={1}>
@@ -65,34 +62,38 @@ export default function Header() {
           </li>
         </NavLink>
       </Menu.Item>
-      <Menu.Item key={2}> 
+      <Menu.Item key={2}>
         <NavLink exact to="/history">
-        <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
-          // onClick={() => dispatch(authActions.logout())}
-        >
-          <i className="fa-solid fa-file-invoice-dollar  mr-2"></i> <p>History</p>
-        </li>
+          <li
+            className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
+            // onClick={() => dispatch(authActions.logout())}
+          >
+            <i className="fa-solid fa-file-invoice-dollar  mr-2"></i> <p>History</p>
+          </li>
         </NavLink>
       </Menu.Item>
       <Menu.Item key={3}>
-      <NavLink exact to="/carts" className="">
-        <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
-          // onClick={() => dispatch(authActions.logout())}
-        >
-         <Badge count={userReducer?.gioHang.length || 0}> <i className=" fa-solid fa-cart-shopping  mr-2"></i></Badge>  <p className='ml-5'>Cart</p>
+        <NavLink exact to="/carts" className="">
+          <li
+            className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
+            // onClick={() => dispatch(authActions.logout())}
+          >
+            <Badge count={userReducer?.gioHang.length || 0}>
+              {' '}
+              <i className=" fa-solid fa-cart-shopping  mr-2"></i>
+            </Badge>{' '}
+            <p className="ml-5">Cart</p>
           </li>
-          </NavLink>
+        </NavLink>
       </Menu.Item>
       <Menu.Item key={4}>
         <NavLink exact to="/likes">
-        <li
-          className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
-          // onClick={() => dispatch(authActions.logout())}
-        >
-          <i className="fa-solid fa-heart mr-2"></i> <p>Like</p>
-        </li>
+          <li
+            className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl flex justify-self-start"
+            // onClick={() => dispatch(authActions.logout())}
+          >
+            <i className="fa-solid fa-heart mr-2"></i> <p>Like</p>
+          </li>
         </NavLink>
       </Menu.Item>
       <Menu.Item key={5}>
@@ -108,13 +109,15 @@ export default function Header() {
   return (
     <div
       className={`${
-        scrollPosition > 230 ? 'fixed z-20 bg-white top-0 w-full max-w-full  px-104' : 'max-w-8xl'
+        scrollPosition > 230
+          ? 'fixed z-20 bg-white top-0 w-full max-w-full  px-104'
+          : 'lg:px-0 max-w-8xl px-10'
       } transition-all  duration-500  mx-auto flex py-10 justify-between items-center `}
     >
       <NavLink exact to="/">
         <img src="https://templatemo.com/templates/templatemo_571_hexashop/assets/images/logo.png"></img>
       </NavLink>
-      <div className="md:block ">
+      <div className="lg:block hidden  ">
         <ul className="flex items-center">
           <li className="2xl:text-3xl xl:px-9 md:px-2  hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
             <NavLink exact to="/home" className="text-black">
@@ -122,21 +125,18 @@ export default function Header() {
             </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
-    
             <NavLink exact to="/categories/nam_gioi" className="text-black">
-            Men's
+              Men's
             </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
-        
             <NavLink exact to="/categories/nu_gioi" className="text-black">
-               Women's
+              Women's
             </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
-           
             <NavLink exact to="/categories/tre_em" className="text-black">
-            Kid's
+              Kid's
             </NavLink>
           </li>
           <li className="2xl:text-3xl xl:px-9 md:px-2 hover:text-sky-700 font-bold cursor-pointer  md:text-2xl ">
@@ -180,11 +180,47 @@ export default function Header() {
           )}
         </ul>
       </div>
-      <div className="md:hidden">
-        <label>
-          <span>&rarr;</span>
+
+      <div className="block lg:hidden ">
+        <input type="checkbox" className="	" id="navi-toggle" />
+
+        <label className="navigation__button">
+          <span className="navigation__icon">&nbsp;</span>
         </label>
+
+        <div className="navigation__background">&nbsp;</div>
+
+        <nav className="navigation__nav checkbox-checked:opacity-100">
+          <ul className="navigation__list absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 list-none text-center w-full">
+            <li className="navigation__item m-4">
+              <a href="" className="navigation__link">
+                <span>01</span> About Natous
+              </a>
+            </li>
+            <li className="navigation__item m-4">
+              <a href="" className="navigation__link">
+                <span>02</span> Tour benfits
+              </a>
+            </li>
+            <li className="navigation__item m-4">
+              <a href="" className="navigation__link">
+                <span>03</span> Popular tours
+              </a>
+            </li>
+            <li className="navigation__item m-4">
+              <a href="" className="navigation__link">
+                <span>04</span> Stories
+              </a>
+            </li>
+            <li className="navigation__item m-4">
+              <a href="" className="navigation__link">
+                <span>05</span> Book now
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
+     
     </div>
   );
 }

@@ -70,10 +70,10 @@ export default function SignInSide() {
           >
          
 
-            <div className="flex flex-col mt-20 max-w-5xl p-12 rounded-md  border w-4/5 shadow-lg">
-              <div className="mb-16  text-center">
-                <h1 className="my-6 text-8xl font-bold">Sign in</h1>
-                <p className="text-xl dark:text-coolGray-400">Sign in to access your account</p>
+            <div className="flex flex-col mt-20 xl:max-w-7xl w-full p-12 rounded-md  border xl:w-4/5 shadow-lg">
+              <div className="md:mb-16  text-center">
+                <h1 className="md:text-5xl text-2xl my-6  font-bold ">Sign in</h1>
+                <p className="md:text-xl text-lg dark:text-coolGray-400">Sign in to access your account</p>
               </div>
               <form
                 onSubmit={formikLogin.handleSubmit}
@@ -81,38 +81,39 @@ export default function SignInSide() {
               >
                 <div className="space-y-4">
                   <div>
-                    <label className="block mb-5 text-2xl">Account</label>
+                    <label className="md:text-2xl block mb-5 text-xl">Account</label>
                     <input
                       onChange={formikLogin.handleChange}
                       onBlur={formikLogin.handleBlur}
                       name="taiKhoan"
                       id="email"
                       placeholder="acoount"
-                      className="w-full text-xl px-6 py-5 border rounded-md  "
+                      className={`w-full text-xl px-6 py-5 ${formikLogin.errors.taiKhoan && formikLogin.touched.taiKhoan ? " border-solid border-red-700" : ""}  rounded-md  shadow appearance-none  text-gray-700 leading-tight`} 
                     />
-                    <div className="text-red-900 ml-5">
+                    <div className="text-red-900 ml-4 mt-3 ">
                       {formikLogin.errors.taiKhoan && formikLogin.touched.taiKhoan ? (
-                        <>{formikLogin.errors.taiKhoan}</>
+                        <p>{formikLogin.errors.taiKhoan}</p>
                       ) : null}
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between mb-8">
-                      <label className="text-2xl">Password</label>
+                    <div className="flex justify-between ">
+                      <label className="md:text-2xl block mb-5 text-xl">Password</label>
                      
                     </div>
                     <input
-                      onChange={formikLogin.handleChange}
+                      onChange={formikLogin.handleChange} 
                       onBlur={formikLogin.handleBlur}
                       type="password"
                       name="matKhau"
                       id="password"
                       placeholder="*****"
-                      className="border-2 w-full text-xl px-6 py-5 rounded-md  "
+                      className={` w-full text-xl px-6 py-5 rounded-md leading-tight border ${formikLogin.errors.matKhau && formikLogin.touched.matKhau ? "border-solid border-red-700" : ""}  shadow   text-gray-700  focus:outline-none focus:shadow-outline border-red-800 boder-2 outline-none`}
                     />
-                     <div className="text-red-900 ml-8">
+          
+                     <div className="text-red-900 ml-4 mt-3">
                      {formikLogin.errors.matKhau && formikLogin.touched.matKhau ? (
-                      <>{formikLogin.errors.matKhau}</>
+                      <p>{formikLogin.errors.matKhau}</p>
                     ) : null}
                     </div>
                   </div>
@@ -127,7 +128,7 @@ export default function SignInSide() {
                       {isLogging && <CircularProgress size={20} color="secondary" />} &nbsp; Sign in
                     </button>
                   </div>
-                  <p className="px-20 text-2xl text-center ">
+                  <p className="md:px-20 text-2xl text-center ">
                     Don't have an account yet?
                     <NavLink
                       rel="noopener noreferrer"
