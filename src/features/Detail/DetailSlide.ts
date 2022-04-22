@@ -26,7 +26,6 @@ const projectDetail = createSlice({
       state.isLoadddingProduct = true;
     },
     pushCommentProduct(state, action: PayloadAction<PayloadIComment>) {
-      console.log(action.payload);
       state.isLoaddingComment = true;
     },
 

@@ -31,7 +31,7 @@ export default function Likes() {
             {MoneyVietName(v.giaTien)} 
           </h3>
           </NavLink>
-          <h2 className="text-2xl text-gray-900 font-medium title-font mb-4">{v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + "..." : v.tenSanPham}</h2>
+          <h2 className="text-2xl text-gray-900 font-medium title-font mb-4">{v.tenSanPham.length > 25 ? v.tenSanPham.slice(0, 25) + " ..." : v.tenSanPham}</h2>
           <p className="leading-relaxed text-xl ">  {v.moTa?.length || 0 > 125 ? v.moTa?.slice(0, 125) + " ..." : v.moTa }</p>
           <button
             className="px-8 py-3 font-semibold rounded bg-gray-800 text-white"

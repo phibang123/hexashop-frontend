@@ -63,7 +63,7 @@ export default function Categories(props: any) {
   }, [categories]);
   useEffect(() => {
     dispatch(categoriesAction.getCategoriesProduct(categories))
-  }, [])
+  }, [categories.split("&")[0]])
   
 
   const productPagination = useAppSelector((state) => state.projectsReducer.producPaginition);
@@ -254,7 +254,6 @@ export default function Categories(props: any) {
       return string;
     }
   };
-  console.log(productPagination?.length ||0 > 6)
   const customeSkeletonObject = (string: string | object | void | undefined) => {
     if (isLoadingCategories || string === undefined) {
       return (

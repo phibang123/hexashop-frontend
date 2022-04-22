@@ -190,7 +190,6 @@ export default function Home() {
 
       <SlickCarouselWomen sanPham={productWomen}></SlickCarouselWomen>
 
-
       <SlickCarouselMen sanPham={productMen}></SlickCarouselMen>
 
       <SlickCarouselKid sanPham={productKid}></SlickCarouselKid>
