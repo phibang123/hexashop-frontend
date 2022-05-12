@@ -46,6 +46,3 @@ h6 {
   overflow-wrap: break-word;
 }
 
-#menu-toggle:checked + #menu {
-  display: block;
-}

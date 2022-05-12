@@ -7,6 +7,7 @@ import About from './features/About/About';
 import AdminTemplate from "templates/adminTemplate/AdminTempalte"
 import Cart from 'features/Cart/components/Cart';
 import Categories from 'features/Categories/components/Categories';
+import CreateProduct from "./Admin/CreateProduct/components/CreateProduct"
 import Detail from 'features/Detail/components/Detail';
 import DetailTemplate from 'templates/detailTemPlate/DetailTemplate';
 import HistoryPay from 'features/HistoryPay/components/HistoryPay';
@@ -33,7 +34,9 @@ function App() {
       <DetailTemplate exact path="/detail/:id" Component={Detail}></DetailTemplate>
       <DetailTemplate exact path="/products" Component={Productlist}></DetailTemplate>
       <DetailTemplate exact path="/categories/:categories" Component={Categories}></DetailTemplate>
-      {/* <AdminTemplate exact path="/admin/" Component={HomeAdmin}></AdminTemplate> */}
+      <AdminTemplate exact path="/admin/" Component={HomeAdmin}></AdminTemplate>
+      <AdminTemplate exact path="/admin/index" Component={HomeAdmin}></AdminTemplate>
+      <AdminTemplate exact path="/admin/createproduct" Component={CreateProduct}></AdminTemplate>
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
       <Route path='*' exact={true} component={NotFound} />

@@ -9,7 +9,8 @@ import { NavLink } from 'react-router-dom';
 import { categoriesAction } from '../CategoriesSlide';
 import { productsActions } from 'features/Products/productSlice';
 
-export default function Categories(props: any) {
+export default function Categories(props: any)
+{
   let { categories } = props.match.params;
   const [current, setCurrent] = useState(1);
   const [nameSort, setNameSort] = useState('Sort By');
@@ -17,7 +18,8 @@ export default function Categories(props: any) {
   useEffect(() => {
     setCurrent(1);
     if (!categories.includes('&')) {
-      if (categories.includes('!')) {
+      if (categories.includes('!'))
+      {
         const text = categories.split('!');
         // dispatch(categoriesAction.getCategoriesProduct(text[0]));
         dispatch(
@@ -35,7 +37,7 @@ export default function Categories(props: any) {
         );
       }
     } else {
-      if (categories.includes('!')) {
+    if (categories.includes('!')) {
         const text: string = categories.split('!');
         const textCustomCategories: string = text[0].replace(/&/g, '/');
         // dispatch(categoriesAction.getCategoriesProduct(categories.split('&')[0]));
@@ -61,9 +63,10 @@ export default function Categories(props: any) {
       setNameSort('Sort By');
     }
   }, [categories]);
-  useEffect(() => {
-    dispatch(categoriesAction.getCategoriesProduct(categories))
-  }, [categories.split("&")[0]])
+  useEffect(() =>
+  {
+    dispatch(categoriesAction.getCategoriesProduct(categories.split("&")[0]))
+  }, [])
   
 
   const productPagination = useAppSelector((state) => state.projectsReducer.producPaginition);
@@ -74,6 +77,7 @@ export default function Categories(props: any) {
   const categoriesProduct = useAppSelector((state) => state.categoriesProductReducer.categories);
   const isLoadingCategories = useAppSelector((state) => state.categoriesProductReducer.isLoading);
   const userNguoiDung = useAppSelector((state) => state.auth.currentUser);
+  console.log(productPagination)
   const menu = (
     <Menu className="w-64">
     
@@ -353,7 +357,7 @@ export default function Categories(props: any) {
               </div>
             </div>
             <div className="lg:w-4/5 mx-auto ">
-              {productPagination?.length  === 6 ? customeSkeleton(<Pagination
+              {productPagination?.length  === 0 ? <div></div> :  customeSkeleton(<Pagination
                 defaultPageSize={6}
                 className="text-right"
                 current={current}
@@ -404,7 +408,7 @@ export default function Categories(props: any) {
                   setCurrent(page);
                 }}
                 total={totalPagination}
-              /> ) : <div></div>}
+              /> ) }
             </div>
           </div>
         </section>

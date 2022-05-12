@@ -152,7 +152,7 @@ export default function Productlist() {
                 })}
           </div>
           <div className="mt-24 text-right">
-            {productPagination?.length === 8 ? <Pagination
+            {productPagination?.length === 0 ? "" : <Pagination
               defaultPageSize={8}
               current={current}
               onChange={(page, pageSize) => {
@@ -160,7 +160,7 @@ export default function Productlist() {
                 setCurrent(page);
               }}
               total={totalPagination}
-            /> : ""}
+            /> }
           </div>
         </div>
       </div>
